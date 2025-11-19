@@ -2281,7 +2281,9 @@ window.addEventListener('load', toggleBackToTop);
         generateSkeletonCards();
         
         // Simulate loading delay
-        setTimeout(showActualTools, 800);
+        if (performance.getEntriesByType("navigation")[0].type !== "back_forward") {
+    setTimeout(showActualTools, 800);
+}
 
         // === Tool Category Filtering ===
         const categoryButtons = document.querySelectorAll('.category-btn');
