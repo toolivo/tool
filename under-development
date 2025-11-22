@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tool/Page Under Development 🔧</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background: transparent;
+      line-height: 1.6;
+    }
+
+    .maintenance-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 24px;
+      text-align: center;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .maintenance-container h2 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+    }
+
+    .maintenance-container p {
+      margin: 8px 0 20px 0;
+      color: #6b7280;
+      font-size: 16px;
+    }
+
+    .robot-art {
+      width: 100%;
+      max-width: 540px;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: block;
+      padding: 12px 24px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #2563EB, #1E40AF);
+      color: white !important;
+      text-decoration: none;
+      font-weight: 600;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ripple effect */
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Hover effect */
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn.clicked {
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
+      animation: glowPulse 0.6s ease-out;
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6); }
+      70% { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+    }
+
+    @media (max-width: 480px) {
+      .maintenance-container {
+        margin: 16px 12px;
+        padding: 16px;
+      }
+      .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+      .robot-art {
+        max-width: 100%;
+      }
+    }
+
+    /* Robot Head Animation */
+    .robot-head {
+      transform-origin: center;
+      animation: think 4s ease-in-out infinite;
+    }
+
+    @keyframes think {
+      0% { transform: rotate(0deg); }
+      20% { transform: rotate(5deg); }
+      40% { transform: rotate(-5deg); }
+      60% { transform: rotate(0deg); }
+      80% { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Hand animations - fixed origins */
+    .robot-hand-left {
+      animation: waveLeft 2s ease-in-out infinite;
+      transform-origin: 75px 75px;
+    }
+
+    .robot-hand-right {
+      animation: waveRight 2s ease-in-out infinite 0.5s;
+      transform-origin: 165px 75px;
+    }
+
+    @keyframes waveLeft {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-15deg); }
+      75% { transform: rotate(15deg); }
+    }
+
+    @keyframes waveRight {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(15deg); }
+      75% { transform: rotate(-15deg); }
+    }
+
+    /* ========== DARK MODE TOGGLE ========== */
+    #theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99999;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+    }
+
+    #theme-toggle .material-icons {
+      color: #2563eb;
+      font-size: 24px;
+    }
+
+    body.dark-mode #theme-toggle {
+      background: rgba(30, 30, 30, 0.9);
+      z-index: 99999;
+    }
+
+    body.dark-mode #theme-toggle .material-icons {
+      color: white !important;
+    }
+
+    #theme-toggle.visible {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    }
+
+    body.dark-mode .maintenance-container {
+      background: #121212;
+      color: #f0f0f0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .maintenance-container h2,
+    body.dark-mode .maintenance-container p,
+    body.dark-mode .maintenance-container small {
+      color: #f0f0f0;
+    }
+
+    body.dark-mode .btn {
+      background: linear-gradient(135deg, #3a5bc7, #2a3a8f);
+    }
+
+    body.dark-mode .btn:hover {
+      background: linear-gradient(135deg, #2a3a8f, #3a5bc7);
+      box-shadow: 0 6px 16px rgba(58, 91, 199, 0.4);
+    }
+
+    /* Screen text stays BLUE in ALL modes */
+    .screen-text {
+      color: #1e40af !important;
+    }
+
+    /* Keyboard Key Styling */
+    .key {
+      fill: #ffffff;
+      stroke: #cbd5e1;
+      stroke-width: 0.5;
+      transition: fill 0.12s ease, filter 0.12s ease, transform 0.06s ease;
+    }
+
+    /* Glow used while typing - up to 4 keys will get this class */
+    .key.glow {
+      fill: url(#blueGradient);
+      filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.9))
+              drop-shadow(0 0 10px rgba(30, 64, 175, 0.7));
+      animation: keyPulse 0.3s ease-in-out;
+    }
+
+    @keyframes keyPulse {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-1px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Pressed styling (used for the Cut button while deleting) */
+    .key.pressed {
+      transform: translateY(1.5px);
+      filter: brightness(0.85);
+      fill: #c7d2fe;
+    }
+
+    /* Control button styling */
+    .control-btn {
+      fill: #cbd5e1;
+      stroke: #94a3b8;
+      stroke-width: 0.5;
+    }
+
+    /* Text inside laptop screen */
+    .laptop-screen-text {
+      font-size: 7.2px;
+      font-family: monospace;
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="maintenance-container">
+    <svg class="robot-art" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2563eb" />
+          <stop offset="100%" stop-color="#1e40af" />
+        </linearGradient>
+        <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#60a5fa" />
+          <stop offset="100%" stop-color="#2563eb" />
+        </linearGradient>
+      </defs>
+
+      <!-- Robot Head -->
+      <rect x="97.5" y="12" width="45" height="30" rx="7.5" fill="#f3f4f6" stroke="#2563EB" stroke-width="2.25" class="robot-head"/>
+      <circle cx="112.5" cy="27" r="4.5" fill="#374151"/>
+      <circle cx="127.5" cy="27" r="4.5" fill="#374151"/>
+      <rect x="112.5" y="36" width="15" height="3" rx="1.5" fill="#94a3b8"/>
+
+      <!-- Body -->
+      <rect x="90" y="49.5" width="60" height="52.5" rx="12" fill="#f3f4f6" stroke="#2563EB" stroke-width="2.25"/>
+      
+      <!-- Control buttons on robot body -->
+      <circle cx="105" cy="65" r="3" class="control-btn"/>
+      <circle cx="120" cy="65" r="3" class="control-btn"/>
+      <circle cx="135" cy="65" r="3" class="control-btn"/>
+      <rect x="100" y="75" width="40" height="3" rx="1.5" fill="#cbd5e1"/>
+      <rect x="100" y="82" width="40" height="3" rx="1.5" fill="#cbd5e1"/>
+      <rect x="100" y="89" width="40" height="3" rx="1.5" fill="#cbd5e1"/>
+
+      <!-- Left arm with hand -->
+      <g class="robot-hand-left">
+        <line x1="82.5" y1="75" x2="35" y2="90" stroke="#2563EB" stroke-width="3"/>
+        <circle cx="35" cy="90" r="10" fill="url(#handGradient)" stroke="#2563EB" stroke-width="1"/>
+        <line x1="35" y1="90" x2="27" y2="97" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="35" y1="90" x2="35" y2="100" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="35" y1="90" x2="43" y2="97" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="35" y1="85" x2="29" y2="85" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      
+      <!-- Right arm with hand -->
+      <g class="robot-hand-right">
+        <line x1="157.5" y1="75" x2="205" y2="90" stroke="#2563EB" stroke-width="3"/>
+        <circle cx="205" cy="90" r="10" fill="url(#handGradient)" stroke="#2563EB" stroke-width="1"/>
+        <line x1="205" y1="90" x2="197" y2="97" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="205" y1="90" x2="205" y2="100" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="205" y1="90" x2="213" y2="97" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="205" y1="85" x2="211" y2="85" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Antenna -->
+      <line x1="112.5" y1="4.5" x2="112.5" y2="12" stroke="#2563EB" stroke-width="2.25"/>
+      <circle cx="112.5" cy="2" r="3" fill="#2563EB"/>
+
+      <!-- ENLARGED LAPTOP -->
+      <g transform="translate(25,110)">
+        <!-- Outer screen -->
+        <rect x="0" y="0" width="190" height="85" rx="7" fill="#1f2937" stroke="#2563EB" stroke-width="2.5"/>
+        <!-- Inner screen -->
+        <rect x="9" y="6" width="172" height="70" rx="4" fill="#f1f5f9" stroke="#2563EB" stroke-width="1.2"/>
+        <!-- Text area -->
+        <foreignObject x="14" y="10" width="162" height="60">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="laptop-screen-text">
+            <div class="screen-text line1">Loading...</div>
+            <div class="screen-text line2"></div>
+            <div class="screen-text line3"></div>
+          </div>
+        </foreignObject>
+        
+        <!-- Keyboard -->
+        <rect x="0" y="90" width="190" height="58" rx="7" fill="#374151" stroke="#2563EB" stroke-width="2.5"/>
+        
+        <!-- Row 1 -->
+        <rect x="10" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="22" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="34" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="46" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="58" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="70" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="82" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="94" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="106" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="118" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="130" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="142" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="154" y="96" width="10" height="7" rx="1" class="key"/>
+        <rect x="166" y="96" width="14" height="7" rx="1" class="key"/>
+        
+        <!-- Row 2 -->
+        <rect x="10" y="105" width="14" height="7" rx="1" class="key"/>
+        <rect x="26" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="38" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="50" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="62" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="74" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="86" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="98" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="110" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="122" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="134" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="146" y="105" width="10" height="7" rx="1" class="key"/>
+        <rect x="158" y="105" width="22" height="7" rx="1" class="key"/>
+        
+        <!-- Row 3 -->
+        <rect x="10" y="114" width="18" height="7" rx="1" class="key"/>
+        <rect x="30" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="42" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="54" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="66" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="78" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="90" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="102" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="114" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="126" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect x="138" y="114" width="10" height="7" rx="1" class="key"/>
+        <rect id="cut-key" x="150" y="114" width="30" height="7" rx="1" class="key" />
+        
+        <!-- Row 4 -->
+        <rect x="10" y="123" width="22" height="7" rx="1" class="key"/>
+        <rect x="34" y="123" width="10" height="7" rx="1" class="key"/>
+        <rect x="46" y="123" width="10" height="7" rx="1" class="key"/>
+        <rect x="58" y="123" width="60" height="7" rx="1" class="key"/>
+        <rect x="120" y="123" width="10" height="7" rx="1" class="key"/>
+        <rect x="132" y="123" width="10" height="7" rx="1" class="key"/>
+        <rect x="144" y="123" width="10" height="7" rx="1" class="key"/>
+        <rect x="156" y="123" width="24" height="7" rx="1" class="key"/>
+        
+        <!-- Trackpad -->
+        <rect x="65" y="134" width="60" height="8" rx="2" fill="#6b7280" stroke="#4b5563" stroke-width="0.5"/>
+      </g>
+    </svg>
+
+    <h2>Tool/Page is Under Development 🔧</h2>
+    <p>This Tool/Page Will Be Ready Soon!<br><small>Our development robot is working hard to get it ready. Check back soon!</small></p>
+
+    <div class="btn-group">
+      <a href="https://toolivo.github.io/tool/" class="btn">Home</a>
+    </div>
+  </div>
+
+  <button id="theme-toggle">
+    <span class="material-icons">dark_mode</span>
+  </button>
+
+  <script>
+    // Dark Mode Toggle
+    const toggle = document.getElementById('theme-toggle');
+    const icon = toggle.querySelector('.material-icons');
+    if (sessionStorage.getItem('dark') === 'true') {
+      document.body.classList.add('dark-mode');
+      icon.textContent = 'light_mode';
+    }
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        if (!toggle.classList.contains('visible')) {
+          toggle.style.display = 'flex';
+          setTimeout(() => toggle.classList.add('visible'), 100);
+        }
+      } else {
+        toggle.classList.remove('visible');
+        toggle.style.display = 'none';
+      }
+    });
+    toggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark-mode');
+      sessionStorage.setItem('dark', isDark);
+      icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+    });
+
+    // Button Click Animation
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.add('clicked');
+        setTimeout(() => this.classList.remove('clicked'), 600);
+      });
+    });
+
+    // Tool Development Snippets
+    const toolSnippets = [
+      // Productivity Tools
+      ["Smart Task Manager", "AI-powered task prioritization with calendar integration.", "Uses machine learning to predict your most productive hours."],
+      ["Code Snippet Library", "Organize and share code snippets across your team.", "Supports syntax highlighting for 50+ programming languages."],
+      ["Project Timeline Generator", "Visual project planning with drag-and-drop interface.", "Automatically adjusts timelines when tasks change."],
+      ["Meeting Note Taker", "AI-powered transcription and action item extraction.", "Integrates with all major calendar platforms."],
+      ["File Format Converter", "Convert between 100+ file formats with one click.", "Batch processing for up to 1000 files at once."],
+      ["Data Visualization Tool", "Create interactive charts and graphs from any dataset.", "Export options include PNG, SVG, and interactive HTML."],
+
+      // Design Tools
+      ["Logo Maker Pro", "AI-generated logos based on your business description.", "Generates 50+ variations in under 60 seconds."],
+      ["Color Palette Generator", "Create harmonious color schemes for your projects.", "Accessibility checker ensures WCAG compliance."],
+      ["Mockup Creator", "Build realistic product mockups in minutes.", "Library of 500+ device frames and backgrounds."],
+      ["Typography Tool", "Find the perfect font pairing for any project.", "Analyzes readability and visual hierarchy."],
+      ["Image Optimizer", "Compress images without losing quality.", "Reduces file size by up to 80% automatically."],
+      ["Vector Editor", "Browser-based vector graphics editor.", "Export to SVG, PDF, and PNG formats."],
+
+      // Development Tools
+      ["API Testing Suite", "Test REST APIs with automated workflows.", "Generate detailed reports with performance metrics."],
+      ["Database Manager", "Visual interface for managing multiple databases.", "Supports MySQL, PostgreSQL, MongoDB, and more."],
+      ["Code Review Assistant", "AI-powered code analysis and improvement suggestions.", "Integrates with GitHub, GitLab, and Bitbucket."],
+      ["Website Performance Analyzer", "Comprehensive website speed and SEO audit.", "Provides actionable recommendations."],
+      ["Security Scanner", "Automated vulnerability detection for web applications.", "Scans for OWASP Top 10 security risks."],
+      ["Deployment Automation", "One-click deployment to multiple cloud platforms.", "Supports AWS, Google Cloud, and Azure."],
+
+      // Marketing Tools
+      ["Social Media Scheduler", "Plan and publish content across all platforms.", "Analytics dashboard tracks engagement metrics."],
+      ["SEO Keyword Research", "Find high-value keywords for your content strategy.", "Competitor analysis reveals untapped opportunities."],
+      ["Email Template Builder", "Drag-and-drop email designer with responsive layouts.", "A/B testing for subject lines and content."],
+      ["Landing Page Creator", "Build high-converting landing pages without coding.", "Integration with major CRM and email platforms."],
+      ["Analytics Dashboard", "Unified view of all your marketing metrics.", "Custom reports and automated insights."],
+      ["Ad Campaign Manager", "Create and optimize digital ad campaigns.", "ROI calculator predicts campaign performance."],
+
+      // Business Tools
+      ["Invoice Generator", "Professional invoices with automatic calculations.", "Multi-currency support and tax calculations."],
+      ["Contract Template Library", "Legal document templates for common business needs.", "Electronic signature integration."],
+      ["Expense Tracker", "Automated expense categorization and reporting.", "Receipt scanning with OCR technology."],
+      ["Team Collaboration Platform", "Unified workspace for projects, chat, and files.", "Real-time collaboration on documents."],
+      ["Customer Feedback Tool", "Collect and analyze customer feedback at scale.", "Sentiment analysis identifies key themes."],
+      ["HR Management System", "Employee onboarding, time tracking, and performance reviews.", "Compliance monitoring for labor regulations."]
+    ];
+
+    // Screen lines
+    const line1 = document.querySelector('.screen-text.line1');
+    const line2 = document.querySelector('.screen-text.line2');
+    const line3 = document.querySelector('.screen-text.line3');
+
+    // Keyboard keys collection
+    const keyEls = Array.from(document.querySelectorAll('.key'));
+    const cutKey = document.getElementById('cut-key');
+
+    // Audio context for typing sound
+    let audioCtx;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    // Play mild typing sound
+    function playTypeSound() {
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        
+        // Create oscillator for click sound
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        // Mild click frequency with variation
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(800 + Math.random() * 200, now);
+        
+        // Very soft volume envelope
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.015, now + 0.001); // Quick attack
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05); // Quick decay
+        
+        // Connect and play
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } catch (e) {
+        // Silently ignore if audio fails
+      }
+    }
+
+    // Typing control variables
+    let currentIdx = Math.floor(Math.random() * toolSnippets.length);
+    let currentText = '';
+    let charIndex = 0;
+    let currentLine = 1;
+    let typingTimer = null;
+    let glowTimer = null;
+    let isTyping = false;
+    let deleteMode = false;
+
+    // Helper: start glow animation (up to 4 keys at once)
+    function startGlow() {
+      stopGlow(); // Clear any existing
+      glowTimer = setInterval(() => {
+        // Clear previous glows
+        keyEls.forEach(k => k.classList.remove('glow'));
+        
+        // Choose 1 to 4 random keys to glow
+        const numKeys = Math.floor(1 + Math.random() * 4); // 1 to 4 keys
+        const picked = new Set();
+        
+        // Pick random unique keys
+        while (picked.size < numKeys) {
+          const idx = Math.floor(Math.random() * keyEls.length);
+          if (keyEls[idx] !== cutKey) { // Don't glow the cut key during typing
+            picked.add(idx);
+          }
+        }
+        
+        // Apply glow to selected keys
+        picked.forEach(i => {
+          keyEls[i].classList.add('glow');
+        });
+      }, 100); // Update glowing keys every 100ms for dynamic effect
+    }
+
+    function stopGlow() {
+      if (glowTimer) {
+        clearInterval(glowTimer);
+        glowTimer = null;
+      }
+      keyEls.forEach(k => k.classList.remove('glow'));
+    }
+
+    // Press/unpress cut key
+    function pressCutKey(on) {
+      if (!cutKey) return;
+      if (on) {
+        cutKey.classList.add('pressed');
+      } else {
+        cutKey.classList.remove('pressed');
+      }
+    }
+
+    // Medium-fast typing speed (50-80ms per character)
+    function randomTypeDelay() {
+      return 50 + Math.random() * 30;
+    }
+    
+    // Deletion is slightly faster
+    function randomDeleteDelay() {
+      return 35 + Math.random() * 20;
+    }
+
+    // Main typing function
+    function typeNextChar() {
+      // Start glowing when typing starts
+      if (!isTyping) {
+        isTyping = true;
+        startGlow();
+      }
+      
+      // Play typing sound for each character
+      playTypeSound();
+
+      const [title, desc, fact] = toolSnippets[currentIdx];
+      
+      if (currentLine === 1) {
+        if (charIndex < title.length) {
+          currentText += title[charIndex];
+          line1.textContent = currentText;
+          charIndex++;
+          typingTimer = setTimeout(typeNextChar, randomTypeDelay());
+          return;
+        }
+        // Finished line 1
+        charIndex = 0;
+        currentText = '';
+        currentLine = 2;
+        typingTimer = setTimeout(typeNextChar, 200 + Math.random() * 100);
+      } else if (currentLine === 2) {
+        if (charIndex < desc.length) {
+          currentText += desc[charIndex];
+          line2.textContent = currentText;
+          charIndex++;
+          typingTimer = setTimeout(typeNextChar, randomTypeDelay());
+          return;
+        }
+        // Finished line 2
+        charIndex = 0;
+        currentText = '';
+        currentLine = 3;
+        typingTimer = setTimeout(typeNextChar, 200 + Math.random() * 100);
+      } else if (currentLine === 3) {
+        if (charIndex < fact.length) {
+          currentText += fact[charIndex];
+          line3.textContent = currentText;
+          charIndex++;
+          typingTimer = setTimeout(typeNextChar, randomTypeDelay());
+          return;
+        }
+        // Finished typing all lines - stop glowing
+        isTyping = false;
+        stopGlow();
+        
+        // Pause before deletion
+        deleteMode = true;
+        typingTimer = setTimeout(finishTyping, 1500 + Math.random() * 1000);
+      }
+    }
+
+    function finishTyping() {
+      // Start deletion
+      deleteMode = true;
+      pressCutKey(true);
+      stopGlow(); // Ensure glow is stopped during deletion
+      charIndex = 0;
+      deleteLine(3);
+    }
+
+    function deleteLine(lineNum) {
+      const [title, desc, fact] = toolSnippets[currentIdx];
+      let targetLine, targetText;
+      
+      if (lineNum === 3) {
+        targetLine = line3;
+        targetText = fact;
+      } else if (lineNum === 2) {
+        targetLine = line2;
+        targetText = desc;
+      } else {
+        targetLine = line1;
+        targetText = title;
+      }
+
+      const remaining = targetLine.textContent.length;
+      if (remaining > 0) {
+        pressCutKey(true);
+        targetLine.textContent = targetText.substring(0, remaining - 1);
+        
+        // Optional: play sound during deletion (quieter)
+        // playTypeSound();
+        
+        typingTimer = setTimeout(() => deleteLine(lineNum), randomDeleteDelay());
+      } else {
+        pressCutKey(false);
+        if (lineNum > 1) {
+          setTimeout(() => {
+            deleteLine(lineNum - 1);
+          }, 100 + Math.random() * 100);
+        } else {
+          // Finished deletion, pick next snippet
+          deleteMode = false;
+          
+          let nextIdx;
+          if (toolSnippets.length <= 1) {
+            nextIdx = 0;
+          } else {
+            do {
+              nextIdx = Math.floor(Math.random() * toolSnippets.length);
+            } while (nextIdx === currentIdx);
+          }
+          
+          currentIdx = nextIdx;
+          currentLine = 1;
+          charIndex = 0;
+          currentText = '';
+          isTyping = false;
+          
+          // Start typing next snippet
+          typingTimer = setTimeout(typeNextChar, 500 + Math.random() * 300);
+        }
+      }
+    }
+
+    // Initialize audio on first user interaction
+    document.addEventListener('click', initAudio, { once: true });
+
+    // Start initial typing
+    setTimeout(typeNextChar, 800);
+
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => {
+      if (typingTimer) clearTimeout(typingTimer);
+      if (glowTimer) clearInterval(glowTimer);
+      if (audioCtx && typeof audioCtx.close === 'function') audioCtx.close();
+    });
+  </script>
+</body>
+</html>
