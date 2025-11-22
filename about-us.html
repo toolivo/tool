@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+    <title>About Us - Toolivo</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn about Toolivo - our mission to provide free, easy-to-use online tools for everyone. Discover our story, values, and commitment to privacy.">
+    <meta name="keywords" content="about toolivo, our story, team, mission, values, online tools, free utilities">
+    <meta name="author" content="Mushfikur Riad">
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
+            --light-bg: #ffffff;
+            --light-text: #1f2937;
+            --light-card: rgba(255,255,255,0.98);
+            --dark-bg-1: #071127;
+            --dark-bg-2: #071a2b;
+            --dark-text: #e6eef8;
+            --dark-card: #0f1724;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --menu-width: 280px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800));
+            color: var(--light-text);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+        }
+
+        /* === Menu Toggle === */
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+            z-index: 10;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        body.dark-mode .menu-toggle:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 24px;
+            border-radius: 2px;
+            background: white;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+
+        body.dark-mode .menu-toggle span {
+            background: #e6eef8;
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* === Menu Card === */
+        .menu-card {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            width: var(--menu-width);
+            background: var(--light-card);
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+            transform: translateX(-105%);
+            transition: transform 0.36s cubic-bezier(0.22, 0.61, 0.36, 1);
+            z-index: 1000;
+            padding: 1.5rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        body.dark-mode .menu-card {
+            background: var(--dark-card);
+        }
+
+        .menu-card.open {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .menu-header {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .menu-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .menu-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-close:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode .menu-close:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .menu-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem 0.75rem 0.5rem;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.dark-mode .menu-link {
+            color: var(--dark-text);
+        }
+
+        .menu-link:hover {
+            background: rgba(37,99,235,0.1);
+            transform: translateX(4px);
+        }
+
+        body.dark-mode .menu-link:hover {
+            background: rgba(14,165,233,0.12);
+        }
+
+        .menu-icon {
+            width: 20px;
+            opacity: 0.7;
+        }
+
+        /* Backdrop */
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.24s, visibility 0.24s;
+            z-index: 999;
+        }
+
+        .backdrop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* === Header === */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 0.75rem;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            transition: transform 0.28s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        /* === Theme Toggle === */
+        .theme-toggle {
+            background: rgba(255,255,255,0.14);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 1.6;
+            fill: none;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .theme-icon {
+            stroke: #e6eef8;
+        }
+
+        /* === Button Styles === */
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 8px 18px rgba(37,99,235,0.18);
+            border: 2px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.dark-mode .cta-btn {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 16px 36px rgba(37,99,235,0.28);
+        }
+
+        body.dark-mode .cta-btn:hover {
+            box-shadow: 0 16px 36px rgba(14,165,233,0.28);
+        }
+
+        /* Glow effect for buttons */
+        .cta-btn.glow {
+            animation: buttonGlow 0.6s ease-out;
+        }
+
+        @keyframes buttonGlow {
+            0% {
+                box-shadow: 0 8px 18px rgba(37,99,235,0.18);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(37,99,235,0.6), 0 8px 18px rgba(37,99,235,0.18);
+            }
+            100% {
+                box-shadow: 0 8px 18px rgba(37,99,235,0.18);
+            }
+        }
+
+        body.dark-mode .cta-btn.glow {
+            animation: buttonGlowDark 0.6s ease-out;
+        }
+
+        @keyframes buttonGlowDark {
+            0% {
+                box-shadow: 0 8px 18px rgba(14,165,233,0.18);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(14,165,233,0.6), 0 8px 18px rgba(14,165,233,0.18);
+            }
+            100% {
+                box-shadow: 0 8px 18px rgba(14,165,233,0.18);
+            }
+        }
+
+        /* === About Content === */
+        .about-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .about-hero h1 {
+            font-size: 2.8rem; /* Reduced from 3rem */
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .about-hero p {
+            font-size: 1.1rem; /* Reduced from 1.2rem */
+            max-width: 800px;
+            margin: 0 auto;
+            color: #ffffff;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .content-section {
+            background: var(--light-card);
+            border-radius: 16px;
+            padding: 2.5rem; /* Reduced from 3rem */
+            margin-bottom: 2rem;
+            box-shadow: 0 18px 30px -12px rgba(12, 24, 60, 0.24);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .content-section {
+            background: var(--dark-card);
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem; /* Reduced from 2rem */
+            margin-bottom: 1.5rem;
+            color: inherit;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            border-radius: 2px;
+        }
+
+        body.dark-mode .content-section h2::after {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .content-section p {
+            font-size: 1rem; /* Reduced from 1.1rem */
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* FIXED: Better card visibility in light mode */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        body.dark-mode .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .value-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        body.dark-mode .value-icon {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .value-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .value-card h3 {
+            color: var(--dark-text);
+        }
+
+        .value-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .team-section {
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: var(--light-card);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .team-member {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        body.dark-mode .member-avatar {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .team-member h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member .role {
+            color: var(--blue-600);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .team-member .role {
+            color: #0ea5e9;
+        }
+
+        .team-member p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem; /* Reduced from 1.05rem */
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--blue-600);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        body.dark-mode .feature-list li::before {
+            color: #0ea5e9;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 3.5rem 2rem; /* Reduced from 4rem */
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            margin: 3rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        body.dark-mode .cta-section {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .cta-section h2 {
+            font-size: 2rem; /* Reduced from 2.2rem */
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem; /* Reduced from 1.2rem */
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* === Footer === */
+        .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        body.dark-mode .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            /* FIXED: 3 cards per row on desktop */
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Fix for white bar on larger screens */
+        @media (min-width: 1400px) {
+            body {
+                background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800)) fixed;
+            }
+            body.dark-mode {
+                background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2)) fixed;
+            }
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-links a svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        .creator-credit {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            .about-hero h1 { font-size: 2.2rem; }
+            .content-section { padding: 2rem 1.5rem; }
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .cta-btn { width: 100%; max-width: 300px; }
+            .logo { max-width: 160px; }
+            .menu-card { top: 60px; left: 10px; right: 10px; width: calc(100% - 20px); }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .about-hero h1 { font-size: 2.4rem; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Remove blue flash on all interactive elements */
+        button:focus,
+        .cta-btn:focus,
+        .menu-link:focus,
+        .theme-toggle:focus,
+        .menu-toggle:focus,
+        .menu-close:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Compact Menu Card -->
+    <div class="menu-card" id="menuCard">
+        <div class="menu-header">
+            <h3>Menu</h3>
+            <button class="menu-close" id="menuClose" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/community.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Community
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/request-a-tool.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 20h4l10.6-10.6a3 3 0 1 0-4.2-4.2L4 16v4z"/>
+                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/>
+                    </svg>
+                    Request a Tool
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/about-us.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    About Us
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/contact-us.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Contact Us
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="backdrop" id="backdrop"></div>
+
+    <div class="container">
+        <header>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="logo-container">
+                <a href="https://toolivo.github.io/tool/">
+                    <img 
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOu9Vo8K91Uj7n00ddjVguj_KfjaKvU_eKOMOmxzN4tyJzpXHWU1G6yBw6xSzqO3PBt2jPTv5WsXLjw3H5amAAhVLNwWbLOYUsXDnl8nAJilNGiT38j4EIQzgULpPKeTikR8Rhfg3K-2uWOeqlFuEwxwD3kqAhz9CjJVjXFZdsfCHbWA/s1600/20251121_112451.png"
+                        alt="Toolivo Logo"
+                        class="logo"
+                        loading="lazy"
+                    >
+                </a>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="theme-icon" id="themeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5" fill="none"/>
+                    <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+                    <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+                    <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+                    <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="about-hero">
+                <h1>About Toolivo</h1>
+                <p>Empowering your everyday with simple, powerful tools that just work. No sign-ups, no limits, just solutions.</p>
+            </section>
+
+            <!-- Our Story Section -->
+            <section class="content-section">
+                <h2>Our Story</h2>
+                <p>Toolivo was born from a simple observation: people waste precious time jumping between different websites for basic tasks like converting units, calculating tips, or formatting text. We asked ourselves: "What if there was one clean, fast, and reliable platform for all these everyday needs?"</p>
+                <p>That question sparked our journey. What started as a small project has grown into a dedicated team of 10 passionate developers and designers, all united by a common goal: to create the most user-friendly toolkit on the web.</p>
+                <p>Today, we serve users worldwide with a growing collection of essential tools designed to simplify daily tasks for developers, designers, students, and professionals alike.</p>
+            </section>
+
+            <!-- Our Mission Section -->
+            <section class="content-section">
+                <h2>Our Mission & Values</h2>
+                <p>At Toolivo, we believe everyone deserves access to powerful, easy-to-use tools for everyday tasks. Our mission is simple: <strong>to provide essential daily life tools right at your fingertips</strong> - completely free, with no strings attached.</p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </div>
+                        <h3>Super Easy to Use</h3>
+                        <p>Clean, intuitive interfaces designed for everyone - no technical knowledge required.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3>Privacy First</h3>
+                        <p>Your data stays on your device. Most tools process data locally in your browser.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h3>Almost Always Free</h3>
+                        <p>Most tools are completely free. For API-based tools, we provide generous usage limits.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What We Offer Section -->
+            <section class="content-section">
+                <h2>What We Offer</h2>
+                <p>Toolivo provides a comprehensive collection of online tools designed to streamline your workflow and simplify everyday tasks:</p>
+                
+                <ul class="feature-list">
+                    <li><strong>Developer Tools:</strong> JSON validators, code formatters, text diff checkers, and more</li>
+                    <li><strong>Media Utilities:</strong> Image compressors, color palette generators, and format converters</li>
+                    <li><strong>Data Tools:</strong> Base64 encoders, CSV converters, and data generators</li>
+                    <li><strong>Security Utilities:</strong> Password generators, hash creators, and validators</li>
+                    <li><strong>General Utilities:</strong> Text tools, calculators, and everyday problem solvers</li>
+                </ul>
+                
+                <p>We're constantly expanding our collection based on user feedback and emerging needs in the digital landscape.</p>
+            </section>
+
+            <!-- Our Team Section -->
+            <section class="content-section team-section">
+                <h2>Meet Our Team</h2>
+                <p>Toolivo is powered by a diverse team of 10 passionate individuals who believe in making technology work for people, not the other way around.</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">MR</div>
+                        <h3>Mushfikur Riad</h3>
+                        <div class="role">Founder & Lead Developer</div>
+                        <p>Passionate about creating tools that solve real-world problems and make life easier for everyone.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">TD</div>
+                        <h3>Development Team</h3>
+                        <div class="role">Backend & Infrastructure</div>
+                        <p>Building robust systems and ensuring our tools are fast, reliable, and scalable.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">DS</div>
+                        <h3>Design Team</h3>
+                        <div class="role">UI/UX Design</div>
+                        <p>Creating beautiful, intuitive interfaces that make complex tools easy to use.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us Section -->
+            <section class="content-section">
+                <h2>Why Choose Toolivo?</h2>
+                <p>In a world full of complicated software and subscription services, Toolivo stands out by keeping things simple, reliable, and accessible.</p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🚀</div>
+                        <h3>Instant Access</h3>
+                        <p>No sign-ups required. Start using our tools immediately without any registration.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🔧</div>
+                        <h3>Growing Collection</h3>
+                        <p>We're always adding new tools based on user feedback and emerging needs.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🌍</div>
+                        <h3>For Everyone</h3>
+                        <p>Whether you're a student, professional, or casual user, Toolivo has you covered.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Optimized tools that deliver instant results when you need them most.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🛡️</div>
+                        <h3>Secure & Private</h3>
+                        <p>Most tools process data locally - your files never touch our servers.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">💡</div>
+                        <h3>Smart Design</h3>
+                        <p>Tools designed with user experience as the top priority.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Plans Section -->
+            <section class="content-section">
+                <h2>Our Vision for the Future</h2>
+                <p>We're committed to continuously evolving and improving Toolivo to better serve our growing community:</p>
+                
+                <ul class="feature-list">
+                    <li><strong>Tool Expansion:</strong> Adding 50+ new tools across various categories</li>
+                    <li><strong>Mobile Experience:</strong> Developing dedicated mobile apps for on-the-go access</li>
+                    <li><strong>AI Integration:</strong> Incorporating AI-powered features for smarter tool functionality</li>
+                    <li><strong>Community Features:</strong> Building tools based on user requests and feedback</li>
+                    <li><strong>API Access:</strong> Providing developers with API access to our tool collection</li>
+                </ul>
+                
+                <p>Our goal is to become the most comprehensive and user-friendly online toolkit available, serving millions of users worldwide.</p>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2>Ready to Get Started?</h2>
+                <p>Join thousands of users who trust Toolivo for their daily tool needs. Explore our collection and experience the difference today!</p>
+                <div class="cta-buttons">
+                    <a href="https://toolivo.github.io/tool/" class="cta-btn" id="exploreBtn">Explore Our Tools</a>
+                    <a href="https://toolivo.github.io/tool/request-a-tool.html" class="cta-btn" id="requestBtn">Request a Tool</a>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="comprehensive-footer">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Terms & Conditions</a></li>
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Privacy Policy</a></li>
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://toolivo.github.io/tool/about-us.html">About Us</a></li>
+                            <li><a href="https://toolivo.github.io/tool/contact-us.html">Contact Us</a></li>
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Features</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Help Center</a></li>
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">FAQ</a></li>
+                            <li><a href="https://toolivo.github.io/tool/request-a-tool.html">Request a Tool</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Blog</a></li>
+                            <li><a href="https://toolivo.github.io/tool/under-development.html">Updates</a></li>
+                            <li><a href="https://toolivo.github.io/tool/community.html">Community</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>Toolivo &copy; 2025 — All rights reserved</p>
+                    <p class="creator-credit">Created with ❤️ by Mushfikur Riad</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // === Menu Functionality ===
+        const menuToggle = document.getElementById('menuToggle');
+        const menuCard = document.getElementById('menuCard');
+        const menuClose = document.getElementById('menuClose');
+        const backdrop = document.getElementById('backdrop');
+
+        function openMenu() {
+            menuCard.classList.add('open');
+            backdrop.classList.add('visible');
+            menuToggle.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menuCard.classList.remove('open');
+            backdrop.classList.remove('visible');
+            menuToggle.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', () => {
+            menuCard.classList.contains('open') ? closeMenu() : openMenu();
+        });
+
+        menuClose.addEventListener('click', closeMenu);
+        backdrop.addEventListener('click', closeMenu);
+
+        // === Theme Toggle ===
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        const sunIcon = `
+            <circle cx="12" cy="12" r="5" fill="none"/>
+            <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+            <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+            <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+            <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+        `;
+
+        const moonIcon = `
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none"/>
+        `;
+
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+        const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+        function applyTheme(isDarkMode) {
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                themeIcon.innerHTML = moonIcon;
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.innerHTML = sunIcon;
+            }
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        applyTheme(isDark);
+
+        themeToggle.addEventListener('click', () => {
+            const isNowDark = !body.classList.contains('dark-mode');
+            applyTheme(isNowDark);
+        });
+
+        // === Button Glow Effect ===
+        const exploreBtn = document.getElementById('exploreBtn');
+        const requestBtn = document.getElementById('requestBtn');
+
+        function addGlowEffect(button) {
+            button.classList.add('glow');
+            setTimeout(() => {
+                button.classList.remove('glow');
+            }, 600);
+        }
+
+        exploreBtn.addEventListener('click', (e) => {
+            addGlowEffect(exploreBtn);
+        });
+
+        requestBtn.addEventListener('click', (e) => {
+            addGlowEffect(requestBtn);
+        });
+
+        // Add glow effect to all CTA buttons
+        document.querySelectorAll('.cta-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                addGlowEffect(this);
+            });
+        });
+    </script>
+</body>
+</html>
