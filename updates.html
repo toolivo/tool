@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+    <title>Updates - Toolivo</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
+            --light-bg: #ffffff;
+            --light-text: #1f2937;
+            --light-card: rgba(255,255,255,0.98);
+            --dark-bg-1: #071127;
+            --dark-bg-2: #071a2b;
+            --dark-text: #e6eef8;
+            --dark-card: #0f1724;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --menu-width: 280px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+        html {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800));
+            color: var(--light-text);
+            transition: var(--transition);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 0.75rem;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            transition: transform 0.28s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: rgba(255,255,255,0.14);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            backdrop-filter: blur(8px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 1.6;
+            fill: none;
+        }
+
+        /* HERO */
+        .hero { 
+            text-align: center; 
+            margin-bottom: 4rem; 
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #ffffff;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Updates Navigation */
+        .updates-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: white;
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Updates Sections */
+        .updates-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .updates-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Version Cards */
+        .version-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .version-card {
+            background: var(--light-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border-left: 6px solid var(--primary-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .version-card {
+            background: var(--dark-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .version-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.15);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .version-badge {
+            background: linear-gradient(135deg, var(--primary-blue), #0ea5e9);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .version-date {
+            color: inherit;
+            opacity: 0.7;
+            font-size: 1rem;
+        }
+
+        .version-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: inherit;
+            font-weight: 700;
+        }
+
+        .version-description {
+            color: inherit;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .changelog {
+            margin-top: 2rem;
+        }
+
+        .changelog-category {
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .changes-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .change-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        body.dark-mode .change-item {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .change-item:last-child {
+            border-bottom: none;
+        }
+
+        .change-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-top: 0.2rem;
+        }
+
+        .badge-new {
+            background: rgba(34, 197, 94, 0.15);
+            color: #16a34a;
+        }
+
+        .badge-improved {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--primary-blue);
+        }
+
+        .badge-fixed {
+            background: rgba(239, 68, 68, 0.15);
+            color: #dc2626;
+        }
+
+        .change-text {
+            flex: 1;
+            color: inherit;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Roadmap */
+        .roadmap-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-blue), #0ea5e9);
+            border-radius: 3px;
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 80px;
+        }
+
+        .roadmap-date {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: var(--light-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary-blue);
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        body.dark-mode .roadmap-date {
+            background: var(--dark-card);
+        }
+
+        .roadmap-content {
+            background: var(--light-card);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .roadmap-content {
+            background: var(--dark-card);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .roadmap-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: inherit;
+            font-weight: 600;
+        }
+
+        .roadmap-features {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .roadmap-features li {
+            padding: 0.5rem 0;
+            color: inherit;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .roadmap-features li::before {
+            content: '→';
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Subscribe Section */
+        .subscribe-section {
+            background: var(--light-card);
+            border-radius: 25px;
+            padding: 4rem 3rem;
+            text-align: center;
+            margin: 4rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .subscribe-section {
+            background: var(--dark-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .subscribe-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: inherit;
+        }
+
+        .subscribe-section p {
+            color: inherit;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .subscribe-form {
+                flex-direction: column;
+            }
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light-card);
+            color: inherit;
+        }
+
+        body.dark-mode .email-input {
+            background: var(--dark-card);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .subscribe-btn {
+            background: linear-gradient(135deg, var(--primary-blue), #0ea5e9);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .logo {
+                max-width: 160px;
+            }
+            
+            header {
+                flex-wrap: wrap;
+            }
+            
+            .version-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .roadmap-item {
+                padding-left: 60px;
+            }
+            
+            .roadmap-date {
+                width: 50px;
+                height: 50px;
+                font-size: 0.9rem;
+            }
+            
+            .subscribe-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .subscribe-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img 
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOu9Vo8K91Uj7n00ddjVguj_KfjaKvU_eKOMOmxzN4tyJzpXHWU1G6yBw6xSzqO3PBt2jPTv5WsXLjw3H5amAAhVLNwWbLOYUsXDnl8nAJilNGiT38j4EIQzgULpPKeTikR8Rhfg3K-2uWOeqlFuEwxwD3kqAhz9CjJVjXFZdsfCHbWA/s1600/20251121_112451.png"
+                    alt="Toolivo Logo"
+                    class="logo"
+                >
+            </div>
+
+            <button class="theme-toggle" id="themeToggle">
+                <svg class="theme-icon" id="themeIcon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5" fill="none"/>
+                    <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+                    <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+                    <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+                    <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1>What's New at Toolivo</h1>
+                <p>Stay updated with the latest features, improvements, and exciting developments in our toolkit platform</p>
+            </section>
+
+            <!-- Updates Navigation -->
+            <div class="updates-nav">
+                <button class="nav-btn active" data-section="latest">Latest Updates</button>
+                <button class="nav-btn" data-section="roadmap">Product Roadmap</button>
+                <button class="nav-btn" data-section="history">Version History</button>
+            </div>
+
+            <!-- Platform Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">v2.5.0</div>
+                    <div class="stat-label">Current Version</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">New Tools Added</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">User Satisfaction</div>
+                </div>
+            </div>
+
+            <!-- Latest Updates Section -->
+            <section id="latest" class="updates-section active">
+                <div class="version-grid">
+                    <!-- Latest Version -->
+                    <div class="version-card">
+                        <div class="version-header">
+                            <div class="version-badge">v2.5.0 - Quantum Update</div>
+                            <div class="version-date">December 15, 2024</div>
+                        </div>
+                        <h3 class="version-title">Revolutionary Performance Boost & New AI Tools</h3>
+                        <p class="version-description">Our biggest update yet! Introducing AI-powered tools, 200% faster processing, and a completely redesigned user interface.</p>
+                        
+                        <div class="changelog">
+                            <div class="changelog-category">
+                                <h4 class="category-title">🚀 New Features</h4>
+                                <ul class="changes-list">
+                                    <li class="change-item">
+                                        <span class="change-badge badge-new">NEW</span>
+                                        <span class="change-text">AI Code Assistant - Get intelligent code suggestions and auto-completion</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-new">NEW</span>
+                                        <span class="change-text">Smart Image Optimizer - AI-powered image compression with quality preservation</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-new">NEW</span>
+                                        <span class="change-text">Real-time Collaboration - Work on documents with team members simultaneously</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-new">NEW</span>
+                                        <span class="change-text">Advanced Data Analytics - New visualization tools and chart generators</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="changelog-category">
+                                <h4 class="category-title">⚡ Performance Improvements</h4>
+                                <ul class="changes-list">
+                                    <li class="change-item">
+                                        <span class="change-badge badge-improved">IMPROVED</span>
+                                        <span class="change-text">200% faster tool loading times with new caching system</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-improved">IMPROVED</span>
+                                        <span class="change-text">Reduced memory usage by 60% across all tools</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-improved">IMPROVED</span>
+                                        <span class="change-text">New compression algorithms for faster file processing</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="changelog-category">
+                                <h4 class="category-title">🐛 Bug Fixes</h4>
+                                <ul class="changes-list">
+                                    <li class="change-item">
+                                        <span class="change-badge badge-fixed">FIXED</span>
+                                        <span class="change-text">Resolved JSON formatting issues with large datasets</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-fixed">FIXED</span>
+                                        <span class="change-text">Fixed image converter memory leak on mobile devices</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-fixed">FIXED</span>
+                                        <span class="change-text">Corrected timezone calculations in date tools</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Previous Version -->
+                    <div class="version-card">
+                        <div class="version-header">
+                            <div class="version-badge">v2.4.2</div>
+                            <div class="version-date">November 28, 2024</div>
+                        </div>
+                        <h3 class="version-title">Security Enhancement & Mobile Optimization</h3>
+                        <p class="version-description">Major security updates and improved mobile experience with new responsive design.</p>
+                        
+                        <div class="changelog">
+                            <div class="changelog-category">
+                                <h4 class="category-title">🔒 Security Updates</h4>
+                                <ul class="changes-list">
+                                    <li class="change-item">
+                                        <span class="change-badge badge-improved">IMPROVED</span>
+                                        <span class="change-text">Enhanced encryption for all data processing tools</span>
+                                    </li>
+                                    <li class="change-item">
+                                        <span class="change-badge badge-new">NEW</span>
+                                        <span class="change-text">Added two-factor authentication for user accounts</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roadmap Section -->
+            <section id="roadmap" class="updates-section">
+                <div class="roadmap-timeline">
+                    <div class="roadmap-item">
+                        <div class="roadmap-date">Q1 2025</div>
+                        <div class="roadmap-content">
+                            <h3 class="roadmap-title">AI Integration Phase</h3>
+                            <ul class="roadmap-features">
+                                <li>Advanced AI-powered code generation</li>
+                                <li>Smart content creation tools</li>
+                                <li>Predictive analytics dashboard</li>
+                                <li>Natural language processing utilities</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-date">Q2 2025</div>
+                        <div class="roadmap-content">
+                            <h3 class="roadmap-title">Collaboration Suite</h3>
+                            <ul class="roadmap-features">
+                                <li>Real-time team collaboration tools</li>
+                                <li>Project management integration</li>
+                                <li>Shared workspace features</li>
+                                <li>Version control for documents</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-date">Q3 2025</div>
+                        <div class="roadmap-content">
+                            <h3 class="roadmap-title">Mobile Revolution</h3>
+                            <ul class="roadmap-features">
+                                <li>Dedicated mobile applications</li>
+                                <li>Offline tool functionality</li>
+                                <li>Mobile-optimized workflows</li>
+                                <li>Touch-optimized interfaces</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-date">Q4 2025</div>
+                        <div class="roadmap-content">
+                            <h3 class="roadmap-title">Enterprise Features</h3>
+                            <ul class="roadmap-features">
+                                <li>Advanced admin controls</li>
+                                <li>Custom tool development</li>
+                                <li>API access for businesses</li>
+                                <li>Advanced analytics and reporting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Version History Section -->
+            <section id="history" class="updates-section">
+                <div class="version-grid">
+                    <!-- Version 2.3.0 -->
+                    <div class="version-card">
+                        <div class="version-header">
+                            <div class="version-badge">v2.3.0</div>
+                            <div class="version-date">October 15, 2024</div>
+                        </div>
+                        <h3 class="version-title">Design Tools Expansion</h3>
+                        <p class="version-description">Added comprehensive design and creative tools with advanced features.</p>
+                    </div>
+
+                    <!-- Version 2.2.1 -->
+                    <div class="version-card">
+                        <div class="version-header">
+                            <div class="version-badge">v2.2.1</div>
+                            <div class="version-date">September 5, 2024</div>
+                        </div>
+                        <h3 class="version-title">Performance Optimization</h3>
+                        <p class="version-description">Significant speed improvements and bug fixes across all tools.</p>
+                    </div>
+
+                    <!-- Version 2.1.0 -->
+                    <div class="version-card">
+                        <div class="version-header">
+                            <div class="version-badge">v2.1.0</div>
+                            <div class="version-date">August 20, 2024</div>
+                        </div>
+                        <h3 class="version-title">Developer Tools Suite</h3>
+                        <p class="version-description">Launched comprehensive developer tools with code formatting and validation.</p>
+                    </div>
+
+                    <!-- Version 2.0.0 -->
+                    <div class="version-card">
+                        <div class="version-header">
+                            <div class="version-badge">v2.0.0</div>
+                            <div class="version-date">July 1, 2024</div>
+                        </div>
+                        <h3 class="version-title">Platform Relaunch</h3>
+                        <p class="version-description">Complete redesign with new UI/UX and 10+ additional tools.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subscribe Section -->
+            <section class="subscribe-section">
+                <h2>Never Miss an Update</h2>
+                <p>Subscribe to our newsletter and be the first to know about new features, tools, and platform improvements.</p>
+                <form class="subscribe-form">
+                    <input type="email" class="email-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="subscribe-btn">Subscribe Now</button>
+                </form>
+            </section>
+
+            <!-- Footer -->
+            <footer class="comprehensive-footer">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul class="footer-links">
+                            <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul class="footer-links">
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="contact-us.html">Contact Us</a></li>
+                            <li><a href="features.html">Features</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="faqs.html">FAQ</a></li>
+                            <li><a href="request-a-tool.html">Request a Tool</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://toolivo.github.io/blogs/">Blog</a></li>
+                            <li><a href="updates.html">Updates</a></li>
+                            <li><a href="community.html">Community</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>Toolivo &copy; 2026 — All rights reserved</p>
+                    <p>Created with ❤️ by Mushfikur Riad</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Enhanced Theme Toggle with System Preference
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        const sunIcon = `
+            <circle cx="12" cy="12" r="5" fill="none"/>
+            <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+            <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+            <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+            <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+        `;
+
+        const moonIcon = `
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none"/>
+        `;
+
+        // Enhanced theme detection with system preference
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+        const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+        // Apply theme with smooth transition
+        function applyTheme(isDarkMode) {
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                themeIcon.innerHTML = moonIcon;
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.innerHTML = sunIcon;
+            }
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches);
+            }
+        });
+
+        // Initialize theme
+        applyTheme(isDark);
+
+        themeToggle.addEventListener('click', () => {
+            const isNowDark = !body.classList.contains('dark-mode');
+            applyTheme(isNowDark);
+        });
+
+        // Updates Navigation
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const updateSections = document.querySelectorAll('.updates-section');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and sections
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                updateSections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding section
+                const sectionId = button.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // Add scroll animation for version cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe version cards for animation
+        document.querySelectorAll('.version-card, .roadmap-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Subscribe form handling
+        const subscribeForm = document.querySelector('.subscribe-form');
+        subscribeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = subscribeForm.querySelector('.email-input').value;
+            alert(`Thank you for subscribing with ${email}! You'll receive updates soon.`);
+            subscribeForm.reset();
+        });
+    </script>
+</body>
+</html>
