@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+    <title>Features - Toolivo</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
+            --light-bg: #ffffff;
+            --light-text: #1f2937;
+            --light-card: rgba(255,255,255,0.98);
+            --dark-bg-1: #071127;
+            --dark-bg-2: #071a2b;
+            --dark-text: #e6eef8;
+            --dark-card: #0f1724;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --menu-width: 280px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+        html {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800));
+            color: var(--light-text);
+            transition: var(--transition);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 0.75rem;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            transition: transform 0.28s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: rgba(255,255,255,0.14);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            backdrop-filter: blur(8px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 1.6;
+            fill: none;
+        }
+
+        /* HERO */
+        .hero { 
+            text-align: center; 
+            margin-bottom: 4rem; 
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #ffffff;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: var(--light-card);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .feature-card {
+            background: var(--dark-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), #0ea5e9);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(37, 99, 235, 0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-blue), #0ea5e9);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: inherit;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: inherit;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .feature-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tool-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .tool-tag {
+            background: rgba(14, 165, 233, 0.15);
+            color: #0ea5e9;
+        }
+
+        .tool-tag:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Platform Stats */
+        .platform-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .platform-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem 1rem;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--blue-700));
+            border-radius: 30px;
+            color: white;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-blue);
+            padding: 1.2rem 3rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .logo {
+                max-width: 160px;
+            }
+            
+            header {
+                flex-wrap: wrap;
+            }
+            
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img 
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOu9Vo8K91Uj7n00ddjVguj_KfjaKvU_eKOMOmxzN4tyJzpXHWU1G6yBw6xSzqO3PBt2jPTv5WsXLjw3H5amAAhVLNwWbLOYUsXDnl8nAJilNGiT38j4EIQzgULpPKeTikR8Rhfg3K-2uWOeqlFuEwxwD3kqAhz9CjJVjXFZdsfCHbWA/s1600/20251121_112451.png"
+                    alt="Toolivo Logo"
+                    class="logo"
+                >
+            </div>
+
+            <button class="theme-toggle" id="themeToggle">
+                <svg class="theme-icon" id="themeIcon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5" fill="none"/>
+                    <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+                    <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+                    <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+                    <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1>Unleash Your Productivity</h1>
+                <p>Discover 100+ powerful tools designed for developers, designers, students, and professionals. Everything you need, completely free.</p>
+            </section>
+
+            <!-- Platform Statistics -->
+            <div class="platform-stats">
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Tools Available and more is coming Every week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free Forever</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Zero</div>
+                    <div class="stat-label">Registration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Instant</div>
+                    <div class="stat-label">Processing</div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <!-- Developer Tools -->
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Developer Essentials</h3>
+                    <p>Comprehensive suite for programmers and developers with advanced coding utilities</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Code Formatter</span>
+                        <span class="tool-tag">JSON Validator</span>
+                        <span class="tool-tag">Base64 Encoder</span>
+                        <span class="tool-tag">Regex Tester</span>
+                        <span class="tool-tag">Hash Generator</span>
+                        <span class="tool-tag">URL Encoder</span>
+                        <span class="tool-tag">SQL Formatter</span>
+                        <span class="tool-tag">API Tester</span>
+                    </div>
+                </div>
+
+                <!-- Design Tools -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Design & Creative</h3>
+                    <p>Powerful tools for designers, artists, and creative professionals</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Color Picker</span>
+                        <span class="tool-tag">Image Converter</span>
+                        <span class="tool-tag">SVG Optimizer</span>
+                        <span class="tool-tag">Gradient Generator</span>
+                        <span class="tool-tag">Font Preview</span>
+                        <span class="tool-tag">CSS Generator</span>
+                        <span class="tool-tag">Icon Maker</span>
+                        <span class="tool-tag">Mockup Creator</span>
+                    </div>
+                </div>
+
+                <!-- Text Tools -->
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Text Utilities</h3>
+                    <p>Advanced text manipulation and processing tools for writers and editors</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Case Converter</span>
+                        <span class="tool-tag">Word Counter</span>
+                        <span class="tool-tag">Text Diff</span>
+                        <span class="tool-tag">Lorem Ipsum</span>
+                        <span class="tool-tag">Markdown Editor</span>
+                        <span class="tool-tag">Password Generator</span>
+                        <span class="tool-tag">Text Encoder</span>
+                        <span class="tool-tag">Slug Generator</span>
+                    </div>
+                </div>
+
+                <!-- Data Tools -->
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Data & Analytics</h3>
+                    <p>Tools for data processing, analysis, and visualization</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">CSV Converter</span>
+                        <span class="tool-tag">JSON to XML</span>
+                        <span class="tool-tag">Data Validator</span>
+                        <span class="tool-tag">Chart Generator</span>
+                        <span class="tool-tag">Number Converter</span>
+                        <span class="tool-tag">Data Formatter</span>
+                        <span class="tool-tag">QR Code Generator</span>
+                        <span class="tool-tag">Barcode Reader</span>
+                    </div>
+                </div>
+
+                <!-- Web Tools -->
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Web & SEO</h3>
+                    <p>Essential tools for web developers and SEO specialists</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Meta Tag Generator</span>
+                        <span class="tool-tag">Sitemap Generator</span>
+                        <span class="tool-tag">Website Analyzer</span>
+                        <span class="tool-tag">SSL Checker</span>
+                        <span class="tool-tag">IP Lookup</span>
+                        <span class="tool-tag">DNS Checker</span>
+                        <span class="tool-tag">URL Shortener</span>
+                        <span class="tool-tag">Robots.txt Generator</span>
+                    </div>
+                </div>
+
+                <!-- Productivity -->
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Productivity Boosters</h3>
+                    <p>Tools to enhance your workflow and save time</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Unit Converter</span>
+                        <span class="tool-tag">Time Zone Converter</span>
+                        <span class="tool-tag">Calculator Suite</span>
+                        <span class="tool-tag">Note Converter</span>
+                        <span class="tool-tag">File Converter</span>
+                        <span class="tool-tag">Batch Processor</span>
+                        <span class="tool-tag">Template Generator</span>
+                        <span class="tool-tag">Workflow Automator</span>
+                    </div>
+                </div>
+
+                <!-- Multimedia -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Multimedia Tools</h3>
+                    <p>Audio, video, and image processing utilities</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Audio Converter</span>
+                        <span class="tool-tag">Video Compressor</span>
+                        <span class="tool-tag">Image Resizer</span>
+                        <span class="tool-tag">GIF Maker</span>
+                        <span class="tool-tag">Screen Recorder</span>
+                        <span class="tool-tag">Audio Editor</span>
+                        <span class="tool-tag">Video Trimmer</span>
+                        <span class="tool-tag">Thumbnail Generator</span>
+                    </div>
+                </div>
+
+                <!-- Security -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Security & Privacy</h3>
+                    <p>Tools to protect your data and ensure privacy</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Password Strength</span>
+                        <span class="tool-tag">Encryption Tools</span>
+                        <span class="tool-tag">VPN Checker</span>
+                        <span class="tool-tag">Data Eraser</span>
+                        <span class="tool-tag">Security Scanner</span>
+                        <span class="tool-tag">Privacy Checker</span>
+                        <span class="tool-tag">Cookie Analyzer</span>
+                        <span class="tool-tag">HTTPS Checker</span>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Education & Learning</h3>
+                    <p>Tools for students, teachers, and lifelong learners</p>
+                    <div class="feature-tools">
+                        <span class="tool-tag">Citation Generator</span>
+                        <span class="tool-tag">Plagiarism Checker</span>
+                        <span class="tool-tag">Math Solver</span>
+                        <span class="tool-tag">Language Translator</span>
+                        <span class="tool-tag">Flashcard Maker</span>
+                        <span class="tool-tag">Grade Calculator</span>
+                        <span class="tool-tag">Study Timer</span>
+                        <span class="tool-tag">Bibliography Maker</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2>Ready to Supercharge Your Workflow?</h2>
+                <p>Join thousands of users who boost their productivity with Toolivo's comprehensive toolkit</p>
+                <a href="https://toolivo.github.io/tool/" class="cta-button">Explore All Tools Now</a>
+            </section>
+
+            <!-- Footer -->
+            <footer class="comprehensive-footer">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul class="footer-links">
+                            <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="disclaimer.html">Disclaimer</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul class="footer-links">
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="contact-us.html">Contact Us</a></li>
+                            <li><a href="features.html">Features</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="faqs.html">FAQ</a></li>
+                            <li><a href="request-a-tool.html">Request a Tool</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://toolivo.github.io/blogs/">Blog</a></li>
+                            <li><a href="updates.html">Updates</a></li>
+                            <li><a href="community.html">Community</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>Toolivo &copy; 2026 — All rights reserved</p>
+                    <p>Created with ❤️ by Mushfikur Riad</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Enhanced Theme Toggle with System Preference
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        const sunIcon = `
+            <circle cx="12" cy="12" r="5" fill="none"/>
+            <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+            <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+            <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+            <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+        `;
+
+        const moonIcon = `
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none"/>
+        `;
+
+        // Enhanced theme detection with system preference
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+        const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+        // Apply theme with smooth transition
+        function applyTheme(isDarkMode) {
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                themeIcon.innerHTML = moonIcon;
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.innerHTML = sunIcon;
+            }
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches);
+            }
+        });
+
+        // Initialize theme
+        applyTheme(isDark);
+
+        themeToggle.addEventListener('click', () => {
+            const isNowDark = !body.classList.contains('dark-mode');
+            applyTheme(isNowDark);
+        });
+
+        // Add scroll animation for feature cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards for animation
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
