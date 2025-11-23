@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Join the Toolivo community - Connect with other users, share feedback, and get support.">
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+    <title>Community - Toolivo</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
+            --light-bg: #ffffff;
+            --light-text: #1f2937;
+            --light-card: rgba(255,255,255,0.98);
+            --dark-bg-1: #071127;
+            --dark-bg-2: #071a2b;
+            --dark-text: #e6eef8;
+            --dark-card: #0f1724;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --menu-width: 280px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800));
+            color: var(--light-text);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--dark-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+            padding: 0;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 24px;
+            border-radius: 2px;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Menu Card */
+        .menu-card {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            width: var(--menu-width);
+            background: var(--light-card);
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+            transform: translateX(-105%);
+            transition: transform 0.36s cubic-bezier(0.22, 0.61, 0.36, 1);
+            z-index: 1000;
+            padding: 1.5rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        body.dark-mode .menu-card {
+            background: var(--dark-card);
+        }
+
+        .menu-card.open {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .menu-header {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .menu-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .menu-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .menu-close:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode .menu-close:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem 0.75rem 0.5rem;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .menu-link {
+            color: var(--dark-text);
+        }
+
+        .menu-link:hover {
+            background: rgba(37,99,235,0.1);
+            transform: translateX(4px);
+        }
+
+        .menu-icon {
+            width: 20px;
+            opacity: 0.7;
+        }
+
+        /* Backdrop */
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.24s, visibility 0.24s;
+            z-index: 999;
+        }
+
+        .backdrop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .theme-toggle {
+            background: rgba(255,255,255,0.14);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 1.6;
+            fill: none;
+        }
+
+        /* Hero */
+        .hero { 
+            text-align: center; 
+            margin-bottom: 3rem; 
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Simple Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem auto;
+            max-width: 500px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .content-grid {
+            display: grid;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: var(--light-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .content-card {
+            background: var(--dark-card);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), #0ea5e9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: inherit;
+            font-weight: 600;
+        }
+
+        .card-content p {
+            color: inherit;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Simple CTA */
+        .cta-section {
+            text-align: center;
+            margin: 3rem auto;
+            max-width: 500px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Comprehensive Footer */
+        .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .stat-item {
+                padding: 1rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .menu-card {
+                top: 60px;
+                left: 10px;
+                right: 10px;
+                width: calc(100% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.2rem;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comprehensive-footer {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Backdrop -->
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- Menu Card -->
+    <div class="menu-card" id="menuCard">
+        <div class="menu-header">
+            <h3>Menu</h3>
+            <button class="menu-close" id="menuClose">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/" class="menu-link">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="features.html" class="menu-link">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Features
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="community.html" class="menu-link">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Community
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="request-a-tool.html" class="menu-link">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 20h4l10.6-10.6a3 3 0 1 0-4.2-4.2L4 16v4z"/>
+                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/>
+                    </svg>
+                    Request a Tool
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="about-us.html" class="menu-link">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    About Us
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="contact-us.html" class="menu-link">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Contact Us
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <header>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="logo-container">
+                <img 
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOu9Vo8K91Uj7n00ddjVguj_KfjaKvU_eKOMOmxzN4tyJzpXHWU1G6yBw6xSzqO3PBt2jPTv5WsXLjw3H5amAAhVLNwWbLOYUsXDnl8nAJilNGiT38j4EIQzgULpPKeTikR8Rhfg3K-2uWOeqlFuEwxwD3kqAhz9CjJVjXFZdsfCHbWA/s1600/20251121_112451.png"
+                    alt="Toolivo Logo"
+                    class="logo"
+                >
+            </div>
+
+            <button class="theme-toggle" id="themeToggle">
+                <svg class="theme-icon" id="themeIcon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5" fill="none"/>
+                    <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+                    <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+                    <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+                    <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1>Toolivo Community</h1>
+                <p>Join thousands of users who help each other, share ideas, and make our tools better together.</p>
+            </section>
+
+            <!-- Simple Stats -->
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">25K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.9★</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">💬</div>
+                        <h2 class="card-title">Get Help & Support</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Stuck with a tool? Our community is here to help. Get quick answers from experienced users and share your own knowledge.</p>
+                        <p>Join discussions about best practices, troubleshooting, and creative ways to use our tools.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">💡</div>
+                        <h2 class="card-title">Share Your Ideas</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Have an idea for a new tool or feature? We listen to our community. Your suggestions help shape the future of Toolivo.</p>
+                        <p>Many of our most popular tools started as community suggestions.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">🚀</div>
+                        <h2 class="card-title">Stay Updated</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Be the first to know about new tools, features, and updates. Get tips and tutorials from other community members.</p>
+                        <p>Learn advanced techniques and discover hidden features you might have missed.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple CTA -->
+            <div class="cta-section">
+                <a href="https://toolivo.github.io/tool/" class="cta-button">Start Using Tools</a>
+            </div>
+        </main>
+
+        <!-- Comprehensive Footer -->
+        <footer class="comprehensive-footer">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="features.html">Features</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="faqs.html">FAQ</a></li>
+                        <li><a href="request-a-tool.html">Request a Tool</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://toolivo.github.io/blogs/">Blog</a></li>
+                        <li><a href="updates.html">Updates</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Toolivo &copy; 2026 — All rights reserved</p>
+                <p>Created with ❤️ by Mushfikur Riad</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Menu Toggle Logic
+        const menuToggle = document.getElementById('menuToggle');
+        const menuCard = document.getElementById('menuCard');
+        const menuClose = document.getElementById('menuClose');
+        const backdrop = document.getElementById('backdrop');
+
+        function openMenu() {
+            menuCard.classList.add('open');
+            backdrop.classList.add('visible');
+            menuToggle.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menuCard.classList.remove('open');
+            backdrop.classList.remove('visible');
+            menuToggle.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', () => {
+            menuCard.classList.contains('open') ? closeMenu() : openMenu();
+        });
+
+        menuClose.addEventListener('click', closeMenu);
+        backdrop.addEventListener('click', closeMenu);
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        const sunIcon = `
+            <circle cx="12" cy="12" r="5" fill="none"/>
+            <line x1="12" y1="1" x2="12" y2="3" fill="none"/>
+            <line x1="12" y1="21" x2="12" y2="23" fill="none"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" fill="none"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" fill="none"/>
+            <line x1="1" y1="12" x2="3" y2="12" fill="none"/>
+            <line x1="21" y1="12" x2="23" y2="12" fill="none"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" fill="none"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" fill="none"/>
+        `;
+
+        const moonIcon = `
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none"/>
+        `;
+
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+        const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+        function applyTheme(isDarkMode) {
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                themeIcon.innerHTML = moonIcon;
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.innerHTML = sunIcon;
+            }
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        applyTheme(isDark);
+
+        themeToggle.addEventListener('click', () => {
+            const isNowDark = !body.classList.contains('dark-mode');
+            applyTheme(isNowDark);
+        });
+
+        // Simple animation for cards
+        const cards = document.querySelectorAll('.content-card');
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        setTimeout(() => {
+            cards.forEach(card => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+        }, 200);
+    </script>
+</body>
+</html>
