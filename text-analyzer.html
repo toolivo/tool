@@ -1,0 +1,4631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolivo Text Analyzer | Advanced Text Analysis Tool</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Text Analyzers: Free online tool with 24 text metrics - word count, readability, keyword density & more for writers and SEO pros.">
+    <meta name="keywords" content="Text Analyzers, word counter, text metrics, readability score, character count, SEO text tool, advance text counter, word calculator, free word counter, google docs">
+    <meta name="author" content="Mushfikur Riad">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Toolivo Text Analyzer | Advanced Text Analysis Tool">
+    <meta property="og:description" content="Text Analyzers: Free online tool with 24 text metrics - word count, readability, keyword density & more for writers and SEO pros.">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+    <meta property="og:url" content="https://toolivo.github.io/tool/text-analyzer.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Toolivo">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolivo Text Analyzer | Advanced Text Analysis Tool">
+    <meta name="twitter:description" content="Text Analyzers: Free online tool with 24 text metrics - word count, readability, keyword density & more for writers and SEO pros.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+    <meta name="twitter:creator" content="@toolivo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    <link rel="canonical" href="https://toolivo.github.io/tool/text-analyzer.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QycqQiQqnV11ZLknUk_7YYL6O_Jeozy03pRCF0nGXgLZYFTg2IyquyV-clc845QGYKsda9J8yJ2Sw0qU4sf1d1Kp4VaSxFMPpOy-7tEOiVml5BwT88DAllyvAy9IZ4-OheCO6gR27pLSIM2arFxphvB4TvSG53SR4JrK_WLLGiFuuw/s1600/20251121_115505.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
+            --light-bg: #ffffff;
+            --light-text: #1f2937;
+            --light-card: rgba(255,255,255,0.98);
+            --dark-bg-1: #071127;
+            --dark-bg-2: #071a2b;
+            --dark-text: #e6eef8;
+            --dark-card: #0f1724;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --menu-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800));
+            color: var(--light-text);
+            line-height: 1.6;
+            padding: 5px;
+            min-height: 100vh;
+            transition: var(--transition);
+            margin-top: -1.5rem;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--dark-text);
+        }
+
+        /* === Menu Toggle === */
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+            z-index: 10;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        body.dark-mode .menu-toggle:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 24px;
+            border-radius: 2px;
+            background: white;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+
+        body.dark-mode .menu-toggle span {
+            background: #e6eef8;
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        
+      /* Glowing effect for cards in dark mode — hover-only transition to preserve lazy-load animations */
+body.dark-mode .visual-card,
+body.dark-mode .tool-section,
+body.dark-mode .article-section,
+body.dark-mode .feature-card,
+body.dark-mode .troubleshooting-card,
+body.dark-mode .related-tools-card,
+body.dark-mode .steps,
+body.dark-mode .about-content,
+body.dark-mode .faq-item {
+    box-shadow: 0 0 14px 3px rgba(14, 165, 233, 0.15);
+}
+
+/* ✅ Only apply transition to box-shadow on hover/focus — avoids overriding opacity/transform transitions */
+body.dark-mode .visual-card:hover,
+body.dark-mode .tool-section:hover,
+body.dark-mode .article-section:hover,
+body.dark-mode .feature-card:hover,
+body.dark-mode .troubleshooting-card:hover,
+body.dark-mode .related-tools-card:hover,
+body.dark-mode .steps:hover,
+body.dark-mode .about-content:hover,
+body.dark-mode .faq-item:hover {
+    box-shadow: 0 0 20px 6px rgba(14, 165, 233, 0.25);
+    transition: box-shadow 0.3s ease;
+}
+        
+        /* === Breadcrumb === */
+.breadcrumb {
+    padding: 0.3rem 0.3rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 2px;
+    margin-top: 25px
+}
+body.dark-mode .breadcrumb {
+    background: rgba(255, 255, 255, 0.04);
+}
+.breadcrumb ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.5rem;
+    align-items: center;
+}
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+}
+.breadcrumb li:not(:last-child)::after {
+    content: "/";
+    margin: 0 0.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: var(--transition);
+}
+.breadcrumb a:hover {
+    color: white;
+}
+body.dark-mode .breadcrumb a {
+    color: rgba(230, 238, 248, 0.85);
+}
+body.dark-mode .breadcrumb a:hover {
+    color: #e6eef8;
+}
+.breadcrumb li[aria-current="page"] {
+    color: #e6eef8;
+    font-weight: 600;
+}
+body.dark-mode .breadcrumb li[aria-current="page"] {
+    color: #cbd5e1;
+}
+.breadcrumb i {
+    font-size: 0.9em;
+}
+
+        /* === Menu Card === */
+        .menu-card {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: var(--menu-width);
+    background: #ffffff; /* Explicit white — no transparency */
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+    transform: translateX(-145%);
+    transition: transform 0.36s cubic-bezier(0.22, 0.61, 0.36, 1);
+    z-index: 1000;
+    padding: 1.5rem;
+    max-height: 80vh;
+    max-width: 500px;
+    overflow-y: auto;
+}
+body.dark-mode .menu-card {
+    background: #0f1724; /* Explicit dark — no transparency */
+}
+
+        .menu-card.open {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .menu-header {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .menu-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .menu-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-close:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode .menu-close:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .menu-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        /* ✅ Ensure × icon is white in dark mode — per your preference */
+body.dark-mode .menu-close svg {
+    color: #e6eef8; /* matches your light-text-in-dark-mode preference */
+}
+
+        .menu-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem 0.75rem 0.5rem;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.dark-mode .menu-link {
+            color: var(--dark-text);
+        }
+
+        .menu-link:hover {
+            background: rgba(37,99,235,0.1);
+            transform: translateX(4px);
+        }
+
+        body.dark-mode .menu-link:hover {
+            background: rgba(14,165,233,0.12);
+        }
+
+        .menu-icon {
+            width: 20px;
+            opacity: 0.7;
+        }
+
+        /* Backdrop */
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.24s, visibility 0.24s;
+            z-index: 999;
+        }
+
+        .backdrop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.2rem;
+            padding: 0.2rem 0;
+            gap: 0.8rem;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            transition: transform 0.28s;
+        }
+
+        .logo:hover {
+            transform: scale(1.04);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        body.dark-mode h1 {
+            background: linear-gradient(135deg, #ffffff, #e6eef8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #ffffff;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        body.dark-mode .tagline {
+            color: var(--dark-text);
+        }
+
+        /* === Theme Toggle === */
+      /* === Animated Theme Toggle === */
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.14);
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(255,255,255,0.06);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.2);
+}
+
+body.dark-mode .theme-toggle:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.theme-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    stroke: currentColor;
+}
+
+.sun-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+    color: #ff8c00; /* Black sun in light mode */
+}
+
+.moon-icon {
+    opacity: 0;
+    transform: rotate(-90deg);
+    color: #e6eef8; /* Light moon in dark mode */
+}
+
+body.dark-mode .sun-icon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+body.dark-mode .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* View Transition Support */
+@supports (view-transition-name: none) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+    }
+    
+    ::view-transition-old(root) {
+        z-index: 1;
+    }
+    
+    ::view-transition-new(root) {
+        z-index: 9999;
+    }
+    
+    .dark-mode::view-transition-old(root) {
+        z-index: 9999;
+    }
+    
+    .dark-mode::view-transition-new(root) {
+        z-index: 1;
+    }
+}
+
+        /* === Social Sharing Section === */
+        .social-sharing {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .social-sharing h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .social-sharing h3 {
+            color: var(--dark-text);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.4rem;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Platform-specific hover colors */
+        .social-icon.x-twitter:hover { background: #000000; }
+        .social-icon.linkedin:hover { background: #0077B5; }
+        .social-icon.facebook:hover { background: #0068FF; }
+        .social-icon.whatsapp:hover { background: #25D366; }
+        .social-icon.telegram:hover { background: #0088cc; }
+        .social-icon.instagram:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-icon.reddit:hover { background: #FF4500; }
+        .social-icon.pinterest:hover { background: #BD081C; }
+        .social-icon.messenger:hover { background: #006AFF; }
+        .social-icon.email:hover { background: #EA4335; }
+
+        /* Click animation effect */
+        .social-icon.clicked {
+            animation: clickPulse 0.4s ease-out;
+        }
+
+        @keyframes clickPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* === Footer === */
+        .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        body.dark-mode .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-links a svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        .creator-credit {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Rest of your existing CSS styles... */
+        .tool-section {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            scroll-margin-top: 10px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .tool-section {
+            background: var(--dark-card);
+        }
+
+        .tool-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--blue-600), var(--blue-800));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        body.dark-mode .tool-section::before {
+            background: linear-gradient(90deg, #0ea5e9, #0369a1);
+        }
+
+        .tool-section.has-text::before {
+            transform: scaleX(1);
+        }
+
+        .results-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin: 0 0;
+        }
+
+        .results-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 20px;
+            padding-left: 5px;
+            padding-right: 5px;            
+            padding-top: 30px;
+            gap: 7px;
+        }
+
+        .results-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .results-page {
+            display: grid;
+            gap: 7px;
+            min-width: 100%;
+            flex-shrink: 0;
+            box-sizing: content-box;
+        }
+
+        .result-card {
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            height: 125px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0.4;
+            transform: scale(0.9);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-card.animated {
+            opacity: 1;
+            transform: scale(1);
+            animation: simpleGlow 0.6s ease-out forwards;
+        }
+
+        @keyframes simpleGlow {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px 5px rgba(37, 99, 235, 0.4);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+            }
+        }
+
+        body.dark-mode .result-card.animated {
+            animation: simpleGlowDark 0.6s ease-out forwards;
+        }
+
+        @keyframes simpleGlowDark {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+                box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px 5px rgba(14, 165, 233, 0.4);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(14, 165, 233, 0.15);
+            }
+        }
+
+        .result-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue-600), var(--blue-800));
+            transition: width 0.5s ease;
+        }
+
+        body.dark-mode .result-card::after {
+            background: linear-gradient(90deg, #0ea5e9, #0369a1);
+        }
+
+        .result-card.active {
+            transform: scale(1);
+            opacity: 1;
+            height: 145px;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        }
+
+        body.dark-mode .result-card.active {
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.15);
+        }
+
+        .result-card.active::after {
+            width: 100%;
+        }
+
+        .result-value {
+            font-size: 1.9rem;
+            font-weight: bold;
+            color: var(--blue-600);
+            margin-bottom: 0.25rem;
+            transition: font-size 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        body.dark-mode .result-value {
+            color: #0ea5e9;
+        }
+
+        .result-card.active .result-value {
+            font-size: 2.3rem;
+        }
+
+        .result-label {
+            color: #6c757d;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+        body.dark-mode .result-label {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .input-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 1.2rem;
+        }
+
+        .input-area {
+            width: 100%;
+            min-height: 280px;
+            padding: 1.5rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+            background-color: rgba(248, 250, 255, 0.8);
+            line-height: 1.7;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .input-area {
+            background-color: rgba(15, 23, 36, 0.5);
+            border-color: rgba(14, 165, 233, 0.2);
+            color: var(--dark-text);
+        }
+
+        .input-area:focus {
+            outline: none;
+            border-color: var(--blue-600);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            background-color: white;
+        }
+
+        body.dark-mode .input-area:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+            background-color: rgba(15, 23, 36, 0.7);
+        }
+
+        /* Scroll indicator for textarea */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue-600), var(--blue-800));
+            width: 0%;
+            transition: width 0.2s ease;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        body.dark-mode .scroll-indicator {
+            background: linear-gradient(90deg, #0ea5e9, #0369a1);
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 51%;
+            transform: translateY(-50%);
+            background: rgba(37, 99, 235, 0.1);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--blue-600);
+            font-size: 0.75rem;
+            z-index: 10;
+        }
+
+        body.dark-mode .nav-arrow {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0ea5e9;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(37, 99, 235, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        body.dark-mode .nav-arrow:hover {
+            background: rgba(14, 165, 233, 0.2);
+        }
+
+        .nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+
+        .prev-arrow { left: 1px; }
+        .next-arrow { right: 1px; }
+
+        .page-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 12px;
+        }
+
+        .page-indicator {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        body.dark-mode .page-indicator {
+            background: rgba(14, 165, 233, 0.2);
+        }
+
+        .page-indicator.active {
+            background: var(--blue-600);
+            transform: scale(1.3);
+        }
+
+        body.dark-mode .page-indicator.active {
+            background: #0ea5e9;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-page { display: none !important; }
+            .desktop-page { display: grid !important; }
+
+            .results-page {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                min-height: 290px;
+            }
+
+            .results-wrapper {
+                margin: 0 24px;
+            }
+
+            .result-value {
+                font-size: 1.95rem;
+            }
+
+            .result-card.active .result-value {
+                font-size: 2.35rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-page { display: none !important; }
+            .mobile-page { display: grid !important; }
+
+            h1 { font-size: 2.2rem; }
+            .tool-section { padding: 1.4rem; }
+            .results-page {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                min-height: 250px;
+                width: calc(100% - 18px);
+            }
+
+            .result-value {
+                font-size: 1.65rem;
+            }
+
+            .result-card.active .result-value {
+                font-size: 1.95rem;
+            }
+
+            /* Mobile menu adjustments */
+            .menu-card { top: 60px; left: 10px; right: 10px; width: calc(100% - 20px); }
+            .social-icons { gap: 0.6rem; }
+            .social-icon { width: 42px; height: 42px; font-size: 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .results-page { min-height: 230px; }
+            .result-card {
+                height: 105px;
+                padding: 0.8rem 0.6rem;
+            }
+            .result-card.active { height: 125px; }
+            .result-value { font-size: 1.5rem; }
+            .result-card.active .result-value { font-size: 1.8rem; }
+            .result-label { font-size: 0.78rem; }
+        }
+
+        /* Upload Section - ALWAYS VISIBLE */
+        .upload-section {
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .upload-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(37, 99, 235, 0.05);
+            border: 2px dashed rgba(37, 99, 235, 0.3);
+            border-radius: var(--border-radius);
+            padding: 12px 16px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .upload-bar {
+            background: rgba(14, 165, 233, 0.05);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .upload-bar:hover {
+            border-color: var(--blue-600);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .upload-bar:hover {
+            border-color: #0ea5e9;
+            background: rgba(14, 165, 233, 0.1);
+        }
+
+        .upload-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .upload-icon {
+            font-size: 16px;
+            color: var(--blue-600);
+        }
+
+        body.dark-mode .upload-icon {
+            color: #0ea5e9;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .upload-text {
+            color: var(--dark-text);
+        }
+
+        .upload-text small {
+            color: #6c757d;
+            font-size: 12px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        body.dark-mode .upload-text small {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .upload-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .upload-button {
+            padding: 8px 16px;
+            background: var(--blue-600);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.dark-mode .upload-button {
+            background: #0ea5e9;
+        }
+
+        .upload-button:hover {
+            background: var(--blue-700);
+            transform: translateY(-1px);
+        }
+
+        body.dark-mode .upload-button:hover {
+            background: #0284c7;
+        }
+
+        .upload-button.secondary {
+            background: transparent;
+            color: var(--blue-600);
+            border: 1px solid var(--blue-600);
+        }
+
+        body.dark-mode .upload-button.secondary {
+            color: #0ea5e9;
+            border-color: #0ea5e9;
+            background: transparent;
+        }
+
+        .upload-button.secondary:hover {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .upload-button.secondary:hover {
+            background: transparent;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: var(--border-radius);
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        body.dark-mode .file-info {
+            background: rgba(14, 165, 233, 0.1);
+        }
+
+        .file-info.show {
+            display: flex;
+        }
+
+        .file-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .file-icon {
+            color: var(--blue-600);
+            font-size: 16px;
+        }
+
+        body.dark-mode .file-icon {
+            color: #0ea5e9;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--blue-600);
+            font-size: 14px;
+        }
+
+        body.dark-mode .file-name {
+            color: #0ea5e9;
+        }
+
+        .file-size {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        body.dark-mode .file-size {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .file-remove {
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .file-remove {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .file-remove:hover {
+            color: var(--blue-600);
+        }
+
+        body.dark-mode .file-remove:hover {
+            color: #0ea5e9;
+        }
+
+       /* === Compact Options Styling === */
+.compact-options {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(37, 99, 235, 0.05);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    transition: var(--transition);
+    font-size: 0.85rem; /* Smaller font size */
+    cursor: pointer;
+}
+
+body.dark-mode .option-label {
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.option-label:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.option-label input {
+    width: 16px; /* Smaller checkbox */
+    height: 16px; /* Smaller checkbox */
+    accent-color: var(--blue-600);
+}
+
+body.dark-mode .option-label input {
+    accent-color: #0ea5e9;
+}
+
+/* Make sure the labels are clickable */
+.option-label input[type="checkbox"] {
+    margin: 0;
+}
+
+        /* FIXED: Action buttons now stay in one line on all screen sizes */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 0.7rem 0.7rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-button {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        body.dark-mode .copy-button {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .copy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        body.dark-mode .copy-button:hover {
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+        }
+
+        .reset-button {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--light-text);
+        }
+
+        body.dark-mode .reset-button {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: var(--dark-text);
+        }
+
+        .reset-button:hover {
+            background-color: rgba(37, 99, 235, 0.2);
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode .reset-button:hover {
+            background-color: rgba(14, 165, 233, 0.2);
+        }
+
+        /* Contextual suggestion */
+        .contextual-suggestion {
+            padding: 0.8rem;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+            border-left: 4px solid var(--blue-600);
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .contextual-suggestion {
+            background: rgba(14, 165, 233, 0.1);
+            color: rgba(230, 238, 248, 0.7);
+            border-left-color: #0ea5e9;
+        }
+
+        .contextual-suggestion.highlight {
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--blue-600);
+            font-weight: 500;
+        }
+
+        body.dark-mode .contextual-suggestion.highlight {
+            background: rgba(14, 165, 233, 0.15);
+            color: #0ea5e9;
+        }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-bottom: 3rem;
+        }
+        
+        
+
+        .related-tools-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border: 2px dashed rgba(37, 99, 235, 0.2);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .related-tools-card {
+            background: var(--dark-card);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .related-tools-card:hover {
+            border-color: var(--blue-600);
+            transform: translateY(-5px);
+        }
+
+        body.dark-mode .related-tools-card:hover {
+            border-color: #0ea5e9;
+        }
+
+        .related-tools-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .related-tools-title {
+            color: var(--dark-text);
+        }
+
+        .related-tools-description {
+            margin-bottom: 1.5rem;
+            color: #6c757d;
+        }
+
+        body.dark-mode .related-tools-description {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .related-tools-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .related-tools-button {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .related-tools-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        body.dark-mode .related-tools-button:hover {
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .connected-tools {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .connected-tool-link {
+            color: var(--blue-600);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(37, 99, 235, 0.1);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .connected-tool-link {
+            color: #0ea5e9;
+            background: rgba(14, 165, 233, 0.1);
+        }
+
+        .connected-tool-link:hover {
+            background: var(--blue-600);
+            color: white;
+        }
+
+        body.dark-mode .connected-tool-link:hover {
+            background: #0ea5e9;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
+               
+        }
+
+        body.dark-mode .section-title {
+            color: var(--dark-text);
+        }
+
+        .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blue-600), var(--blue-800));
+    border-radius: 2px;
+
+    /* Apply border only in light mode */
+    border: 1px solid #e3e4f5;
+    box-sizing: border-box;
+}
+
+body.dark-mode .section-title::after {
+    background: linear-gradient(90deg, #0ea5e9, #0369a1);
+    /* Optional: Use a subtle border color for dark mode if needed */
+    /* border: 1px solid rgba(255, 255, 255, 0.1); */
+    /* Or remove it entirely as you prefer */
+    border: none;
+}
+
+/* Add this to your existing CSS */
+body.dark-mode .related-tools-title {
+    color: white; /* Ensure title is white in dark mode */
+}
+
+body.dark-mode .related-tools-description {
+    color: rgba(255, 255, 255, 0.9); /* Make description text more visible in dark mode */
+}
+
+body.dark-mode .connected-tool-link {
+    color: white; /* Change link text to white in dark mode */
+    background: rgba(255, 255, 255, 0.1); /* Lighter background for better contrast */
+}
+
+body.dark-mode .connected-tool-link:hover {
+    background: #0ea5e9;
+    color: white; /* Keep text white on hover */
+}
+        /* Features Section */
+        .features-section {
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+            
+        }
+
+        body.dark-mode .feature-card {
+            background: var(--dark-card);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-top: 4px solid var(--blue-600);
+        }
+
+        body.dark-mode .feature-card:hover {
+            border-top-color: #0ea5e9;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--blue-600);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .feature-icon {
+            color: #0ea5e9;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .feature-title {
+            color: var(--dark-text);
+        }
+
+        /* How to Use Section */
+        .how-to-section {
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        body.dark-mode .steps {
+            background: var(--dark-card);
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            bottom: -2rem;
+            width: 2px;
+            background: rgba(37, 99, 235, 0.1);
+            z-index: 1;
+        }
+
+        body.dark-mode .step::before {
+            background: rgba(14, 165, 233, 0.1);
+        }
+
+        .step:last-child::before {
+            display: none;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            z-index: 2;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        body.dark-mode .step-number {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .step-content h3 {
+            color: var(--dark-text);
+        }
+      
+      
+        
+
+
+
+        /* Article Section */
+        .article-section {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        body.dark-mode .article-section {
+            background: var(--dark-card);
+        }
+
+        .article-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            text-align: center;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        body.dark-mode .article-title {
+            color: var(--dark-text);
+        }
+
+        .article-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--blue-600);
+            text-align: center;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        body.dark-mode .article-subtitle {
+            color: #0ea5e9;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .article-content p {
+            color: var(--dark-text);
+        }
+
+        .article-subheading {
+            font-size: 1.4rem;
+            margin: 2.5rem 0 1rem 0;
+            color: var(--blue-600);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .article-subheading {
+            color: #0ea5e9;
+            border-bottom-color: rgba(14, 165, 233, 0.1);
+        }
+
+        .article-visuals {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .visual-card {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .visual-card {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .visual-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .visual-icon {
+            font-size: 2.5rem;
+            color: var(--blue-600);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .visual-icon {
+            color: #0ea5e9;
+        }
+
+        .visual-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .visual-title {
+            color: var(--dark-text);
+        }
+
+        /* Article Image */
+        .article-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        body.dark-mode .article-image {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .article-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.8), rgba(30, 64, 175, 0.8));
+            z-index: 1;
+        }
+
+        body.dark-mode .article-image::before {
+            background: linear-gradient(45deg, rgba(14, 165, 233, 0.8), rgba(3, 105, 161, 0.8));
+        }
+
+        .article-image-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-item {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        body.dark-mode .faq-item {
+            background: var(--dark-card);
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+
+        .faq-question {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: var(--transition);
+            color: var(--light-text);
+        }
+
+        body.dark-mode .faq-question {
+            color: var(--dark-text);
+        }
+
+        .faq-question:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        body.dark-mode .faq-question:hover {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .faq-answer {
+            color: var(--dark-text);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        .faq-item.active .faq-question {
+            background: rgba(37, 99, 235, 0.05);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .faq-item.active .faq-question {
+            background: rgba(14, 165, 233, 0.05);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .faq-icon {
+            transition: transform 0.4s ease;
+            color: var(--blue-600);
+        }
+
+        body.dark-mode .faq-icon {
+            color: #0ea5e9;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Troubleshooting Section */
+        .troubleshooting-section {
+            margin-bottom: 3rem;
+        }
+
+        .troubleshooting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .hero-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.hero-text h1,
+.hero-text .tagline {
+    text-align: center;
+    margin: 0;
+}
+
+        .troubleshooting-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .troubleshooting-card {
+            background: var(--dark-card);
+        }
+
+        .troubleshooting-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .troubleshooting-card h3 {
+            color: var(--blue-600);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark-mode .troubleshooting-card h3 {
+            color: #0ea5e9;
+        }
+
+        /* About Section */
+        .about-section {
+            margin-bottom: 3rem;
+        }
+
+        .about-content {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .about-content {
+            background: var(--dark-card);
+        }
+
+        /* Lazy loading animation styles */
+        .lazy-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .lazy-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation for numbers */
+        @keyframes countUp {
+            from {
+                transform: translateY(10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .counting {
+            animation: countUp 0.5s ease-out;
+        }
+
+        .lazy-placeholder .result-value {
+            opacity: 0.3;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tool-section {
+                padding: 1.5rem;
+            }
+            
+            .input-area {
+                min-height: 250px;
+            }
+            
+            .article-section, .steps, .about-content {
+                padding: 1.8rem;
+            }
+            
+            .article-visuals {
+                flex-direction: column;
+            }
+            
+            .article-image {
+                height: 200px;
+                font-size: 1.2rem;
+            }
+            
+            /* Fix for mobile step vertical line */
+            .step::before {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                align-self: flex-start;
+            }
+            
+            .upload-bar {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            
+            .upload-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        /* FIXED: Action buttons now stay in one line on mobile */
+        @media (max-width: 480px) {
+            .action-buttons {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .action-button {
+                flex: 1;
+                min-width: 140px;
+                text-align: center;
+            }
+            
+            .connected-tools {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .upload-actions {
+                flex-direction: column;
+            }
+            
+            .upload-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Remove blue flash on all interactive elements */
+        button:focus,
+        .menu-link:focus,
+        .theme-toggle:focus,
+        .menu-toggle:focus,
+        .menu-close:focus,
+        .back-to-top:focus,
+        .social-icon:focus {
+            outline: none;
+        }
+        
+        /* Simple clean info button */
+.info-btn {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: #2563eb;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    padding: 0;
+    line-height: 1;
+    user-select: none;
+}
+
+body.dark-mode .info-btn {
+    background: rgba(14, 165, 233, 0.15);
+    border-color: rgba(14, 165, 233, 0.3);
+    color: #0ea5e9;
+}
+
+.info-btn:hover {
+    background: rgba(37, 99, 235, 0.25);
+    transform: scale(1.1);
+}
+
+body.dark-mode .info-btn:hover {
+    background: rgba(14, 165, 233, 0.25);
+}
+
+.info-btn:active {
+    transform: scale(1.05);
+}
+
+/* Centered notification - no arrows */
+.info-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.info-notification.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.info-notification .content {
+    background: rgba(255, 255, 255, 0.98);
+    color: #1f2937;
+    border-radius: 16px;
+    padding: 24px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    max-width: 90vw;
+    width: 400px;
+    position: relative;
+    transform: translateY(-20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+body.dark-mode .info-notification .content {
+    background: rgba(30, 41, 59, 0.95);
+    color: #e6eef8;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.info-notification.visible .content {
+    transform: translateY(0) scale(1);
+}
+
+/* Enhanced close button */
+.info-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    color: #6b7280;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    font-weight: 300;
+}
+
+body.dark-mode .info-close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+}
+
+.info-close-btn:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+body.dark-mode .info-close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Title styling with parameter-specific emoji */
+.info-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 30px;
+}
+
+body.dark-mode .info-title {
+    color: #f8fafc;
+}
+
+/* Tip section - keeping the original lightbulb */
+.info-tip {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    font-size: 0.87rem;
+    color: #166534;
+}
+
+body.dark-mode .info-tip {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.info-tip::before {
+    content: '💡 Pro Tip: ';
+    font-weight: 600;
+}
+
+/* Enhanced backdrop */
+.notification-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.notification-backdrop.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Ensure content is properly spaced */
+.info-desc {
+    margin-bottom: 0;
+    line-height: 1.65;
+    color: #4b5563;
+}
+
+body.dark-mode .info-desc {
+    color: #d1d5db;
+}
+
+/* Light mode link color */
+.article-section a {
+    color: #2563ea;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.article-section a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* Dark mode link color */
+body.dark-mode .article-section a {
+    color: #10a5e7;
+}
+
+body.dark-mode .article-section a:hover {
+    color: #17b8ff;
+    text-decoration: underline;
+}
+/* === See More Button === */
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-blue);
+  color: white;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Light mode border */
+body:not(.dark-mode) .see-more-btn {
+  border: 1px solid #ffffff;
+}
+
+.see-more-btn:hover {
+  background: var(--blue-700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+/* Dark mode */
+body.dark-mode .see-more-btn {
+  background: #0ea5e9;
+  border: none; /* no border */
+  box-shadow: 0 0 30px 8px rgba(14, 165, 233, 0.25);
+}
+
+body.dark-mode .see-more-btn:hover {
+  background: #0284c7;
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.35);
+}
+
+/* Focus states */
+.see-more-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+body.dark-mode .see-more-btn:focus {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+}
+
+/* Smooth expansion */
+.see-more-content {
+  margin-top: 1.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.see-more-content:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* FAQ See More Button - reuse .see-more-btn but scoped */
+#faq-see-more {
+    margin: 1.2rem auto 1.8rem;
+    display: block;
+    width: fit-content;
+}
+#faq-extra {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+#faq-extra:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+}
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #2563ea; /* Light mode base */
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.85);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.6, 0.4, 1);
+  z-index: 1000;
+}
+
+/* ✅ Light mode glow & lift on hover — uses your blue */
+.back-to-top:hover {
+  background: #2563ea;
+  color: #ffffff;
+  transform: scale(1.08);
+  
+}
+
+/* ✅ Dark mode override — uses your exact #0EA6E9 */
+body.dark-mode .back-to-top {
+  background: #0ea5e9;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ✅ Dark mode hover — your requested #0EA6E9 + lime accent (per your preference!) */
+body.dark-mode .back-to-top:hover {
+  background: #0ea5e9;
+  color: #ffffff;
+  transform: scale(1.08);
+  
+}
+
+/* Show when scrolled */
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* Ensure icon inherits text color */
+.back-to-top svg {
+  stroke: currentColor;
+}
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+    <ul>
+        <li><a href="https://toolivo.github.io/tool/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="https://toolivo.github.io/tool/">Tools</a></li>
+        <li aria-current="page">Text Analyzer</li>
+    </ul>
+</nav>
+    <!-- Compact Menu Card -->
+    <div class="menu-card" id="menuCard">
+        <div class="menu-header">
+            <h3>Menu</h3>
+            <button class="menu-close" id="menuClose" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <a href="https://toolivo.github.io/tool/" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="community.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Community
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="request-a-tool.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 20h4l10.6-10.6a3 3 0 1 0-4.2-4.2L4 16v4z"/>
+                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/>
+                    </svg>
+                    Request a Tool
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="about-us.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    About Us
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="contact-us.html" class="menu-link">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Contact Us
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- Header -->
+    <!-- Header -->
+<header>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="logo-container">
+        <a href="https://toolivo.github.io/tool/">
+            <img 
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOu9Vo8K91Uj7n00ddjVguj_KfjaKvU_eKOMOmxzN4tyJzpXHWU1G6yBw6xSzqO3PBt2jPTv5WsXLjw3H5amAAhVLNwWbLOYUsXDnl8nAJilNGiT38j4EIQzgULpPKeTikR8Rhfg3K-2uWOeqlFuEwxwD3kqAhz9CjJVjXFZdsfCHbWA/s1600/20251121_112451.png"
+                alt="Toolivo Logo"
+                class="logo"
+                loading="lazy"
+            >
+        </a>
+    </div>
+    <!-- 👇 Placeholder to keep layout balanced -->
+    <div style="width: 48px;"></div>
+
+
+<!-- 👇 Fixed theme toggle — outside header, but visually in top-right -->
+<!-- 👇 Animated Theme Toggler -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/>
+        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/>
+        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span class="sr-only">Toggle theme</span>
+</button>
+</header>
+
+    <!-- Hero Section -->
+    <div class="hero-text">
+    <h1>Text Analyzer</h1>
+    <p class="tagline">Instant text insights with clear, real-time metrics.</p>
+</div>
+
+    <!-- Tool Section -->
+    <section class="tool-section" id="tool-section">
+        <div class="results-container">
+            <div class="results-wrapper">
+                <button class="nav-arrow prev-arrow" id="prev-arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="results-scroll" id="results-scroll">
+                    <!-- Desktop Pages (6 cards each) -->
+                    <div class="results-page desktop-page" id="desktop-page-1">
+                        <div class="result-card"><div class="result-value" id="char-count">0</div><div class="result-label">Characters</div></div>
+                        <div class="result-card"><div class="result-value" id="word-count">0</div><div class="result-label">Words</div></div>
+                        <div class="result-card"><div class="result-value" id="sentence-count">0</div><div class="result-label">Sentences</div></div>
+                        <div class="result-card"><div class="result-value" id="paragraph-count">0</div><div class="result-label">Paragraphs</div></div>
+                        <div class="result-card"><div class="result-value" id="reading-time">0</div><div class="result-label">Reading Time</div></div>
+                        <div class="result-card"><div class="result-value" id="speaking-time">0</div><div class="result-label">Speaking Time</div></div>
+                    </div>
+                    <div class="results-page desktop-page lazy-page" data-page="2" id="desktop-page-2">
+                        <!-- Will be filled lazily -->
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                    <div class="results-page desktop-page lazy-page" data-page="3" id="desktop-page-3">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                    <div class="results-page desktop-page lazy-page" data-page="4" id="desktop-page-4">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+
+                    <!-- Mobile Pages (4 cards each) -->
+                    <div class="results-page mobile-page" id="mobile-page-1">
+                        <div class="result-card"><div class="result-value" id="char-count-m">0</div><div class="result-label">Characters</div></div>
+                        <div class="result-card"><div class="result-value" id="word-count-m">0</div><div class="result-label">Words</div></div>
+                        <div class="result-card"><div class="result-value" id="sentence-count-m">0</div><div class="result-label">Sentences</div></div>
+                        <div class="result-card"><div class="result-value" id="paragraph-count-m">0</div><div class="result-label">Paragraphs</div></div>
+                    </div>
+                    <div class="results-page mobile-page lazy-page" data-page="2" id="mobile-page-2">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                    <div class="results-page mobile-page lazy-page" data-page="3" id="mobile-page-3">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                    <div class="results-page mobile-page lazy-page" data-page="4" id="mobile-page-4">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                    <div class="results-page mobile-page lazy-page" data-page="5" id="mobile-page-5">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                    <div class="results-page mobile-page lazy-page" data-page="6" id="mobile-page-6">
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                        <div class="result-card lazy-placeholder"><div class="result-value">—</div><div class="result-label">Loading...</div></div>
+                    </div>
+                </div>
+
+                <button class="nav-arrow next-arrow" id="next-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="page-indicators" id="page-indicators"></div>
+        </div>
+
+        <div class="input-container">
+            <textarea class="input-area" id="text-input" placeholder="Paste your text here to analyze it..."></textarea>
+            <div class="scroll-indicator" id="scroll-indicator"></div>
+        </div>
+
+        <!-- Compact Options Section -->
+<div class="compact-options">
+    <label class="option-label">
+        <input type="checkbox" id="count-spaces" checked>
+        Include spaces
+    </label>
+    <label class="option-label">
+        <input type="checkbox" id="count-punctuation" checked>
+        Include punctuation
+    </label>
+</div>
+       
+       <!-- FIXED: Action buttons now stay in one line on all screen sizes -->
+        <div class="action-buttons">
+            <button class="action-button copy-button" id="copy-button">
+                <i class="fas fa-copy"></i> Copy Results
+            </button>
+            <button class="action-button reset-button" id="reset-button">
+                <i class="fas fa-redo"></i> Reset
+            </button>
+        </div>
+       
+        <!-- Compact File Upload Section - NOW ALWAYS VISIBLE -->
+        <div class="upload-section" id="upload-section">
+            <div class="upload-bar" id="upload-bar">
+                <div class="upload-info">
+                    <i class="fas fa-paperclip upload-icon"></i>
+                    <div class="upload-text">
+                        Or Drag & drop files here or 
+                        <small>Supports .txt, .html, .pdf, .doc, .docx</small>
+                    </div>
+                </div>
+                <div class="upload-actions">
+                    <button class="upload-button" id="browse-button">
+                        <i class="fas fa-folder-open"></i> Browse Files
+                    </button>
+                    <button class="upload-button secondary" id="paste-button">
+                        <i class="fas fa-paste"></i> Paste from Clipboard
+                    </button>
+                </div>
+                <input type="file" id="file-input" class="file-input" accept=".txt,.html,.pdf,.doc,.docx">
+            </div>
+            <div class="file-info" id="file-info">
+                <div class="file-details">
+                    <i class="fas fa-file-alt file-icon"></i>
+                    <div>
+                        <div class="file-name" id="file-name">document.txt</div>
+                        <div class="file-size" id="file-size">-</div>
+                    </div>
+                </div>
+                <button class="file-remove" id="file-remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+      
+
+        
+        
+        <!-- Contextual Suggestion -->
+        <div class="contextual-suggestion" id="contextual-suggestion">
+            Start typing to see suggestions for your text...
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="related-tools-section lazy-section">
+        <div class="related-tools-card">
+            <h3 class="related-tools-title">Need More Writing Tools?</h3>
+            <p class="related-tools-description">Check out our Case Converter to instantly change text casing into upper case, lower case, sentence case and more.</p>
+            <a href="case-converter.html" class="related-tools-button">
+                <i class="fas fa-magic"></i> Try Case Converter
+            </a>
+           <p style="font-weight: bold; margin: 0;">or</p>
+            <div class="connected-tools">
+                <a href="space-removever.html" class="connected-tool-link">Extra Space Remover</a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section lazy-section">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                <h3 class="feature-title">Comprehensive Analysis</h3>
+                <p>Get detailed counts for characters, words, sentences, and paragraphs in one place.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3 class="feature-title">Real-time Counting</h3>
+                <p>See results update instantly as you type or paste your text.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-file-upload"></i></div>
+                <h3 class="feature-title">File Upload Support</h3>
+                <p>Upload .txt, .html, .pdf, .doc, and .docx files for automatic text extraction.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <h3 class="feature-title">Privacy First</h3>
+                <p>Your text is processed locally in your browser - never stored on our servers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="how-to-section lazy-section">
+        <h2 class="section-title">How to Use</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Enter Your Text</h3>
+                    <p>Type or paste your text into the input area. You can also drag and drop files to extract text automatically.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Adjust Settings (Optional)</h3>
+                    <p>Choose whether to include spaces in character count and punctuation in word count based on your needs.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>View Results</h3>
+                    <p>See your character, word, sentence, and paragraph counts displayed in an easy-to-read format.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Copy or Reset</h3>
+                    <p>Copy your results to clipboard or reset the tool to start fresh with new text.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Section -->
+<section class="article-section lazy-section">
+    <h2 class="article-title">Toolivo Text Analyzer: Analyze Words, Characters, Sentences and More</h2>
+    <p class="article-subtitle">A powerful way to measure and improve your writing across 24 different metrics</p>
+    
+    <div class="article-content">
+        <p>Writing online requires clarity, precision and the ability to match platform limits. A modern text analyzer helps achieve all of that. This tool checks 24 important metrics including character count, word count, sentence count, paragraph count, reading time, speaking time and vocabulary depth. It works as a complete alternative to a word counter online, text length calculator and word calculator, but with much more detail.</p>
+
+        <div class="article-image">
+            <div class="article-image-text">
+                <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem;"></i><br>
+                Text Analysis Visualization
+            </div>
+        </div>
+
+        <p>For creators, students and professionals, this text analyzer gives instant insight into your writing. It can function as a basic word counter tool or a full word and character count tool depending on your needs. You can also count words and characters online without creating an account, and everything processes locally on your device.</p>
+        
+        
+        <p>To help with editing, you can also use connected tools like <a href="/case-converter" target="_blank">Toolivo Case Converter</a> to change text format instantly, or <a href="/extra-space-remover" target="_blank">Toolivo Extra Space Remover</a> to clean up unwanted spacing before analysis. These simple tools make the writing process smoother and improve accuracy when checking text.</p>
+        
+        <!-- ✅ "See more" button -->
+<button class="see-more-btn" id="see-more-btn">
+  Read Full Article <i class="fas fa-chevron-down"></i>
+</button>
+
+<!-- ✅ Hidden article continuation -->
+<div class="see-more-content" id="see-more-content" hidden>
+
+
+       <h2 class="article-subheading">Character Count and Platform Requirements</h2>
+<p>Character counting ensures your text meets platform restrictions. Whether you're writing a tweet, preparing an SMS or creating a resume, character limits matter. This tool works as a reliable character counter and text length calculator for all types of content, helping you stay within limits while keeping your message clear.</p>
+
+
+
+  <div class="article-visuals">
+    <div class="visual-card">
+      <div class="visual-icon"><i class="fas fa-font"></i></div>
+      <div class="visual-title">Character Limits</div>
+      <p>Twitter: 280 chars<br>Meta Threads: 500 chars<br>SMS: 160 chars</p>
+    </div>
+    <div class="visual-card">
+      <div class="visual-icon"><i class="fas fa-file-alt"></i></div>
+      <div class="visual-title">Document Standards</div>
+      <p>Academic papers: 250–300 words per page<br>Blog posts: 1,500–2,500 words<br>Resumes: 1–2 pages</p>
+    </div>
+  </div>
+
+  <h2 class="article-subheading">Word Count for SEO and Readability</h2>
+  <p>Word count plays a big role in SEO and user engagement. This analyzer works as both an instant word count checker and a word counter for SEO, helping you understand whether your content is long enough, clear enough and structured well for both readers and search engines.</p>
+  <p>You can analyze short captions, social media posts, essays, blog content and product descriptions. This flexibility makes it more useful than a simple word counter Google Docs alternative because it provides deeper insights in seconds.</p>
+
+  <h2 class="article-subheading">Sentence and Paragraph Analysis</h2>
+  <p>Sentence structure heavily influences readability. Short, balanced sentences keep readers engaged. Long, complex sentences may confuse them. This tool tracks your sentence patterns and paragraph distribution, giving you a complete paragraph and sentence counter to help you refine the flow of your writing.</p>
+
+  <h2 class="article-subheading">Advanced Features Beyond Counting</h2>
+  <p>Along with basic counts, this analyzer checks estimated reading time, speaking time, keyword appearance, text density and vocabulary complexity. These advanced metrics help strengthen your writing style and make your message more effective. It also helps reduce unnecessary words and improve your content’s clarity.</p>
+
+  <h2 class="article-subheading">Why These Metrics Matter</h2>
+  <p>Each metric plays a role in improving your content. Word count improves structure. Character count ensures platform compatibility. Sentence tracking improves rhythm. Keyword insights support SEO. Together, these tools help refine your writing and make it more optimized for online readers.</p>
+  <p>Whether you're writing for school, business or social media, the ability to count words and characters online makes it easy to polish your text and reach your writing goals.</p>
+</div>
+</section>
+
+<!-- FAQ Section -->
+<!-- FAQ Section -->
+<section class="faq-section lazy-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+        <!-- First 3 visible by default -->
+        <div class="faq-group" id="faq-initial">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is my text stored anywhere?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>No. Everything runs in your browser. Your text never leaves your device.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Does it count words and characters accurately?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. The counting system follows industry-standard rules used by professional text editors and online word counters.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How does the sentence counter work?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sentences are detected using punctuation like . ! ? followed by a space or line break. The tool avoids false detection as much as possible.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden extra FAQs -->
+        <div class="faq-group" id="faq-extra" hidden>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is there a limit to how much I can analyze?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can analyze any length of text. Very large documents may take a moment to process depending on your device speed.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I clean and format my text before analyzing?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. You can use the Toolivo Extra Space Remover to fix spacing issues or the Toolivo Case Converter to adjust text format before analyzing.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do I need an account to use the Text Analyzer?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>No. The tool is completely free to use and does not require registration, login or email.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I use Text Analyzer on mobile devices?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. The tool is fully responsive and works on mobile phones, tablets, and desktops without any issues.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Does Text Analyzer support multiple languages?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Currently, the tool is optimized for English text. However, it can count words, characters, and sentences in other languages as well, but accuracy may vary.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I analyze text from other tools like Google Docs?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. Simply copy the text from Google Docs or any other platform and paste it into the Text Analyzer to get instant results.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I export or copy the analysis results?</span>
+                    <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can use the copy button provided in the tool to copy all results to your clipboard. Some browsers may require HTTPS for clipboard access.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- See More Button -->
+        <button class="see-more-btn" id="faq-see-more">
+            See more FAQs <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+</section>
+
+<!-- Troubleshooting Section -->
+<section class="troubleshooting-section lazy-section">
+    <h2 class="section-title">Troubleshooting</h2>
+    <div class="troubleshooting-grid">
+        <div class="troubleshooting-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Counts look incorrect</h3>
+            <p>Check if your settings include or exclude spaces and punctuation. These options change the results.</p>
+        </div>
+
+        <div class="troubleshooting-card">
+            <h3><i class="fas fa-tachometer-alt"></i> Tool feels slow</h3>
+            <p>Large blocks of text may take longer to process on older devices. Refreshing the page may help.</p>
+        </div>
+
+        <div class="troubleshooting-card">
+            <h3><i class="fas fa-copy"></i> Copy button not working</h3>
+            <p>Some browsers block clipboard access unless the page is secure. Make sure the tool loads over HTTPS.</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section lazy-section">
+    <h2 class="section-title">About Text Analyzer</h2>
+    <div class="about-content">
+        <p>Text Analyzer is a free online tool created to help writers, students and content creators measure and improve their writing. It checks 24 text metrics such as word count, character count, sentence count, paragraph count and readability.</p>
+        <p>You can use it as an online word counter tool, a simple text length calculator or a complete writing analysis system depending on your needs.</p>
+        <p>For additional editing support, you can use the Toolivo Case Converter or Toolivo Extra Space Remover to prepare your text before analyzing. Everything works inside your browser and your text stays private.</p>
+    </div>
+</section>
+
+    <!-- Share with Friends Section -->
+    <section class="social-sharing">
+        <h3>Share Text Counter Pro with your friends</h3>
+        <div class="social-icons" id="socialIcons">
+            <!-- Social icons will be dynamically loaded -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="comprehensive-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faqs.html">FAQ</a></li>
+                    <li><a href="request-a-tool.html">Request a Tool</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="https://toolivo.github.io/blogs/">Blog</a></li>
+                    <li><a href="updates.html">Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Toolivo &copy; 2026 — All rights reserved</p>
+            <p class="creator-credit">Created with ❤️ by Mushfikur Riad</p>
+        </div>
+    </footer>
+    <!-- Back-to-top button -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+    <script>
+    // === Menu Functionality ===
+    const menuToggle = document.getElementById('menuToggle');
+    const menuCard = document.getElementById('menuCard');
+    const menuClose = document.getElementById('menuClose');
+    const backdrop = document.getElementById('backdrop');
+
+    function openMenu() {
+        menuCard.classList.add('open');
+        backdrop.classList.add('visible');
+        menuToggle.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        menuCard.classList.remove('open');
+        backdrop.classList.remove('visible');
+        menuToggle.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', () => {
+        menuCard.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    menuClose.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+
+    // === Theme Toggle Functionality ===
+   // === Animated Theme Toggle Functionality ===
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Check for saved theme or system preference
+const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem('theme');
+const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+async function toggleTheme() {
+    if (!document.startViewTransition) {
+        // Fallback for browsers without View Transitions API
+        const newTheme = !body.classList.contains('dark-mode');
+        applyTheme(newTheme);
+        return;
+    }
+
+    await document.startViewTransition(() => {
+        const newTheme = !body.classList.contains('dark-mode');
+        body.classList.toggle('dark-mode', newTheme);
+        localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+    }).ready;
+
+    // Create circular animation
+    const { top, left, width, height } = themeToggle.getBoundingClientRect();
+    const x = left + width / 2;
+    const y = top + height / 2;
+    const maxRadius = Math.hypot(
+        Math.max(left, window.innerWidth - left),
+        Math.max(top, window.innerHeight - top)
+    );
+
+    document.documentElement.animate(
+        {
+            clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${maxRadius}px at ${x}px ${y}px)`,
+            ],
+        },
+        {
+            duration: 400,
+            easing: 'ease-in-out',
+            pseudoElement: '::view-transition-new(root)',
+        }
+    );
+}
+
+function applyTheme(isDarkMode) {
+    body.classList.toggle('dark-mode', isDarkMode);
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
+
+// Apply theme on page load
+applyTheme(isDark);
+
+// Toggle theme on button click
+themeToggle.addEventListener('click', toggleTheme);
+
+    // === Social Icons Functionality ===
+    const socialIconsContainer = document.getElementById('socialIcons');
+    
+    // Social icons data
+    const socialIconsData = [
+        { 
+            name: 'x-twitter', 
+            label: 'Share on X',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>`
+        },
+        { 
+            name: 'linkedin', 
+            label: 'Share on LinkedIn',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+            </svg>`
+        },
+        { 
+            name: 'facebook', 
+            label: 'Share on Facebook',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>`
+        },
+        { 
+            name: 'whatsapp', 
+            label: 'Share on WhatsApp',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893 0-3.189-1.248-6.189-3.515-8.444"/>
+            </svg>`
+        },
+        { 
+            name: 'telegram', 
+            label: 'Share on Telegram',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+            </svg>`
+        },
+        { 
+            name: 'instagram', 
+            label: 'Share on Instagram',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 7A2.5 2.5 0 1 1 14.5 12 2.5 2.5 0 0 1 12 14.5zm4.75-8.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/>
+            </svg>`
+        },
+        { 
+            name: 'reddit', 
+            label: 'Share on Reddit',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+            </svg>`
+        },
+        { 
+            name: 'pinterest', 
+            label: 'Share on Pinterest',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+            </svg>`
+        },
+       {
+    name: 'messenger',
+    label: 'Share on Messenger',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.49 2 2 6.2 2 11.15c0 2.92 1.6 5.55 4.07 7.34V22l3.68-2.02c.99.28 2.07.43 3.25.43 5.51 0 10-4.2 10-9.26C23 6.2 17.51 2 12 2zm4.9 7.6-3.3 3.5-2.1-2.3-4.5 2.3 4.7-4.9 2.1 2.3 3.1-1.9z"/>
+    </svg>`
+},
+        { 
+            name: 'email', 
+            label: 'Share via Email',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>`
+        }
+    ];
+
+    // Function to load social icons
+    function loadSocialIcons() {
+        socialIconsData.forEach(icon => {
+            const socialIcon = document.createElement('a');
+            socialIcon.href = '#';
+            socialIcon.className = `social-icon ${icon.name}`;
+            socialIcon.setAttribute('aria-label', icon.label);
+            socialIcon.innerHTML = icon.svg;
+            
+            socialIconsContainer.appendChild(socialIcon);
+        });
+        
+        // Add event listeners to social icons after they're loaded
+        addSocialIconEventListeners();
+    }
+    
+    // Load social icons immediately when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSocialIcons();
+    });
+
+    // Social Media Sharing Functionality with Click Effects
+    function addSocialIconEventListeners() {
+        const socialIcons = document.querySelectorAll('.social-icon');
+        
+        socialIcons.forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Add click animation
+                icon.classList.add('clicked');
+                setTimeout(() => {
+                    icon.classList.remove('clicked');
+                }, 400);
+                
+                const currentUrl = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(document.title);
+                const description = encodeURIComponent("Analyze text instantly with Toolivo Text Analyzer. Get accurate counts, readability metrics and detailed insights in one place.");
+                
+                let shareUrl = '';
+                
+                if (icon.classList.contains('x-twitter')) {
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${currentUrl}`;
+                } else if (icon.classList.contains('linkedin')) {
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+                } else if (icon.classList.contains('facebook')) {
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+                } else if (icon.classList.contains('whatsapp')) {
+                    shareUrl = `https://api.whatsapp.com/send?text=${title}%20${currentUrl}`;
+                } else if (icon.classList.contains('telegram')) {
+                    shareUrl = `https://t.me/share/url?url=${currentUrl}&text=${title}`;
+                } else if (icon.classList.contains('instagram')) {
+                    // Instagram doesn't support direct sharing, open profile
+                    shareUrl = `https://www.instagram.com/`;
+                } else if (icon.classList.contains('reddit')) {
+                    shareUrl = `https://reddit.com/submit?url=${currentUrl}&title=${title}`;
+                } else if (icon.classList.contains('pinterest')) {
+                    shareUrl = `https://pinterest.com/pin/create/button/?url=${currentUrl}&description=${title}`;
+                } else if (icon.classList.contains('messenger')) {
+                    shareUrl = `https://www.facebook.com/dialog/send?link=${currentUrl}&app_id=YOUR_APP_ID&redirect_uri=${currentUrl}`;
+                } else if (icon.classList.contains('email')) {
+                    shareUrl = `mailto:?subject=${title}&body=${description}%20${currentUrl}`;
+                }
+                
+                if (shareUrl) {
+                    if (icon.classList.contains('email')) {
+                        // For email, don't open in new window
+                        window.location.href = shareUrl;
+                    } else {
+                        window.open(shareUrl, '_blank', 'width=600,height=400');
+                    }
+                }
+            });
+        });
+    }
+
+    // === Text Analyzer Functionality ===
+    const textArea = document.getElementById('text-input');
+    const toolSection = document.getElementById('tool-section');
+    const resultsScroll = document.getElementById('results-scroll');
+    const prevArrow = document.getElementById('prev-arrow');
+    const nextArrow = document.getElementById('next-arrow');
+    const pageIndicators = document.getElementById('page-indicators');
+    const copyButton = document.getElementById('copy-button');
+    const resetButton = document.getElementById('reset-button');
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    const contextualSuggestion = document.getElementById('contextual-suggestion');
+    const countSpacesCheckbox = document.getElementById('count-spaces');
+    const countPunctuationCheckbox = document.getElementById('count-punctuation');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    // File upload elements
+    const uploadSection = document.getElementById('upload-section');
+    const uploadBar = document.getElementById('upload-bar');
+    const fileInput = document.getElementById('file-input');
+    const fileInfo = document.getElementById('file-info');
+    const fileName = document.getElementById('file-name');
+    const fileSize = document.getElementById('file-size');
+    const fileRemove = document.getElementById('file-remove');
+    const browseButton = document.getElementById('browse-button');
+    const pasteButton = document.getElementById('paste-button');
+
+    let isDesktop = window.matchMedia('(min-width: 769px)').matches;
+    let currentPage = 0;
+    let totalPages = isDesktop ? 4 : 6;
+    const loadedPages = new Set([1]); // Page 1 always loaded
+    let animationTimeout;
+
+    // ✅ Scroll indicator update function
+    function updateScrollIndicator() {
+        const scrollTop = textArea.scrollTop;
+        const scrollHeight = textArea.scrollHeight - textArea.clientHeight;
+        const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        scrollIndicator.style.width = `${scrollPercentage}%`;
+    }
+
+    // ✅ FIXED Font Scaling — only for large numbers (≥100,000)
+    function adjustFontSize(el) {
+        if (!el || !el.textContent) return;
+        
+        const value = el.textContent.trim();
+        const num = parseFloat(value.replace(/[^0-9.]/g, ''));
+        const isLargeNumber = !isNaN(num) && num >= 100000; // 6+ digits
+
+        // Reset first
+        el.style.fontSize = '';
+        el.style.fontWeight = 'bold';
+
+        if (isLargeNumber) {
+            // Estimate width: 1ch ≈ width of '0'
+            const card = el.closest('.result-card');
+            if (!card) return;
+            const maxWidth = card.clientWidth * 0.9; // 90% of card width
+            const approxChars = value.length;
+            const neededFontSize = (maxWidth / approxChars) * 0.8; // safety margin
+
+            // Clamp: min 1.25rem (~20px), max base size
+            const fontSizeRem = Math.max(1.25, Math.min(neededFontSize / 16, 1.9));
+            el.style.fontSize = fontSizeRem + 'rem';
+        }
+        // For small numbers: use default CSS size (no inline style)
+    }
+
+    // ✅ Page content definitions
+    const desktopPages = [
+        [], // page 1 predefined in HTML
+        [
+            { id: 'readability-score', label: 'Readability', format: v => Math.round(v) },
+           { id: 'vocab-density', label: 'Vocab Density', format: v => v.toFixed(1) + '%' },
+            { id: 'avg-word-len', label: 'Avg Word Len', format: v => v.toFixed(1) },
+            { id: 'avg-sent-len', label: 'Avg Sent Len', format: v => v.toFixed(1) },
+            { id: 'unique-words', label: 'Unique Words', format: v => v },
+            { id: 'complex-word-count', label: 'Complex Words', format: v => v }
+        ],
+        [
+            { id: 'punctuation-count', label: 'Punctuation', format: v => v },
+            { id: 'case-ratio', label: 'Upper/Lower', format: v => v },
+            { id: 'all-caps-count', label: 'All-Caps Words', format: v => v },
+            { id: 'numbers-count', label: 'Numbers', format: v => v },
+            { id: 'urls-count', label: 'URLs', format: v => v },
+            { id: 'emails-count', label: 'Emails', format: v => v }
+        ],
+        [
+            { id: 'hashtags-count', label: 'Hashtags', format: v => v },
+            { id: 'emoji-count', label: 'Emojis', format: v => v },
+            { id: 'whitespace-pct', label: 'Whitespace %', format: v => v.toFixed(1) + '%' },
+            { id: 'longest-word', label: 'Longest Word', format: v => v },
+            { id: 'shortest-word', label: 'Shortest Word', format: v => v },
+            { id: 'most-used-word', label: 'Most Used Word', format: v => v }
+        ]
+    ];
+
+    const mobilePages = [
+        [], // page 1 predefined
+        [
+            { id: 'reading-time', label: 'Reading Time', format: v => v < 1 ? '< 1 min' : Math.ceil(v) + ' min' },
+            { id: 'speaking-time', label: 'Speaking Time', format: v => v < 1 ? '< 1 min' : Math.ceil(v) + ' min' },
+            { id: 'readability-score', label: 'Readability', format: v => Math.round(v) },
+           { id: 'vocab-density', label: 'Vocab Density', format: v => v.toFixed(1) + '%' }
+        ],
+        [
+            { id: 'avg-word-len', label: 'Avg Word Len', format: v => v.toFixed(1) },
+            { id: 'avg-sent-len', label: 'Avg Sent Len', format: v => v.toFixed(1) },
+            { id: 'unique-words', label: 'Unique Words', format: v => v },
+            { id: 'complex-word-count', label: 'Complex Words', format: v => v }
+        ],
+        [
+            { id: 'punctuation-count', label: 'Punctuation', format: v => v },
+            { id: 'case-ratio', label: 'Upper/Lower', format: v => v },
+            { id: 'all-caps-count', label: 'All-Caps Words', format: v => v },
+            { id: 'numbers-count', label: 'Numbers', format: v => v }
+        ],
+        [
+            { id: 'urls-count', label: 'URLs', format: v => v },
+            { id: 'emails-count', label: 'Emails', format: v => v },
+            { id: 'hashtags-count', label: 'Hashtags', format: v => v },
+            { id: 'emoji-count', label: 'Emojis', format: v => v }
+        ],
+        [
+            { id: 'whitespace-pct', label: 'Whitespace %', format: v => v.toFixed(1) + '%' },
+            { id: 'longest-word', label: 'Longest Word', format: v => v },
+            { id: 'shortest-word', label: 'Shortest Word', format: v => v },
+            { id: 'most-used-word', label: 'Most Used Word', format: v => v }
+        ]
+    ];
+
+    // ✅ Load page content (replaces placeholders)
+    function loadPage(pageNum) {
+        if (loadedPages.has(pageNum)) return;
+        loadedPages.add(pageNum);
+
+        const isDesktopMode = isDesktop;
+        const pageId = isDesktopMode 
+            ? `desktop-page-${pageNum}` 
+            : `mobile-page-${pageNum}`;
+        const pageEl = document.getElementById(pageId);
+        if (!pageEl) return;
+
+        const config = isDesktopMode ? desktopPages[pageNum - 1] : mobilePages[pageNum - 1];
+        if (!config || config.length === 0) return;
+
+        // Replace placeholders with real cards
+        pageEl.innerHTML = '';
+        config.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'result-card';
+            card.innerHTML = `
+                <div class="result-value" id="${item.id}${isDesktopMode ? '' : '-m'}">0</div>
+                <div class="result-label">${item.label}</div>
+            `;
+            pageEl.appendChild(card);
+        });
+
+        // Trigger data update
+        countText();
+    }
+
+    // ✅ IntersectionObserver for lazy loading
+    const pageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const pageEl = entry.target;
+                const pageNum = parseInt(pageEl.dataset.page);
+                if (pageNum && !loadedPages.has(pageNum)) {
+                    loadPage(pageNum);
+                }
+            }
+        });
+    }, {
+        root: resultsScroll,
+        threshold: 0.3 // 30% visible
+    });
+
+    // Observe lazy pages
+    document.querySelectorAll('.lazy-page').forEach(page => {
+        pageObserver.observe(page);
+    });
+
+    // Pagination
+    function updatePageIndicators() {
+        pageIndicators.innerHTML = '';
+        for (let i = 0; i < totalPages; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = `page-indicator ${i === currentPage ? 'active' : ''}`;
+            indicator.addEventListener('click', () => goToPage(i));
+            pageIndicators.appendChild(indicator);
+        }
+    }
+
+    function updateNavigation() {
+        prevArrow.disabled = currentPage === 0;
+        nextArrow.disabled = currentPage === totalPages - 1;
+    }
+
+    function goToPage(pageIndex) {
+        if (pageIndex < 0 || pageIndex >= totalPages) return;
+        currentPage = pageIndex;
+        const pageWidth = resultsScroll.clientWidth + 18;
+        resultsScroll.scrollTo({
+            left: pageIndex * pageWidth,
+            behavior: 'smooth'
+        });
+        updateNavigation();
+        updatePageIndicators();
+    }
+
+    // Auto-scroll on focus
+    textArea.addEventListener('focus', () => {
+        toolSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Track scroll position to update page indicators
+    resultsScroll.addEventListener('scroll', () => {
+        const scrollLeft = resultsScroll.scrollLeft;
+        const pageWidth = resultsScroll.clientWidth + 18;
+        const newPage = Math.round(scrollLeft / pageWidth);
+        
+        if (newPage !== currentPage) {
+            currentPage = newPage;
+            updatePageIndicators();
+            updateNavigation();
+        }
+    });
+
+    // Responsive handling
+    const mediaQuery = window.matchMedia('(min-width: 769px)');
+    function handleResize(e) {
+        const wasDesktop = isDesktop;
+        isDesktop = e.matches;
+        const newTotalPages = isDesktop ? 4 : 6;
+
+        if (wasDesktop !== isDesktop) {
+            loadedPages.clear();
+            loadedPages.add(1);
+            currentPage = 0;
+            totalPages = newTotalPages;
+            updatePageIndicators();
+            updateNavigation();
+            resultsScroll.scrollTo({ left: 0, behavior: 'auto' });
+            // Load page 1 of new layout
+            setTimeout(() => loadPage(1), 100);
+        }
+    }
+    mediaQuery.addListener(handleResize);
+
+    // Get current metric elements
+    function getElements() {
+        const prefix = isDesktop ? '' : '-m';
+        return {
+            char: document.getElementById(`char-count${prefix}`),
+            word: document.getElementById(`word-count${prefix}`),
+            sentence: document.getElementById(`sentence-count${prefix}`),
+            paragraph: document.getElementById(`paragraph-count${prefix}`),
+            reading: document.getElementById(`reading-time${prefix}`),
+            speaking: document.getElementById(`speaking-time${prefix}`),
+            readability: document.getElementById(`readability-score${prefix}`),
+            vocabDensity: document.getElementById(`vocab-density${prefix}`),
+            avgWordLen: document.getElementById(`avg-word-len${prefix}`),
+            avgSentLen: document.getElementById(`avg-sent-len${prefix}`),
+            uniqueWords: document.getElementById(`unique-words${prefix}`),
+            complex: document.getElementById(`complex-word-count${prefix}`),
+            punctuation: document.getElementById(`punctuation-count${prefix}`),
+            caseRatio: document.getElementById(`case-ratio${prefix}`),
+            allCaps: document.getElementById(`all-caps-count${prefix}`),
+            numbers: document.getElementById(`numbers-count${prefix}`),
+            urls: document.getElementById(`urls-count${prefix}`),
+            emails: document.getElementById(`emails-count${prefix}`),
+            hashtags: document.getElementById(`hashtags-count${prefix}`),
+            emoji: document.getElementById(`emoji-count${prefix}`),
+            whitespace: document.getElementById(`whitespace-pct${prefix}`),
+            longestWord: document.getElementById(`longest-word${prefix}`),
+            shortestWord: document.getElementById(`shortest-word${prefix}`),
+            mostUsed: document.getElementById(`most-used-word${prefix}`)
+        };
+    }
+
+    // Animation for metrics
+    function animateMetrics() {
+        const cards = document.querySelectorAll('.result-card');
+        cards.forEach((card, index) => {
+            // Clear any existing timeout
+            if (animationTimeout) clearTimeout(animationTimeout);
+            
+            // Add animation class with staggered delay
+            setTimeout(() => {
+                card.classList.add('animated');
+            }, index * 10); // 100ms delay between each card
+        });
+    }
+
+    // Data computation - FIXED: Parameters now work correctly
+    function countText() {
+        const text = textArea.value;
+        const includeSpaces = countSpacesCheckbox.checked;
+        const includePunctuation = countPunctuationCheckbox.checked;
+        
+        // Character count
+        let charCountValue;
+        if (includeSpaces) {
+            charCountValue = text.length;
+        } else {
+            charCountValue = text.replace(/\s/g, '').length;
+        }
+        
+        // Word count with improved language support
+        let words = [];
+        
+        // Try to detect language and use appropriate word segmentation
+        const isCJK = /[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF]/.test(text);
+        const isBangla = /[\u0980-\u09FF]/.test(text);
+        
+        if (isCJK) {
+            // For Chinese, Japanese, Korean - split by characters
+            words = text.match(/[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF]+/g) || [];
+        } else if (isBangla) {
+            // For Bangla - split by word boundaries
+            words = text.match(/[\u0980-\u09FF]+/g) || [];
+        } else {
+            // For other languages (including English) - use standard word splitting
+            words = text.trim().split(/\s+/);
+            if (!includePunctuation) {
+                words = words.map(word => word.replace(/[^\w]/g, '')).filter(word => word.length > 0);
+            }
+        }
+        
+        const wordCountValue = text.trim() === '' ? 0 : words.length;
+        
+        // Sentence count with improved language support
+        let sentences = [];
+        
+        if (isCJK) {
+            // For CJK languages, use CJK-specific sentence delimiters
+            sentences = text.split(/[。！？!?]+/).filter(sentence => sentence.trim().length > 0);
+        } else {
+            // For other languages
+            sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0);
+        }
+        
+        const sentenceCountValue = sentences.length;
+        
+        // Paragraph count
+        const paragraphs = text.split(/\n\s*\n/).filter(paragraph => paragraph.trim().length > 0);
+        const paragraphCountValue = paragraphs.length;
+
+        const data = {};
+
+        data.char = charCountValue;
+        data.word = wordCountValue;
+        data.sentence = sentenceCountValue;
+        data.paragraph = paragraphCountValue;
+        data.reading = data.word / 200;
+        data.speaking = data.word / 130;
+
+        const syllables = words.reduce((sum, w) => sum + countSyllables(w), 0);
+        data.readability = data.word > 0 && data.sentence > 0
+            ? Math.max(0, Math.min(100, 206.835 - (1.015 * (data.word / data.sentence)) - (84.6 * (syllables / data.word))))
+            : 0;
+
+       data.avgWordLen = data.word > 0 ? (text.replace(/\s/g, '').length / data.word) : 0;
+data.avgSentLen = data.sentence > 0 ? (data.word / data.sentence) : 0;
+
+// ✅ Compute unique words FIRST
+const cleanWords = words.map(w => w.toLowerCase().replace(/[^a-z0-9]/g, '')).filter(w => w);
+const uniqueSet = new Set(cleanWords);
+data.uniqueWords = uniqueSet.size;
+
+// ✅ THEN compute vocab density — now data.uniqueWords is ready!
+data.vocabDensity = data.word > 0 ? (data.uniqueWords / data.word) * 100 : 0;
+        data.complex = words.filter(w => countSyllables(w) >= 3).length;
+
+        data.punctuation = (text.match(/[.,!?;:'"\/\\\-_(){}\[\]]/g) || []).length;
+        const up = (text.match(/[A-Z]/g) || []).length;
+        const low = (text.match(/[a-z]/g) || []).length;
+        data.caseRatio = `${up}/${low}`;
+        data.allCaps = words.filter(w => /^[A-Z]+$/.test(w)).length;
+
+        data.numbers = (text.match(/\b\d+\b/g) || []).length;
+        data.urls = (text.match(/https?:\/\/[^\s]+/gi) || []).length;
+        data.emails = (text.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g) || []).length;
+        data.hashtags = (text.match(/#[a-zA-Z0-9_]+/g) || []).length;
+
+        const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu;
+        data.emoji = (text.match(emojiRegex) || []).length;
+
+        const wsCount = (text.match(/\s/g) || []).length;
+        data.whitespace = text.length > 0 ? (wsCount / text.length) * 100 : 0;
+
+        const alphaWords = words.map(w => w.replace(/[^a-zA-Z]/g, '')).filter(w => w.length > 0);
+        data.longestWord = alphaWords.length ? alphaWords.reduce((a, b) => a.length > b.length ? a : b, '') : '-';
+        data.shortestWord = alphaWords.length ? alphaWords.reduce((a, b) => a.length < b.length ? a : b, alphaWords[0]) : '-';
+
+        const freq = {};
+        cleanWords.forEach(w => freq[w] = (freq[w] || 0) + 1);
+        let maxWord = '-', maxCount = 0;
+        for (const [word, count] of Object.entries(freq)) {
+            if (count > maxCount) { maxCount = count; maxWord = word; }
+        }
+        data.mostUsed = maxWord;
+
+      // Update UI
+const el = getElements();
+const updates = [
+    { el: el.char, val: formatNumberWithCommas(data.char) },
+    { el: el.word, val: formatNumberWithCommas(data.word) },
+    { el: el.sentence, val: formatNumberWithCommas(data.sentence) },
+    { el: el.paragraph, val: formatNumberWithCommas(data.paragraph) },
+    { el: el.reading, val: data.reading < 1 ? '< 1 min' : Math.ceil(data.reading) + ' min' },
+    { el: el.speaking, val: data.speaking < 1 ? '< 1 min' : Math.ceil(data.speaking) + ' min' },
+    { el: el.readability, val: Math.round(data.readability) },
+    { el: el.vocabDensity, val: data.vocabDensity.toFixed(1) + '%' },
+    { el: el.avgWordLen, val: data.avgWordLen.toFixed(1) },
+    { el: el.avgSentLen, val: data.avgSentLen.toFixed(1) },
+    { el: el.uniqueWords, val: formatNumberWithCommas(data.uniqueWords) },
+    { el: el.complex, val: formatNumberWithCommas(data.complex) },
+    { el: el.punctuation, val: formatNumberWithCommas(data.punctuation) },
+    { el: el.caseRatio, val: data.caseRatio },
+    { el: el.allCaps, val: formatNumberWithCommas(data.allCaps) },
+    { el: el.numbers, val: formatNumberWithCommas(data.numbers) },
+    { el: el.urls, val: formatNumberWithCommas(data.urls) },
+    { el: el.emails, val: formatNumberWithCommas(data.emails) },
+    { el: el.hashtags, val: formatNumberWithCommas(data.hashtags) },
+    { el: el.emoji, val: formatNumberWithCommas(data.emoji) },
+    { el: el.whitespace, val: data.whitespace.toFixed(1) + '%' },
+    { el: el.longestWord, val: data.longestWord },
+    { el: el.shortestWord, val: data.shortestWord },
+    { el: el.mostUsed, val: data.mostUsed }
+];
+
+        updates.forEach(({ el, val }) => {
+            if (el) {
+                el.textContent = val;
+                adjustFontSize(el); // ✅ Apply smart font sizing
+            }
+        });
+
+        // Show/hide colored bar based on text presence
+        if (text.length > 0) {
+            toolSection.classList.add('has-text');
+            animateMetrics();
+        } else {
+            toolSection.classList.remove('has-text');
+            // Remove animation classes when text is cleared
+            document.querySelectorAll('.result-card').forEach(card => {
+                card.classList.remove('animated');
+            });
+        }
+
+        // Update contextual suggestion
+        updateContextualSuggestion(text);
+    }
+
+    function countSyllables(word) {
+        const w = word.toLowerCase().replace(/[^a-z]/g, '');
+        if (w.length <= 3) return 1;
+        const groups = w.match(/[aeiouy]+/g) || [];
+        let s = groups.length;
+        if (w.endsWith('e') && s > 1) s--;
+        return Math.max(1, s);
+    }
+
+    // Update contextual suggestion based on text length
+    function updateContextualSuggestion(text) {
+        const charCount = text.length;
+        const wordCount = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+        let suggestion = "";
+        let highlight = false;
+
+        if (charCount === 0) {
+            suggestion = "Wait for What.Start Typing or Paste your Text Now....";
+        } else if (charCount <= 20) {
+            const options = [
+                "Tiny but mighty! Perfect for a quick emoji or reaction.",
+                "Short and sweet - a minimalist approach!",
+                "One-liner that packs a punch!",
+                "Great for a micro-message!"
+            ];
+            suggestion = options[Math.floor(Math.random() * options.length)];
+            highlight = true;
+        } else if (charCount <= 50) {
+            const options = [
+                "Nice and concise! Works well for social media comments.",
+                "Quick message! Ideal for a short update.",
+                "Easy to read and digest. Good job!"
+            ];
+            suggestion = options[Math.floor(Math.random() * options.length)];
+            highlight = true;
+        } else if (charCount <= 100) {
+            suggestion = "Perfect for a tweet or a short post.";
+            highlight = true;
+        } else if (charCount <= 200) {
+            suggestion = "Good length for a detailed tweet or a mini update.";
+            highlight = true;
+        } else if (charCount <= 280) {
+            suggestion = "Fits a full Twitter/X post!";
+            highlight = true;
+        } else if (charCount <= 500) {
+            suggestion = "Great for a Threads post or a detailed caption.";
+            highlight = true;
+        } else if (charCount <= 800) {
+            suggestion = "Ideal for blog intros or short articles.";
+            highlight = true;
+        } else if (charCount <= 1000) {
+            suggestion = "Long enough for a newsletter paragraph or detailed guide.";
+            highlight = true;
+        } else if (charCount <= 1500) {
+            suggestion = "Good for a medium-length article or story section.";
+            highlight = true;
+        } else if (charCount <= 2000) {
+            suggestion = "Great for a comprehensive article section.";
+            highlight = true;
+        } else if (charCount <= 3000) {
+            suggestion = "Long-form content – consider adding headings or bullet points.";
+            highlight = true;
+        } else if (charCount <= 4000) {
+            suggestion = "Very detailed! Make it easier to read with paragraphs.";
+            highlight = true;
+        } else if (charCount <= 5000) {
+            suggestion = "Extensive content! You might split it into multiple sections.";
+            highlight = true;
+        } else if (charCount <= 7500) {
+            suggestion = "Super long text! Consider summarizing key points for readers.";
+            highlight = true;
+        } else if (charCount <= 10000) {
+            suggestion = "Massive content! Breaking into chapters or sections is recommended.";
+            highlight = true;
+        } else {
+            suggestion = "Extra long text – readers might appreciate a summary at the top.";
+        }
+
+        // Word-based adjustments
+        if (wordCount <= 5 && charCount > 0) {
+            const funSuggestions = [
+                "Short and sweet! Perfect for a quick message.",
+                "Brevity is the soul of wit!",
+                "Concise and to the point - love it!",
+                "Say more with less - great job!"
+            ];
+            suggestion = funSuggestions[Math.floor(Math.random() * funSuggestions.length)];
+            highlight = true;
+        } else if (wordCount > 2000) {
+            suggestion = "Extremely long text – consider splitting for easier reading.";
+            highlight = true;
+        }
+
+        contextualSuggestion.textContent = suggestion;
+
+        if (highlight) {
+            contextualSuggestion.classList.add('highlight');
+        } else {
+            contextualSuggestion.classList.remove('highlight');
+        }
+    }
+
+    // Copy & Reset
+    function copyResults() {
+    const el = getElements();
+    const lines = [
+        `Characters: ${el.char?.textContent || '0'}`,
+        `Words: ${el.word?.textContent || '0'}`,
+        `Sentences: ${el.sentence?.textContent || '0'}`,
+        `Paragraphs: ${el.paragraph?.textContent || '0'}`,
+        `Reading Time: ${el.reading?.textContent || '0'}`,
+        `Speaking Time: ${el.speaking?.textContent || '0'}`,
+        `Readability: ${el.readability?.textContent || '0'}`,
+        `Vocab Density: ${el.vocabDensity?.textContent || '0%'}`,
+        `Avg Word Len: ${el.avgWordLen?.textContent || '0'}`,
+        `Avg Sent Len: ${el.avgSentLen?.textContent || '0'}`,
+        `Unique Words: ${el.uniqueWords?.textContent || '0'}`,
+        `Complex Words: ${el.complex?.textContent || '0'}`,
+        `Punctuation: ${el.punctuation?.textContent || '0'}`,
+        `Case Ratio: ${el.caseRatio?.textContent || '0/0'}`,
+        `All-Caps Words: ${el.allCaps?.textContent || '0'}`,
+        `Numbers: ${el.numbers?.textContent || '0'}`,
+        `URLs: ${el.urls?.textContent || '0'}`,
+        `Emails: ${el.emails?.textContent || '0'}`,
+        `Hashtags: ${el.hashtags?.textContent || '0'}`,
+        `Emojis: ${el.emoji?.textContent || '0'}`,
+        `Whitespace %: ${el.whitespace?.textContent || '0%'}`,
+        `Longest Word: ${el.longestWord?.textContent || '-'}`,
+        `Shortest Word: ${el.shortestWord?.textContent || '-'}`,
+        `Most Used Word: ${el.mostUsed?.textContent || '-'}`
+    ];
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+        const orig = copyButton.innerHTML;
+        copyButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => copyButton.innerHTML = orig, 2000);
+    });
+}
+
+    function resetTool() {
+        textArea.value = '';
+        countText();
+        updateScrollIndicator(); // Reset scroll indicator
+        
+        // Reset file info
+        fileInfo.classList.remove('show');
+        fileName.textContent = 'document.txt';
+        fileSize.textContent = '-';
+        
+        // Scroll to top of page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // File upload handling
+    function handleFileUpload(file) {
+        // Update file info
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+        fileInfo.classList.add('show');
+        
+        // Check file type
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        
+        // For text files, read directly
+        if (fileExtension === 'txt' || fileExtension === 'html') {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                textArea.value = e.target.result;
+                countText();
+            };
+            reader.readAsText(file);
+        } else {
+            // For other file types, show a message
+            textArea.value = `[File: ${file.name}]\n\nNote: Full text extraction for .pdf, .doc, and .docx files requires server-side processing. For now, please copy and paste the text content manually.`;
+            countText();
+        }
+    }
+
+    // Format file size
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // File upload event handlers
+    browseButton.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFileUpload(e.target.files[0]);
+        }
+    });
+
+    // Paste from clipboard
+    pasteButton.addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            textArea.value = text;
+            countText();
+            
+            // Show success feedback
+            const originalText = pasteButton.innerHTML;
+            pasteButton.innerHTML = '<i class="fas fa-check"></i> Pasted!';
+            setTimeout(() => {
+                pasteButton.innerHTML = '<i class="fas fa-paste"></i> Paste from Clipboard';
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to read clipboard: ', err);
+            alert('Unable to paste from clipboard. Please make sure you have clipboard access enabled.');
+        }
+    });
+
+    // Remove file
+    fileRemove.addEventListener('click', () => {
+        fileInfo.classList.remove('show');
+        fileInput.value = '';
+    });
+
+    // Drag and drop event handlers
+    uploadBar.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadBar.style.borderColor = 'var(--blue-600)';
+        uploadBar.style.background = 'rgba(37, 99, 235, 0.1)';
+    });
+
+    uploadBar.addEventListener('dragleave', () => {
+        uploadBar.style.borderColor = 'rgba(37, 99, 235, 0.3)';
+        uploadBar.style.background = 'rgba(37, 99, 235, 0.05)';
+    });
+
+    uploadBar.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadBar.style.borderColor = 'rgba(37, 99, 235, 0.3)';
+        uploadBar.style.background = 'rgba(37, 99, 235, 0.05)';
+        
+        if (e.dataTransfer.files.length > 0) {
+            handleFileUpload(e.dataTransfer.files[0]);
+        }
+    });
+
+  // Enhanced FAQ toggle with smooth animation, grouped visibility, and outside-click close
+function initFAQs() {
+    const allFAQItems = document.querySelectorAll('.faq-item');
+    allFAQItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (!question.dataset.initialized) {
+            question.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering outside-click handler
+                const isActive = item.classList.contains('active');
+                // Close all others
+                allFAQItems.forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('active');
+                    }
+                });
+                // Toggle current
+                item.classList.toggle('active', !isActive);
+            });
+            question.dataset.initialized = 'true';
+        }
+    });
+}
+
+// Close all FAQs on outside click/tap
+function closeAllFAQs() {
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+    });
+}
+
+// Global outside-click listener
+document.addEventListener('click', (e) => {
+    const clickedInsideFAQ = e.target.closest('.faq-item');
+    if (!clickedInsideFAQ) {
+        closeAllFAQs();
+    }
+});
+
+// Initialize first batch
+initFAQs();
+
+// Enhanced FAQ "See More" with smooth entry animation
+const seeMoreBtn = document.getElementById('faq-see-more');
+const extraFAQs = document.getElementById('faq-extra');
+
+if (seeMoreBtn && extraFAQs) {
+    seeMoreBtn.addEventListener('click', () => {
+        // 1. Reveal container with smooth opacity/transform
+        extraFAQs.style.opacity = '0';
+        extraFAQs.style.transform = 'translateY(10px)';
+        extraFAQs.removeAttribute('hidden');
+        
+        // Trigger reflow
+        void extraFAQs.offsetWidth;
+        
+        // 2. Animate container in
+        extraFAQs.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        extraFAQs.style.opacity = '1';
+        extraFAQs.style.transform = 'translateY(0)';
+
+        // 3. Fade out & remove button smoothly
+        seeMoreBtn.style.opacity = '0';
+        seeMoreBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            seeMoreBtn.style.display = 'none';
+        }, 300);
+
+        // 4. Initialize new FAQs
+        setTimeout(() => {
+            initFAQs();
+            
+            // 5. Animate each newly revealed FAQ item
+            const newItems = extraFAQs.querySelectorAll('.faq-item');
+            newItems.forEach((item, i) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(10px)';
+                item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, i * 80);
+            });
+        }, 100);
+    });
+}
+
+    // Lazy loading implementation
+    function lazyLoadSections() {
+        const sections = document.querySelectorAll('.lazy-section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    }
+
+// ✅ Format large numbers with commas for readability
+function formatNumberWithCommas(num) {
+    if (typeof num === 'number') {
+        // For numbers, use toLocaleString for proper formatting
+        return num.toLocaleString();
+    } else if (typeof num === 'string') {
+        // For strings, check if it's a number and format accordingly
+        const numericValue = parseFloat(num.replace(/[^0-9.]/g, ''));
+        if (!isNaN(numericValue)) {
+            return numericValue.toLocaleString();
+        }
+    }
+    return num; // Return as-is if not a number
+}
+    // Events
+    textArea.addEventListener('input', countText);
+    textArea.addEventListener('scroll', updateScrollIndicator); // Update scroll indicator on scroll
+    copyButton.addEventListener('click', copyResults);
+    resetButton.addEventListener('click', resetTool);
+    prevArrow.addEventListener('click', () => goToPage(currentPage - 1));
+    nextArrow.addEventListener('click', () => goToPage(currentPage + 1));
+    countSpacesCheckbox.addEventListener('change', countText);
+    countPunctuationCheckbox.addEventListener('change', countText);
+
+    // Init
+    countText();
+    updatePageIndicators();
+    updateNavigation();
+    loadPage(1); // Ensure page 1 is loaded
+    lazyLoadSections();
+    
+ // Enhanced metric descriptions with parameter-specific emojis
+const metricDescriptions = {
+    "char-count": {
+        title: "Character Count",
+        emoji: "🔤",
+        description: "This counts every single character in your text including letters, numbers, spaces, and punctuation marks(according to the settings).",
+        tip: "Useful for social media posts with character limits like Twitter (280 chars)."
+    },
+    "word-count": {
+        title: "Word Count",
+        emoji: "📝",
+        description: "Measures the total number of words in your text. Words are separated by spaces, and you can choose whether to include punctuation in the count through settings.",
+        tip: "Aim for 500-800 words for blog posts for optimal readability."
+    },
+    "sentence-count": {
+        title: "Sentence Count",
+        emoji: "📄",
+        description: "Counts complete sentences by detecting ending punctuation marks (. ! ?) followed by a space or the end of the text.",
+        tip: "Mix short and long sentences for better writing rhythm."
+    },
+    "paragraph-count": {
+        title: "Paragraph Count",
+        emoji: "📑",
+        description: "Identifies separate paragraphs by looking for blank lines or double line breaks between blocks of text.",
+        tip: "Keep paragraphs to 3-4 sentences for better online readability."
+    },
+    "reading-time": {
+        title: "Reading Time",
+        emoji: "⏱️",
+        description: "Estimates how long it would take an average person to read your text silently, based on a standard reading speed of 200 words per minute.",
+        tip: "Perfect for blog posts - readers love knowing the time commitment!"
+    },
+    "speaking-time": {
+        title: "Speaking Time",
+        emoji: "🎤",
+        description: "Calculates how long it would take to speak your text aloud, using an average speaking pace of 130 words per minute.",
+        tip: "Great for preparing speeches or podcast scripts."
+    },
+    "readability-score": {
+        title: "Readability Score",
+        emoji: "📊",
+        description: "Uses the Flesch Reading Ease formula to score your text from 0-100. Higher scores mean easier reading (90-100: very easy, 60-70: standard, 0-30: very difficult).",
+        tip: "Aim for 60+ for general audiences, 70+ for online content."
+    },
+    "vocab-density": {
+        title: "Vocabulary Density",
+        emoji: "🎯",
+        description: "Shows the percentage of unique words compared to your total word count. Higher percentages indicate more varied vocabulary.",
+        tip: "25-40% is usually good. Too high might mean confusing jargon."
+    },
+    "avg-word-len": {
+        title: "Average Word Length",
+        emoji: "📏",
+        description: "Calculates the average number of characters per word, excluding spaces. Helps assess vocabulary complexity.",
+        tip: "4-5 characters per word is ideal for general audiences."
+    },
+    "avg-sent-len": {
+        title: "Average Sentence Length",
+        emoji: "⚖️",
+        description: "Measures the average number of words per sentence. Good indicator of writing complexity.",
+        tip: "15-20 words per sentence is comfortable for most readers."
+    },
+    "unique-words": {
+        title: "Unique Words",
+        emoji: "✨",
+        description: "Counts distinct words in your text, ignoring capitalization and stripping punctuation to find true uniqueness.",
+        tip: "Shows your vocabulary range - great for writers and content creators."
+    },
+    "complex-word-count": {
+        title: "Complex Words",
+        emoji: "🧠",
+        description: "Identifies words with 3 or more syllables, helping you spot potentially difficult vocabulary.",
+        tip: "Limit complex words to 10-15% of your text for better accessibility."
+    },
+    "punctuation-count": {
+        title: "Punctuation Usage",
+        emoji: "🔣",
+        description: "Counts all punctuation marks including: . , ! ? ; : ' \" / \\ - _ ( ) { } [ ]. Helps analyze your writing style.",
+        tip: "Proper punctuation improves readability by 40%!"
+    },
+    "case-ratio": {
+        title: "Case Ratio",
+        emoji: "🔠",
+        description: "Compares uppercase to lowercase letters. High ratios might indicate shouting or technical content.",
+        tip: "Normal text should have 95%+ lowercase letters."
+    },
+    "all-caps-count": {
+        title: "All-Caps Words",
+        emoji: "📢",
+        description: "Counts words written entirely in uppercase letters, often used for emphasis or in specific contexts.",
+        tip: "Use all-caps sparingly - they feel like SHOUTING online."
+    },
+    "numbers-count": {
+        title: "Numbers Count",
+        emoji: "🔢",
+        description: "Identifies standalone numeric values like 42 or 2025 (not numbers within words).",
+        tip: "Numbers add credibility - use them to support your points."
+    },
+    "urls-count": {
+        title: "URL Links",
+        emoji: "🌐",
+        description: "Detects web addresses starting with http:// or https://, perfect for analyzing web content.",
+        tip: "2-3 relevant links per 1000 words is a good benchmark."
+    },
+    "emails-count": {
+        title: "Email Addresses",
+        emoji: "📧",
+        description: "Finds email addresses in standard format (name@domain.com) within your text.",
+        tip: "Great for contact forms or business communications analysis."
+    },
+    "hashtags-count": {
+        title: "Hashtags",
+        emoji: "🏷️",
+        description: "Counts words starting with # symbol, commonly used in social media for categorization.",
+        tip: "3-5 relevant hashtags maximize engagement on most platforms."
+    },
+    "emoji-count": {
+        title: "Emoji Usage",
+        emoji: "😊",
+        description: "Detects Unicode emoji characters in your text, popular in informal digital communication.",
+        tip: "1-2 emojis per message can increase engagement by 25%!"
+    },
+    "whitespace-pct": {
+        title: "Whitespace Percentage",
+        emoji: "␣",
+        description: "Shows what percentage of your text consists of spaces, tabs, and line breaks.",
+        tip: "15-20% whitespace makes text much easier to read."
+    },
+    "longest-word": {
+        title: "Longest Word",
+        emoji: "🏆",
+        description: "Finds the longest alphabetical word in your text, with punctuation removed for accuracy.",
+        tip: "If your longest word is confusing, consider breaking it down."
+    },
+    "shortest-word": {
+        title: "Shortest Word",
+        emoji: "📌",
+        description: "Identifies the shortest meaningful word (minimum 1 letter) in your content.",
+        tip: "Short words create punchy, memorable phrases."
+    },
+    "most-used-word": {
+        title: "Most Frequent Word",
+        emoji: "🔄",
+        description: "Shows which word appears most often, with case normalization for accurate counting.",
+        tip: "Your most used word reveals your writing focus - use it intentionally!"
+    }
+};
+
+// Label → ID mapping
+const labelToId = {
+    'Characters': 'char-count',
+    'Words': 'word-count',
+    'Sentences': 'sentence-count',
+    'Paragraphs': 'paragraph-count',
+    'Reading Time': 'reading-time',
+    'Speaking Time': 'speaking-time',
+    'Readability': 'readability-score',
+    'Vocab Density': 'vocab-density',
+    'Avg Word Len': 'avg-word-len',
+    'Avg Sent Len': 'avg-sent-len',
+    'Unique Words': 'unique-words',
+    'Complex Words': 'complex-word-count',
+    'Punctuation': 'punctuation-count',
+    'Upper/Lower': 'case-ratio',
+    'All-Caps Words': 'all-caps-count',
+    'Numbers': 'numbers-count',
+    'URLs': 'urls-count',
+    'Emails': 'emails-count',
+    'Hashtags': 'hashtags-count',
+    'Emojis': 'emoji-count',
+    'Whitespace %': 'whitespace-pct',
+    'Longest Word': 'longest-word',
+    'Shortest Word': 'shortest-word',
+    'Most Used Word': 'most-used-word'
+};
+
+// Track currently open notification and active button
+let currentNotification = null;
+let currentButton = null;
+
+// Simple injection function
+function injectInfoButtons() {
+    document.querySelectorAll('.result-card:not(.has-info)').forEach(card => {
+        const labelEl = card.querySelector('.result-label');
+        if (!labelEl) return;
+
+        const labelText = labelEl.textContent.trim();
+        const metricId = labelToId[labelText] || labelText.toLowerCase().replace(/\s+/g, '-');
+        const metricData = metricDescriptions[metricId] || {
+            title: labelText,
+            emoji: "ℹ️",
+            description: 'Detailed information about this metric will be available soon.',
+            tip: 'Check back later for more insights!'
+        };
+
+        // Create simple info button
+        const infoBtn = document.createElement('button');
+        infoBtn.className = 'info-btn';
+        infoBtn.title = `Learn about ${labelText}`;
+        infoBtn.innerHTML = 'ⓘ';
+        infoBtn.setAttribute('aria-label', `Info about ${labelText}`);
+        infoBtn.setAttribute('data-metric-id', metricId);
+
+        // Create global notification element (once)
+        let notify = document.getElementById('info-notification');
+        if (!notify) {
+            notify = document.createElement('div');
+            notify.id = 'info-notification';
+            notify.className = 'info-notification';
+            notify.innerHTML = `
+                <div class="content">
+                    <div id="info-title" class="info-title"></div>
+                    <div id="info-desc" class="info-desc"></div>
+                    <div id="info-tip" class="info-tip" style="display: none;"></div>
+                    <button class="info-close-btn" aria-label="Close">×</button>
+                </div>
+            `;
+            document.body.appendChild(notify);
+        }
+
+        // Create global backdrop (once)
+        let backdrop = document.getElementById('notification-backdrop');
+        if (!backdrop) {
+            backdrop = document.createElement('div');
+            backdrop.id = 'notification-backdrop';
+            backdrop.className = 'notification-backdrop';
+            document.body.appendChild(backdrop);
+        }
+
+        // Open/close logic
+        function showNotification() {
+            // Update content
+            document.getElementById('info-title').innerHTML = `${metricData.emoji} ${metricData.title}`;
+            document.getElementById('info-desc').textContent = metricData.description;
+            
+            const tipElement = document.getElementById('info-tip');
+            if (metricData.tip) {
+                tipElement.textContent = metricData.tip;
+                tipElement.style.display = 'block';
+            } else {
+                tipElement.style.display = 'none';
+            }
+
+            // Show notification
+            notify.classList.add('visible');
+            backdrop.classList.add('visible');
+            currentNotification = notify;
+            currentButton = infoBtn;
+            
+            // Add vibration on mobile for better UX
+            if (navigator.vibrate) {
+                navigator.vibrate(10);
+            }
+        }
+
+        function hideNotification() {
+            if (currentNotification) {
+                currentNotification.classList.remove('visible');
+                backdrop.classList.remove('visible');
+                currentNotification = null;
+                currentButton = null;
+            }
+        }
+
+        // Event listeners
+        infoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (notify.classList.contains('visible')) {
+                hideNotification();
+            } else {
+                showNotification();
+            }
+        });
+
+        // Close button
+        notify.querySelector('.info-close-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            hideNotification();
+        });
+
+        // Close on backdrop click
+        backdrop.addEventListener('click', hideNotification);
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && currentNotification) {
+                hideNotification();
+            }
+        });
+
+        // FIXED: Close when clicking/touching outside the notification content
+        document.addEventListener('click', (e) => {
+            if (currentNotification && currentNotification.classList.contains('visible')) {
+                const content = currentNotification.querySelector('.content');
+                const isClickInsideContent = content.contains(e.target);
+                const isClickOnButton = currentButton && currentButton.contains(e.target);
+                
+                // Close if clicking outside both the content and the button
+                if (!isClickInsideContent && !isClickOnButton) {
+                    hideNotification();
+                }
+            }
+        });
+
+        // Also handle touch events for mobile
+        document.addEventListener('touchstart', (e) => {
+            if (currentNotification && currentNotification.classList.contains('visible')) {
+                const content = currentNotification.querySelector('.content');
+                const isTouchInsideContent = content.contains(e.target);
+                const isTouchOnButton = currentButton && currentButton.contains(e.target);
+                
+                // Close if touching outside both the content and the button
+                if (!isTouchInsideContent && !isTouchOnButton) {
+                    hideNotification();
+                }
+            }
+        });
+
+        card.style.position = 'relative';
+        card.appendChild(infoBtn);
+        card.classList.add('has-info');
+    });
+}
+
+// Enhanced initialization with error handling
+function initializeInfoSystem() {
+    try {
+        injectInfoButtons();
+        
+        // Re-inject on dynamic content changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    setTimeout(injectInfoButtons, 50);
+                }
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    } catch (error) {
+        console.warn('Info button system initialization failed:', error);
+    }
+}
+
+// Replace your original loadPage handler
+const originalLoadPage = window.loadPage;
+window.loadPage = function(pageNum) {
+    if (originalLoadPage) {
+        originalLoadPage(pageNum);
+    }
+    setTimeout(injectInfoButtons, 150);
+};
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeInfoSystem);
+} else {
+    initializeInfoSystem();
+}
+
+// Export for potential external use
+window.metricInfoSystem = {
+    injectInfoButtons,
+    metricDescriptions,
+    labelToId
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('see-more-btn');
+  const content = document.getElementById('see-more-content');
+
+  if (btn && content) {
+    btn.addEventListener('click', () => {
+      // 1. Show the hidden content
+      content.removeAttribute('hidden');
+      
+      // 2. Hide the button completely
+      btn.style.display = 'none';
+      
+      // 3. Optional: smooth scroll to revealed content
+      content.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start', 
+        inline: 'nearest' 
+      });
+      
+      // 4. Optional: Add animation to content appearance
+      setTimeout(() => {
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+      }, 10);
+    });
+  }
+});
+
+const backToTopBtn = document.getElementById('backToTop');
+
+// Show/hide based on scroll
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add('show');
+  } else {
+    backToTopBtn.classList.remove('show');
+  }
+});
+
+// Smooth scroll to top
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+</script>
+</body>
+</html>
