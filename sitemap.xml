@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Most recently updated tool -->
+  <url>
+    <loc>https://toolivo.github.io/tool/image-compressor.html</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Second most recent -->
+  <url>
+    <loc>https://toolivo.github.io/tool/text-analyzer.html</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Tools homepage (aggregator) -->
+  <url>
+    <loc>https://toolivo.github.io/tool/</loc>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+</urlset>
