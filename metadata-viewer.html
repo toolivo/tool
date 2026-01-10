@@ -2656,6 +2656,179 @@ body.dark-mode .file-list::-webkit-scrollbar-thumb:hover {
 }
 
     </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Toolivo Metadata Viewer",
+      "url": "https://toolivo.github.io/tool/metadata-viewer.html",
+      "description": "Free online metadata viewer to extract EXIF, GPS, camera settings, and video metadata from images and videos. 100% private, client-side, no uploads."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolivo Metadata Viewer",
+      "applicationCategory": "Utility",
+      "operatingSystem": "Any",
+      "url": "https://toolivo.github.io/tool/metadata-viewer.html",
+      "description": "View and extract image and video metadata instantly — EXIF, GPS, timestamps, device info, and more. 100% private, browser-based, no file uploads.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolivo",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolivo.github.io/tool/toolivo-logo.webp"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Full EXIF & Video Metadata",
+        "GPS Location Data",
+        "Camera & Device Info",
+        "File Details",
+        "Timestamps",
+        "Media Specifications",
+        "Technical Capture Settings",
+        "Raw JSON Export",
+        "Copy Individual Fields",
+        "100% Private & Local"
+      ],
+      "additionalProperty": [
+        { "@type": "PropertyValue", "name": "EXIF Viewer", "value": "Extract complete EXIF data from images including camera settings and timestamps." },
+        { "@type": "PropertyValue", "name": "GPS Metadata", "value": "Display latitude/longitude from geotagged photos in human-readable format." },
+        { "@type": "PropertyValue", "name": "Device Information", "value": "Show camera make, model, lens, firmware, and serial number when available." },
+        { "@type": "PropertyValue", "name": "File Analysis", "value": "View file name, size, type, dimensions, and last modified date." },
+        { "@type": "PropertyValue", "name": "Video Metadata", "value": "Read basic video metadata like duration, resolution, and creation time." },
+        { "@type": "PropertyValue", "name": "Technical Settings", "value": "Display ISO, aperture, shutter speed, focal length, and white balance." },
+        { "@type": "PropertyValue", "name": "Privacy Protection", "value": "All processing occurs locally—no files are uploaded or stored." },
+        { "@type": "PropertyValue", "name": "Export & Copy", "value": "Copy fields individually or export full metadata as raw JSON." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are my files uploaded or stored anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All metadata parsing happens locally in your browser using libraries like exif-js. Your images and videos never leave your device — no uploads, no servers, no tracking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of files does it support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Images: JPEG, PNG, WebP (with EXIF/XMP/GPS). Videos: MP4, MOV, AVI (basic metadata like duration, resolution, creation date). Support depends on browser capabilities and embedded data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I see GPS location data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — if your photo contains geotags, Toolivo displays them as latitude/longitude coordinates and clearly indicates when location data is present (or absent). No map rendering, but values are copy-ready for external use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is some metadata missing from my file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not all devices or apps embed full EXIF data. Screenshots, social media downloads, or edited files often strip metadata. Toolivo shows everything that’s actually embedded — nothing is hidden or filtered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I export or save the metadata?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can copy individual fields or export the full dataset as raw JSON for documentation, forensic reports, or archival purposes — no watermarks or restrictions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on mobile phones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Toolivo works on iOS and Android browsers. You can inspect EXIF data from photos taken moments ago — ideal for quick privacy checks before sharing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Toolivo really free — forever?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. No signups, no ads, no premium tiers. It’s a public utility for transparency — built for journalists, photographers, and privacy-conscious users."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it detect if a photo has been edited?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Indirectly. If modification dates differ from creation dates, or if software tags (e.g., “Photoshop”) appear in XMP data, those clues may indicate editing. However, Toolivo doesn’t perform deep forensic analysis — it only displays what’s embedded."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why doesn’t video metadata show codec or audio details?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Browser-based video metadata extraction is limited for security reasons. Only basic fields (duration, dimensions, creation time) are available. Advanced details require desktop tools like MediaInfo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the GPS or timestamp data shown?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Toolivo displays exactly what’s embedded in your file — no interpretation or correction. Accuracy depends entirely on your device’s settings (e.g., whether geotagging was enabled at capture time)."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolivo.github.io/tool/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://toolivo.github.io/tool/" },
+        { "@type": "ListItem", "position": 3, "name": "Metadata Viewer" }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Use Toolivo Metadata Viewer",
+      "description": "Simple 4-step process to view and extract metadata",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Upload or Drag & Drop. Add images (JPG, PNG, WebP, etc.) or videos (MP4, MOV) — no format restrictions."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Explore Instantly. Metadata auto-loads into organized tabs: General, Location, Device, Technical, EXIF/XMP, and Raw — searchable and copy-enabled."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Verify or Audit. Check authenticity, spot unintended geotags, or compare metadata across files for consistency."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Copy or Export. Copy individual fields or export the full metadata as raw JSON — no watermarks or forced downloads."
+        }
+      ],
+      "totalTime": "PT30S"
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <!-- Breadcrumb -->
