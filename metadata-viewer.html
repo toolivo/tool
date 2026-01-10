@@ -1,0 +1,4640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js"></script>
+    <title>Toolivo Metadata Viewer | Free Online EXIF & Video Metadata Extractor</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free online metadata viewer to extract EXIF, GPS, camera settings, and video metadata from images and videos. 100% private, client-side, no uploads.">
+    <meta name="keywords" content="free metadata viewer, online EXIF viewer, view image metadata online, read video metadata online, EXIF extractor online, GPS metadata viewer, image EXIF reader online, free EXIF info viewer, metadata extractor online, check image EXIF online">
+    <meta name="author" content="Mushfikur Riad">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Toolivo Metadata Viewer | Free EXIF & Video Metadata Extractor">
+    <meta property="og:description" content="View and extract image and video metadata instantly — EXIF, GPS, timestamps, device info, and more. 100% private, browser-based, no file uploads.">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJVjQOjQtdFyYehycOQywWco10C7w0ichSra29f2nGuzKrDk5twAEplNrAnb7M_ZBjzehQLi1LYqCmpjpJUepYQPhl7CJiGF6ZmHrEBtMaqMPVIHIFEorZyKyDuDBk-rRZPcWi3KvQcmKUh_NnDWNgQseHq-VZk_Ql6dREzj5ru3tKZQ/s1600/1image.webp">
+    <meta property="og:url" content="https://toolivo.github.io/tool/metadata-viewer.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Toolivo">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolivo Metadata Viewer | Free EXIF & Video Metadata Extractor">
+    <meta name="twitter:description" content="Extract EXIF, GPS, and technical metadata from photos and videos — instantly, privately, and for free in your browser.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJVjQOjQtdFyYehycOQywWco10C7w0ichSra29f2nGuzKrDk5twAEplNrAnb7M_ZBjzehQLi1LYqCmpjpJUepYQPhl7CJiGF6ZmHrEBtMaqMPVIHIFEorZyKyDuDBk-rRZPcWi3KvQcmKUh_NnDWNgQseHq-VZk_Ql6dREzj5ru3tKZQ/s1600/1image.webp">
+    <meta name="twitter:creator" content="@toolivo">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    <link rel="canonical" href="https://toolivo.github.io/tool/metadata-viewer.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://toolivo.github.io/tool/favicon.png">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+        :root {
+            --primary-blue: #2563eb;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-800: #1e40af;
+            --light-bg: #ffffff;
+            --light-text: #1f2937;
+            --light-card: rgba(255,255,255,0.98);
+            --dark-bg-1: #071127;
+            --dark-bg-2: #071a2b;
+            --dark-text: #e6eef8;
+            --dark-card: #0f1724;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --menu-width: 280px;
+            --container-max-width: 1400px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-700), var(--blue-800));
+            color: var(--light-text);
+            line-height: 1.6;
+            padding: 5px;
+            min-height: 100vh;
+            transition: var(--transition);
+            margin-top: -1.5rem;
+            max-width: var(--container-max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--dark-text);
+        }
+
+        /* === Menu Toggle === */
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+            z-index: 10;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        body.dark-mode .menu-toggle:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 24px;
+            border-radius: 2px;
+            background: white;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+
+        body.dark-mode .menu-toggle span {
+            background: #e6eef8;
+        }
+
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Glowing effect for cards in dark mode — hover-only transition to preserve lazy-load animations */
+        body.dark-mode .visual-card,
+        body.dark-mode .tool-section,
+        body.dark-mode .article-section,
+        body.dark-mode .feature-card,
+        body.dark-mode .troubleshooting-card,
+        body.dark-mode .related-tools-card,
+        body.dark-mode .steps,
+        body.dark-mode .about-content,
+        body.dark-mode .faq-item {
+            box-shadow: 0 0 14px 3px rgba(14, 165, 233, 0.15);
+        }
+
+        /* ✅ Only apply transition to box-shadow on hover/focus — avoids overriding opacity/transform transitions */
+        body.dark-mode .visual-card:hover,
+        body.dark-mode .tool-section:hover,
+        body.dark-mode .article-section:hover,
+        body.dark-mode .feature-card:hover,
+        body.dark-mode .troubleshooting-card:hover,
+        body.dark-mode .related-tools-card:hover,
+        body.dark-mode .steps:hover,
+        body.dark-mode .about-content:hover,
+        body.dark-mode .faq-item:hover {
+            box-shadow: 0 0 20px 6px rgba(14, 165, 233, 0.25);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        /* === Breadcrumb === */
+        .breadcrumb {
+            padding: 0.3rem 0.3rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 2px;
+            margin-top: 25px
+        }
+        body.dark-mode .breadcrumb {
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .breadcrumb ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.1rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0.5rem;
+            align-items: center;
+        }
+        .breadcrumb li {
+            display: flex;
+            align-items: center;
+        }
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin: 0 0.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+        }
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: var(--transition);
+        }
+        .breadcrumb a:hover {
+            color: white;
+        }
+        body.dark-mode .breadcrumb a {
+            color: rgba(230, 238, 248, 0.85);
+        }
+        body.dark-mode .breadcrumb a:hover {
+            color: #e6eef8;
+        }
+        .breadcrumb li[aria-current="page"] {
+            color: #e6eef8;
+            font-weight: 600;
+        }
+        body.dark-mode .breadcrumb li[aria-current="page"] {
+            color: #cbd5e1;
+        }
+        .breadcrumb i {
+            font-size: 0.9em;
+        }
+
+        /* === Menu Card === */
+        .menu-card {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            width: var(--menu-width);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+            transform: translateX(-145%);
+            transition: transform 0.36s cubic-bezier(0.22, 0.61, 0.36, 1);
+            z-index: 1000;
+            padding: 1.5rem;
+            max-height: 80vh;
+            max-width: 500px;
+            overflow-y: auto;
+        }
+        body.dark-mode .menu-card {
+            background: #0f1724;
+        }
+
+        .menu-card.open {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .menu-header {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .menu-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .menu-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-close:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode .menu-close:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .menu-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        body.dark-mode .menu-close svg {
+            color: #e6eef8;
+        }
+
+        .menu-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.25rem 1rem 0.25rem 0.25rem;
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body.dark-mode .menu-link {
+            color: var(--dark-text);
+        }
+
+        .menu-link:hover {
+            background: rgba(37,99,235,0.1);
+            transform: translateX(4px);
+        }
+
+        body.dark-mode .menu-link:hover {
+            background: rgba(14,165,233,0.12);
+        }
+
+        .menu-icon {
+            width: 20px;
+            opacity: 0.7;
+        }
+
+        /* Backdrop */
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.24s, visibility 0.24s;
+            z-index: 999;
+        }
+
+        .backdrop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.2rem;
+            padding: 0.2rem 0;
+            gap: 0.8rem;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            transition: transform 0.28s;
+        }
+
+        .logo:hover {
+            transform: scale(1.04);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        body.dark-mode h1 {
+            background: linear-gradient(135deg, #ffffff, #e6eef8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #ffffff;
+            font-weight: 400;
+            opacity: 0.6;
+        }
+
+        body.dark-mode .tagline {
+            color: var(--dark-text);
+        }
+
+        /* === Theme Toggle === */
+        .theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.14);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s, visibility 0.3s;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            -webkit-tap-highlight-color: transparent;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.9) translateY(-4px);
+        }
+
+        .theme-toggle.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .theme-icon {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            stroke: currentColor;
+        }
+
+        .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+            color: #ff8c00;
+        }
+
+        .moon-icon {
+            opacity: 0;
+            transform: rotate(-90deg);
+            color: #e6eef8;
+        }
+
+        body.dark-mode .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        body.dark-mode .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* View Transition Support */
+        @supports (view-transition-name: none) {
+            ::view-transition-old(root),
+            ::view-transition-new(root) {
+                animation: none;
+                mix-blend-mode: normal;
+            }
+            
+            ::view-transition-old(root) {
+                z-index: 1;
+            }
+            
+            ::view-transition-new(root) {
+                z-index: 9999;
+            }
+            
+            .dark-mode::view-transition-old(root) {
+                z-index: 9999;
+            }
+            
+            .dark-mode::view-transition-new(root) {
+                z-index: 1;
+            }
+        }
+
+        /* === Social Sharing Section === */
+        .social-sharing {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .social-sharing h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .social-sharing h3 {
+            color: var(--dark-text);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.4rem;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Platform-specific hover colors */
+        .social-icon.x-twitter:hover { background: #000000; }
+        .social-icon.linkedin:hover { background: #0077B5; }
+        .social-icon.facebook:hover { background: #0068FF; }
+        .social-icon.whatsapp:hover { background: #25D366; }
+        .social-icon.telegram:hover { background: #0088cc; }
+        .social-icon.instagram:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-icon.reddit:hover { background: #FF4500; }
+        .social-icon.pinterest:hover { background: #BD081C; }
+        .social-icon.messenger:hover { background: #006AFF; }
+        .social-icon.email:hover { background: #EA4335; }
+
+        /* Click animation effect */
+        .social-icon.clicked {
+            animation: clickPulse 0.4s ease-out;
+        }
+
+        @keyframes clickPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* === Footer === */
+        .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: white;
+        }
+
+        body.dark-mode .comprehensive-footer {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-links a svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        .creator-credit {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* === Removed Tool Section Styles === */
+        
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-bottom: 3rem;
+        }
+        
+        .related-tools-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border: 2px dashed rgba(37, 99, 235, 0.2);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .related-tools-card {
+            background: var(--dark-card);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .related-tools-card:hover {
+            border-color: var(--blue-600);
+            transform: translateY(-5px);
+        }
+
+        body.dark-mode .related-tools-card:hover {
+            border-color: #0ea5e9;
+        }
+
+        .related-tools-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .related-tools-title {
+            color: var(--dark-text);
+        }
+
+        .related-tools-description {
+            margin-bottom: 1.5rem;
+            color: #6c757d;
+        }
+
+        body.dark-mode .related-tools-description {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .related-tools-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .related-tools-button {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .related-tools-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        body.dark-mode .related-tools-button:hover {
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .connected-tools {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .connected-tool-link {
+            color: var(--blue-600);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(37, 99, 235, 0.1);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .connected-tool-link {
+            color: #0ea5e9;
+            background: rgba(14, 165, 233, 0.1);
+        }
+
+        .connected-tool-link:hover {
+            background: var(--blue-600);
+            color: white;
+        }
+
+        body.dark-mode .connected-tool-link:hover {
+            background: #0ea5e9;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        body.dark-mode .section-title {
+            color: var(--dark-text);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue-600), var(--blue-800));
+            border-radius: 2px;
+            border: 1px solid #e3e4f5;
+            box-sizing: border-box;
+        }
+
+        body.dark-mode .section-title::after {
+            background: linear-gradient(90deg, #0ea5e9, #0369a1);
+            border: none;
+        }
+
+        body.dark-mode .related-tools-title {
+            color: white;
+        }
+
+        body.dark-mode .related-tools-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        body.dark-mode .connected-tool-link {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .connected-tool-link:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+
+        body.dark-mode .feature-card {
+            background: var(--dark-card);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-top: 4px solid var(--blue-600);
+        }
+
+        body.dark-mode .feature-card:hover {
+            border-top-color: #0ea5e9;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--blue-600);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .feature-icon {
+            color: #0ea5e9;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .feature-title {
+            color: var(--dark-text);
+        }
+
+        /* How to Use Section */
+        .how-to-section {
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        body.dark-mode .steps {
+            background: var(--dark-card);
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            bottom: -2rem;
+            width: 2px;
+            background: rgba(37, 99, 235, 0.1);
+            z-index: 1;
+        }
+
+        body.dark-mode .step::before {
+            background: rgba(14, 165, 233, 0.1);
+        }
+
+        .step:last-child::before {
+            display: none;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            z-index: 2;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        body.dark-mode .step-number {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .step-content h3 {
+            color: var(--dark-text);
+        }
+
+        /* === REDESIGNED ARTICLE SECTION === */
+        .article-section {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.8rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            border-left: 4px solid var(--blue-600);
+        }
+
+        body.dark-mode .article-section {
+            background: var(--dark-card);
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .article-header {
+            border-bottom-color: rgba(14, 165, 233, 0.1);
+        }
+
+        .article-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        body.dark-mode .article-badge {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        body.dark-mode .article-title {
+            color: var(--dark-text);
+        }
+
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        body.dark-mode .article-subtitle {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        /* Article Single Column Container */
+        .article-single-content {
+            display: block;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .article-single-content {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+        }
+
+        .article-intro {
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 3px solid var(--blue-600);
+        }
+
+        body.dark-mode .article-intro {
+            background: rgba(14, 165, 233, 0.05);
+            border-left: 3px solid #0ea5e9;
+        }
+
+        .article-intro p {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin: 1.2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 0.8rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .stat-card {
+            background: rgba(14, 165, 233, 0.08);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blue-600);
+            margin-bottom: 0.2rem;
+        }
+
+        body.dark-mode .stat-value {
+            color: #0ea5e9;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        body.dark-mode .stat-label {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 1.8rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .section-header {
+            border-bottom-color: rgba(14, 165, 233, 0.1);
+        }
+
+        .section-icon {
+            color: var(--blue-600);
+            font-size: 1.2rem;
+        }
+
+        body.dark-mode .section-icon {
+            color: #0ea5e9;
+        }
+
+        .section-title-sm {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--light-text);
+            margin: 0;
+        }
+
+        body.dark-mode .section-title-sm {
+            color: var(--dark-text);
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .section-content {
+            color: var(--dark-text);
+        }
+
+        .section-content p {
+            margin-bottom: 0.8rem;
+            font-size: 1.02rem;
+        }
+
+        .section-content ul,
+        .section-content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* Subheadings in content */
+        .content-subheading {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--blue-600);
+            margin: 1.5rem 0 0.8rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .content-subheading {
+            color: #0ea5e9;
+            border-bottom-color: rgba(14, 165, 233, 0.1);
+        }
+
+        /* Tips Box */
+        .tips-box {
+            background: rgba(37, 99, 235, 0.08);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 3px solid var(--blue-600);
+        }
+
+        body.dark-mode .tips-box {
+            background: rgba(14, 165, 233, 0.08);
+            border-left: 3px solid #0ea5e9;
+        }
+
+        .tips-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--blue-600);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        body.dark-mode .tips-header {
+            color: #0ea5e9;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tips-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tips-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--blue-600);
+            font-weight: bold;
+        }
+
+        body.dark-mode .tips-list li:before {
+            color: #0ea5e9;
+        }
+
+        /* Article Image - Compact */
+.article-image-compact {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .article-image-compact {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.article-image-compact img {
+    width: 100%;
+    height: 180px; /* Default height for mobile */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.article-image-compact img:hover {
+    transform: scale(1.05);
+}
+
+/* Desktop styles - 300px height */
+@media (min-width: 768px) {
+    .article-image-compact img {
+        height: 300px;
+    }
+}
+
+/* Optional: Adjust for very large screens */
+@media (min-width: 1200px) {
+    .article-image-compact img {
+        height: 350px; /* Slightly taller for large desktop */
+    }
+}
+
+        /* Platform Cards */
+        .platform-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 6px;
+            padding: 0.6rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .platform-card {
+            background: rgba(14, 165, 233, 0.08);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.15);
+        }
+
+        .platform-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .platform-name {
+            color: var(--dark-text);
+        }
+
+        .platform-limit {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        body.dark-mode .platform-limit {
+            color: rgba(230, 238, 248, 0.7);
+        }
+
+        .platform-details {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.2rem;
+        }
+
+        body.dark-mode .platform-details {
+            color: rgba(230, 238, 248, 0.6);
+        }
+
+        /* See More Button */
+     .see-more-btn {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.8rem 2rem;
+    background: var(--blue-600);
+    color: white;
+    border: 1px solid #ffffff; /* White border for light mode */
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    max-width: 200px;
+}
+
+body.dark-mode .see-more-btn {
+    background: #0ea5e9;
+    border: none; /* Remove border in dark mode */
+}
+
+.see-more-btn:hover {
+    background: var(--blue-700);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+body.dark-mode .see-more-btn:hover {
+    background: #0284c7;
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+}
+
+.see-more-content {
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.see-more-content:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+        /* Final Insight Box */
+        .final-insight {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--blue-600);
+            font-size: 1.05rem;
+        }
+
+        body.dark-mode .final-insight {
+            background: rgba(14, 165, 233, 0.05);
+            border-left: 3px solid #0ea5e9;
+        }
+
+        .final-insight strong {
+            color: var(--blue-600);
+        }
+
+        body.dark-mode .final-insight strong {
+            color: #0ea5e9;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-item {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            outline: none;
+        }
+
+        body.dark-mode .faq-item {
+            background: var(--dark-card);
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Theme-colored stroke on focus */
+        .faq-item:focus {
+            outline: 2px solid var(--blue-600);
+            outline-offset: 2px;
+        }
+
+        body.dark-mode .faq-item:focus {
+            outline: 2px solid #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+
+        .faq-question {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: var(--transition);
+            color: var(--light-text);
+            outline: none;
+        }
+
+        body.dark-mode .faq-question {
+            color: var(--dark-text);
+        }
+
+        .faq-question:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        body.dark-mode .faq-question:hover {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .faq-answer {
+            color: var(--dark-text);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        .faq-item.active .faq-question {
+            background: rgba(37, 99, 235, 0.05);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .faq-item.active .faq-question {
+            background: rgba(14, 165, 233, 0.05);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .faq-icon {
+            transition: transform 0.4s ease;
+            color: var(--blue-600);
+        }
+
+        body.dark-mode .faq-icon {
+            color: #0ea5e9;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Troubleshooting Section */
+        .troubleshooting-section {
+            margin-bottom: 3rem;
+        }
+
+        .troubleshooting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .hero-text {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .hero-text h1,
+        .hero-text .tagline {
+            text-align: center;
+            margin: 0;
+        }
+
+        .troubleshooting-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .troubleshooting-card {
+            background: var(--dark-card);
+        }
+
+        .troubleshooting-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .troubleshooting-card h3 {
+            color: var(--blue-600);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark-mode .troubleshooting-card h3 {
+            color: #0ea5e9;
+        }
+
+        /* About Section */
+        .about-section {
+            margin-bottom: 3rem;
+        }
+
+        .about-content {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .about-content {
+            background: var(--dark-card);
+        }
+
+        /* Lazy loading animation styles */
+        .lazy-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .lazy-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation for numbers */
+        @keyframes countUp {
+            from {
+                transform: translateY(10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .counting {
+            animation: countUp 0.5s ease-out;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .article-section, .steps, .about-content {
+                padding: 1.2rem;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .step::before {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                align-self: flex-start;
+            }
+        }
+
+        /* Light mode link color */
+        .article-section a {
+            color: #2563ea;
+            text-decoration: none;
+            transition: 0.2s ease;
+            font-weight: 500;
+        }
+
+        .article-section a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* Dark mode link color */
+        body.dark-mode .article-section a {
+            color: #10a5e7;
+        }
+
+        body.dark-mode .article-section a:hover {
+            color: #17b8ff;
+            text-decoration: underline;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #2563ea;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.85);
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.6, 0.4, 1);
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #2563ea;
+            color: #ffffff;
+            transform: scale(1.08);
+        }
+
+        body.dark-mode .back-to-top {
+            background: #0ea5e9;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        body.dark-mode .back-to-top:hover {
+            background: #0ea5e9;
+            color: #ffffff;
+            transform: scale(1.08);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .back-to-top svg {
+            stroke: currentColor;
+        }
+        /* ============================================
+   TOOLIVO METADATA VIEWER TOOL - CSS SECTION
+   ============================================ */
+
+/* === Tool Section === */
+.tool-section {
+    background: var(--light-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+
+body.dark-mode .tool-section {
+    background: var(--dark-card);
+}
+
+/* === Main Content Grid === */
+.tool-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.3rem; /* ✅ Reduced padding as requested */
+}
+
+@media (min-width: 1024px) {
+    .tool-main {
+        grid-template-columns: 1fr 1.5fr;
+    }
+}
+
+/* === Upload Card === */
+.upload-card {
+    background: var(--light-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+body.dark-mode .upload-card {
+    background: var(--dark-card);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+    padding: 0.8rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body.dark-mode .card-header {
+    background: linear-gradient(135deg, #0ea5e9, #0369a1);
+}
+
+.card-header h2 {
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+body.dark-mode .card-header h2 {
+    color: white;
+}
+
+.card-header h2 i {
+    font-size: 1.2rem;
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+/* === Upload Area === */
+.upload-area {
+    border: 2px dashed var(--blue-600);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: rgba(37, 99, 235, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; /* ✅ Reduced from 250px for better desktop compactness */
+}
+
+@media (min-width: 1024px) {
+    .upload-area {
+        min-height: 200px; /* Explicitly set for desktop */
+    }
+}
+
+body.dark-mode .upload-area {
+    border-color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.upload-area:hover {
+    border-color: var(--blue-700);
+    background: rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .upload-area:hover {
+    border-color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.1);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--blue-600);
+    background: rgba(37, 99, 235, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.dark-mode .upload-icon {
+    color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.1);
+}
+
+.upload-area h3 {
+    margin-bottom: 0.5rem;
+    color: var(--light-text);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+body.dark-mode .upload-area h3 {
+    color: var(--dark-text);
+}
+
+.upload-area p {
+    color: var(--light-text);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+body.dark-mode .upload-area p {
+    color: var(--dark-text);
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    color: inherit;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+    color: white;
+}
+
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #0ea5e9, #0369a1);
+    color: white;
+}
+
+/* ✅ CRITICAL FIX: Prevent "Browse Files" from turning white on tap/focus */
+.btn-primary:focus,
+.btn-primary:active {
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-800)) !important;
+    color: white !important;
+    outline: none;
+    box-shadow: none;
+}
+
+body.dark-mode .btn-primary:focus,
+body.dark-mode .btn-primary:active {
+    background: linear-gradient(135deg, #0ea5e9, #0369a1) !important;
+    color: white !important;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--blue-700), var(--blue-900));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+body.dark-mode .btn-primary:hover {
+    background: linear-gradient(135deg, #0369a1, #0ea5e9);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--blue-600);
+}
+
+body.dark-mode .btn-secondary {
+    background: rgba(14, 165, 233, 0.1);
+    color: #0ea5e9;
+}
+
+.btn-secondary:hover {
+    background: rgba(37, 99, 235, 0.15);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: rgba(14, 165, 233, 0.15);
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 6px;
+}
+
+/* === File List === */
+.file-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    border-radius: 8px;
+    background: var(--light-card);
+}
+
+body.dark-mode .file-list {
+    border: 1px solid rgba(14, 165, 233, 0.1);
+    background: var(--dark-card);
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(37, 99, 235, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .file-item {
+    border-bottom: 1px solid rgba(14, 165, 233, 0.05);
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-item:hover {
+    background: rgba(37, 99, 235, 0.05);
+}
+
+body.dark-mode .file-item:hover {
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.file-item.active {
+    background: rgba(37, 99, 235, 0.08);
+    border-left: 4px solid var(--blue-600);
+}
+
+body.dark-mode .file-item.active {
+    background: rgba(14, 165, 233, 0.08);
+    border-left: 4px solid #0ea5e9;
+}
+
+.file-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+    border-radius: 8px;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+body.dark-mode .file-icon {
+    background: linear-gradient(135deg, #0ea5e9, #0369a1);
+}
+
+.file-info {
+    flex: 1;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.file-name {
+    font-weight: 600;
+    color: var(--light-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+}
+
+body.dark-mode .file-name {
+    color: var(--dark-text);
+}
+
+.file-details {
+    font-size: 0.8rem;
+    color: var(--light-text);
+    opacity: 0.7;
+    display: flex;
+    gap: 0.75rem;
+}
+
+body.dark-mode .file-details {
+    color: var(--dark-text);
+}
+
+.file-size {
+    font-weight: 500;
+}
+
+.file-type {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--blue-600);
+    background: rgba(37, 99, 235, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+body.dark-mode .file-type {
+    color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.1);
+}
+
+/* === Empty States === */
+.empty-state {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--light-text);
+    opacity: 0.5;
+}
+
+body.dark-mode .empty-state {
+    color: var(--dark-text);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
+body.dark-mode .empty-state i {
+    opacity: 0.2;
+}
+
+.empty-state p {
+    font-size: 1rem;
+}
+
+/* === Metadata Viewer Card === */
+.metadata-card {
+    background: var(--light-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    height: 100%;
+}
+
+body.dark-mode .metadata-card {
+    background: var(--dark-card);
+}
+
+/* === Tabs === */
+.tabs-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+    background: var(--light-card);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+body.dark-mode .tabs-container {
+    background: var(--dark-card);
+}
+
+.tabs-header {
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+    padding: 1rem;
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+body.dark-mode .tabs-header {
+    background: linear-gradient(135deg, #0ea5e9, #0369a1);
+}
+
+.tabs-header::-webkit-scrollbar {
+    display: none;
+}
+
+.tab {
+    flex: 0 0 auto;
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    gap: 4px;
+    text-align: center;
+}
+
+.tab i {
+    font-size: 1.1rem;
+}
+
+.tab:hover {
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tab.active {
+    background: white;
+    color: var(--blue-800);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .tab.active {
+    background: white;
+    color: #0369a1;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Metadata Content === */
+.metadata-content {
+    padding: 1.5rem;
+}
+
+.metadata-group {
+    margin-bottom: 2rem;
+}
+
+.metadata-group:last-child {
+    margin-bottom: 0;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+}
+
+body.dark-mode .group-header {
+    border-bottom: 2px solid rgba(14, 165, 233, 0.1);
+}
+
+.group-header h3 {
+    color: var(--light-text);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+body.dark-mode .group-header h3 {
+    color: var(--dark-text);
+}
+
+.group-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 6px;
+    color: var(--blue-600);
+    font-size: 1rem;
+}
+
+body.dark-mode .group-icon {
+    background: rgba(14, 165, 233, 0.1);
+    color: #0ea5e9;
+}
+
+/* === Metadata Grid === */
+.metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .metadata-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.metadata-item {
+    background: var(--light-card);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .metadata-item {
+    background: var(--dark-card);
+    border: 1px solid rgba(14, 165, 233, 0.1);
+}
+
+.metadata-item:hover {
+    border-color: var(--blue-600);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+body.dark-mode .metadata-item:hover {
+    border-color: #0ea5e9;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+}
+
+.metadata-label {
+    font-size: 0.75rem;
+    color: var(--light-text);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body.dark-mode .metadata-label {
+    color: var(--dark-text);
+}
+
+.metadata-value {
+    font-size: 0.95rem;
+    color: var(--light-text);
+    font-weight: 500;
+    word-break: break-word;
+    min-height: 24px;
+}
+
+body.dark-mode .metadata-value {
+    color: var(--dark-text);
+}
+
+.metadata-value.empty {
+    color: var(--light-text);
+    opacity: 0.5;
+    font-style: italic;
+}
+
+body.dark-mode .metadata-value.empty {
+    color: var(--dark-text);
+}
+
+/* === Copy Button === */
+.copy-btn {
+    background: none;
+    border: none;
+    color: var(--light-text);
+    opacity: 0.5;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .copy-btn {
+    color: var(--dark-text);
+}
+
+.copy-btn:hover {
+    background: var(--blue-600);
+    color: white;
+    opacity: 1;
+}
+
+body.dark-mode .copy-btn:hover {
+    background: #0ea5e9;
+    color: white;
+}
+
+.copy-btn.copied {
+    background: #10b981;
+    color: white;
+    opacity: 1;
+}
+
+body.dark-mode .copy-btn.copied {
+    background: #10b981;
+    color: white;
+}
+
+/* === Search Bar === */
+.search-container {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--light-card);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+body.dark-mode .search-container {
+    background: var(--dark-card);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 2px solid rgba(37, 99, 235, 0.1);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background: var(--light-card);
+    color: var(--light-text);
+}
+
+body.dark-mode .search-input {
+    border: 2px solid rgba(14, 165, 233, 0.1);
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+body.dark-mode .search-input:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-text);
+    opacity: 0.5;
+}
+
+body.dark-mode .search-icon {
+    color: var(--dark-text);
+}
+
+/* === Raw Metadata === */
+.raw-metadata {
+    background: #1a1a1a;
+    color: #f0f0f0;
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-height: 500px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+body.dark-mode .raw-metadata {
+    background: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid rgba(14, 165, 233, 0.1);
+}
+
+.raw-metadata::-webkit-scrollbar {
+    width: 8px;
+}
+
+.raw-metadata::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+
+body.dark-mode .raw-metadata::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.raw-metadata::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+body.dark-mode .raw-metadata::-webkit-scrollbar-thumb {
+    background: rgba(14, 165, 233, 0.2);
+}
+
+.raw-metadata::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+body.dark-mode .raw-metadata::-webkit-scrollbar-thumb:hover {
+    background: rgba(14, 165, 233, 0.3);
+}
+
+/* === Status Indicators === */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.status-available {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+body.dark-mode .status-available {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.status-unavailable {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+body.dark-mode .status-unavailable {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+/* === Utility Classes === */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-mono {
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+}
+
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
+.ml-2 { margin-left: 1rem; }
+.mr-2 { margin-right: 1rem; }
+
+/* === Loading Spinner === */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(37, 99, 235, 0.2);
+    border-top-color: var(--blue-600);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+body.dark-mode .spinner {
+    border: 2px solid rgba(14, 165, 233, 0.2);
+    border-top-color: #0ea5e9;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .tool-header h1 {
+        font-size: 2rem;
+    }
+    
+    .tool-main {
+        padding: 0.3rem;
+    }
+    
+    .upload-area {
+        padding: 2rem 1rem;
+        min-height: 200px;
+    }
+    
+    .upload-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5rem;
+    }
+    
+    .tabs-header {
+        padding: 0.75rem;
+    }
+    
+    .tab {
+        min-width: 80px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .tab i {
+        font-size: 1rem;
+    }
+    
+    .metadata-content {
+        padding: 1rem;
+    }
+    
+    .metadata-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === Scrollbar Styling === */
+.file-list::-webkit-scrollbar,
+.raw-metadata::-webkit-scrollbar {
+    width: 6px;
+}
+
+.file-list::-webkit-scrollbar-track {
+    background: rgba(37, 99, 235, 0.05);
+    border-radius: 3px;
+}
+
+body.dark-mode .file-list::-webkit-scrollbar-track {
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.file-list::-webkit-scrollbar-thumb {
+    background: rgba(37, 99, 235, 0.2);
+    border-radius: 3px;
+}
+
+body.dark-mode .file-list::-webkit-scrollbar-thumb {
+    background: rgba(14, 165, 233, 0.2);
+}
+
+.file-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(37, 99, 235, 0.3);
+}
+
+body.dark-mode .file-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(14, 165, 233, 0.3);
+}
+
+/* === Input File Hidden === */
+.file-input-hidden {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+    <ul>
+        <li><a href="https://toolivo.github.io/tool/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="https://toolivo.github.io/tool/">Tools</a></li>
+        <li aria-current="page">Metadata Viewer</li>
+    </ul>
+</nav>
+    <!-- Compact Menu Card -->
+    <div class="menu-card" id="menuCard">
+        <div class="menu-header">
+            <h3>Menu</h3>
+            <button class="menu-close" id="menuClose" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+      <ul class="menu-list">
+
+    <!-- Home -->
+    <li class="menu-item">
+        <a href="index.html" class="menu-link">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Home
+        </a>
+    </li>
+
+    <!-- Tools -->
+    <li class="menu-item">
+        <a href="https://toolivo.github.io/tool/" class="menu-link">
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+</svg>
+            Tools
+        </a>
+    </li>
+
+    <!-- Blog -->
+    <li class="menu-item">
+        <a href="blog.html" class="menu-link">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 19h16V5H4v14z"/>
+                <line x1="8" y1="9" x2="16" y2="9"/>
+                <line x1="8" y1="13" x2="16" y2="13"/>
+            </svg>
+            Blog
+        </a>
+    </li>
+
+    <!-- Community -->
+    <li class="menu-item">
+        <a href="community.html" class="menu-link">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Community
+        </a>
+    </li>
+
+    <!-- Request a Tool -->
+    <li class="menu-item">
+        <a href="request-a-tool.html" class="menu-link">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 20h4l10.6-10.6a3 3 0 1 0-4.2-4.2L4 16v4z"/>
+                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/>
+            </svg>
+            Request a Tool
+        </a>
+    </li>
+
+    <!-- About Us -->
+    <li class="menu-item">
+        <a href="about-us.html" class="menu-link">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            About Us
+        </a>
+    </li>
+
+    <!-- Contact Us -->
+    <li class="menu-item">
+        <a href="contact-us.html" class="menu-link">
+            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Contact Us
+        </a>
+    </li>
+
+</ul>
+    </div>
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- Header -->
+<header>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="logo-container">
+        <a href="https://toolivo.github.io/tool/">
+            <img 
+                src="https://toolivo.github.io/tool/toolivo-logo.webp"
+                alt="Toolivo Logo"
+                class="logo"
+                loading="lazy"
+            >
+        </a>
+    </div>
+    <!-- 👇 Placeholder to keep layout balanced -->
+    <div style="width: 48px;"></div>
+
+
+<!-- 👇 Fixed theme toggle — outside header, but visually in top-right -->
+<!-- 👇 Animated Theme Toggler -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/>
+        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/>
+        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span class="sr-only">Toggle theme</span>
+</button>
+</header>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+<div class="hero-text">
+  <h1>Metadata Viewer</h1>
+  <p class="tagline">View EXIF, GPS, camera settings & video metadata — instantly, privately, and for free.</p>
+</div>
+
+    <!-- Tool Section - Metadata Viewer -->
+<section class="tool-section" id="tool-section">
+    
+    
+    <div class="tool-main">
+        <!-- Left Column: File Upload & Selection -->
+        <div class="upload-card">
+            <div class="card-header">
+                <h2><i class="fas fa-upload"></i> Upload Files</h2>
+            </div>
+            <div class="card-content">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Drag & Drop Images & Videos</h3>
+                    <p>JPG, PNG, GIF, WebP, MP4, MOV, AVI supported</p>
+                    <button class="btn btn-primary" id="browseBtn">
+                        <i class="fas fa-folder-open"></i> Browse Files
+                    </button>
+                    <input type="file" id="fileInput" class="file-input-hidden" multiple accept="image/*,video/*">
+                </div>
+
+                <!-- File List -->
+                <div class="file-list" id="fileList">
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <p>No files uploaded yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Metadata Viewer -->
+        <div class="metadata-card">
+            <div class="card-header">
+                <h2><i class="fas fa-table"></i> Metadata Viewer</h2>
+            </div>
+            <div class="card-content">
+                <!-- Metadata Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs-header" id="metadataTabs">
+                        <div class="tab active" data-tab="general">
+                            <i class="fas fa-file-alt"></i>
+                            <span>General</span>
+                        </div>
+                        <div class="tab" data-tab="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Location</span>
+                        </div>
+                        <div class="tab" data-tab="device">
+                            <i class="fas fa-camera"></i>
+                            <span>Device</span>
+                        </div>
+                        <div class="tab" data-tab="media">
+                            <i class="fas fa-photo-video"></i>
+                            <span>Media Details</span>
+                        </div>
+                        <div class="tab" data-tab="technical">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Technical</span>
+                        </div>
+                        <div class="tab" data-tab="exif">
+                            <i class="fas fa-code"></i>
+                            <span>EXIF/XMP</span>
+                        </div>
+                        <div class="tab" data-tab="raw">
+                            <i class="fas fa-code-branch"></i>
+                            <span>Raw Data</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container hidden" id="searchContainer">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" 
+                               class="search-input" 
+                               id="searchInput" 
+                               placeholder="Search metadata keys and values...">
+                    </div>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="metadata-content" id="metadataContent">
+                    <!-- Content will be dynamically loaded here -->
+                    <div class="empty-state">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Upload an image or video to view its metadata</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+   <!-- Related Tools Section -->
+<section class="related-tools-section lazy-section">
+  <div class="related-tools-card">
+    <h3 class="related-tools-title">Try this next!</h3>
+    <p class="related-tools-description">
+      Remove hidden metadata from your files instantly — no upload required.
+    </p>
+
+    <a href="metadata-remover.html" class="related-tools-button">
+      <i class="fas fa-user-shield"></i> Metadata Remover
+    </a>
+
+    <p style="font-weight: bold; margin: 0; text-align: center;">or Explore more</p>
+
+    <a href="index.html" class="related-tools-button" style="margin-top: 0.5rem;">
+      <i class="fas fa-toolbox"></i> All Tools
+    </a>
+  </div>
+</section>
+   <!-- Features Section -->
+
+<section class="features-section lazy-section">
+  <h2 class="section-title">Key Features</h2>
+  <div class="features-grid">
+    
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-info-circle"></i></div>
+      <h3 class="feature-title">Full EXIF & Video Metadata</h3>
+      <p>View complete image and video metadata — including camera settings, GPS, timestamps, resolution, and codec info — from JPG, PNG, WebP, MP4, MOV, and more.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3 class="feature-title">100% Private & Local</h3>
+      <p>All processing happens in your browser. No uploads, no tracking, no servers — your files never leave your device.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-copy"></i></div>
+      <h3 class="feature-title">Copy, Export & Verify</h3>
+      <p>Instantly copy fields, export raw JSON, or verify authenticity and location consistency — ideal for journalists, photographers, and forensic workflows.</p>
+    </div>
+
+  </div>
+</section>
+    <!-- How to Use Section -->
+<section class="how-to-section lazy-section">
+  <h2 class="section-title">How to Use</h2>
+  <div class="steps">
+    
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Upload Your Media</h3>
+        <p>Drag and drop or select image (JPG, PNG, WebP) or video files (MP4, MOV, AVI). No uploads to servers — everything stays on your device.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>View Organized Metadata</h3>
+        <p>Instantly see EXIF, GPS, device info, timestamps, and technical details in clear tabs — including human-readable location data when available.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Verify or Audit</h3>
+        <p>Check authenticity, spot privacy risks (like hidden geotags), or compare metadata across files — all in one place.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Copy or Export</h3>
+        <p>Copy individual fields or export the full metadata as raw JSON — perfect for documentation, forensics, or archiving.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+ <!-- ARTICLE SECTION -->
+<section class="article-section">
+  <div class="article-header">
+    <div class="article-badge">
+      <i class="fas fa-info-circle"></i> Insight at a Glance
+    </div>
+    <h2 class="article-title">Toolivo Metadata Viewer – Free Online EXIF & Video Metadata Extractor</h2>
+    <p class="article-subtitle">
+      View, extract, and understand image and video metadata — instantly, accurately, and 100% free
+    </p>
+  </div>
+
+  <div class="article-single-content">
+
+    <!-- VISIBLE CONTENT -->
+    <div class="visible-content">
+
+      <div class="article-intro">
+        <p>You shouldn't need specialized software, cloud uploads, or technical expertise just to see what's embedded in your photos and videos. Toolivo Metadata Viewer was built to solve a common yet overlooked need: accessing the rich context hidden inside your media files — from camera settings and GPS coordinates to creation timestamps and device info — all in one intuitive interface.</p>
+        <p>There's no installation, no account creation, and no data leaves your device. Everything runs client-side in your browser. Whether you're verifying photo authenticity, auditing video assets, or simply curious about when and where a file was captured, Toolivo gives you full transparency — with zero compromises.</p>
+      </div>
+
+      <div class="article-image-compact">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJVjQOjQtdFyYehycOQywWco10C7w0ichSra29f2nGuzKrDk5twAEplNrAnb7M_ZBjzehQLi1LYqCmpjpJUepYQPhl7CJiGF6ZmHrEBtMaqMPVIHIFEorZyKyDuDBk-rRZPcWi3KvQcmKUh_NnDWNgQseHq-VZk_Ql6dREzj5ru3tKZQ/s1600/1image.webp"
+          alt="Toolivo Metadata Viewer interface"
+          loading="lazy"
+        >
+      </div>
+
+      <p class="stats-intro">No gimmicks. No limitations. Just a transparent, user-first approach to media metadata — backed by these core principles:</p>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-value">No</div><div class="stat-label">Uploads or Servers</div></div>
+        <div class="stat-card"><div class="stat-value">All</div><div class="stat-label">File Types Supported</div></div>
+        <div class="stat-card"><div class="stat-value">Free</div><div class="stat-label">Forever</div></div>
+        <div class="stat-card"><div class="stat-value">100%</div><div class="stat-label">Private & Local</div></div>
+      </div>
+
+      <div class="content-section">
+        <div class="section-header">
+          <i class="fas fa-camera-retro section-icon"></i>
+          <h3 class="section-title-sm">Beyond the Pixel: See What Your Files Know</h3>
+        </div>
+        <div class="section-content">
+          <p>Metadata isn't just technical clutter — it's context. A photo's EXIF data can confirm authenticity, reconstruct timelines, or reveal shooting conditions. Video metadata helps track provenance, duration, and resolution integrity. Toolivo surfaces this intelligence without complexity.</p>
+
+          <p>With one tool, you can:</p>
+
+          <ul class="format-list">
+            <li><strong>View image metadata online</strong> — inspect EXIF, GPS, device, and XMP data.</li>
+            <li><strong>Read video metadata online</strong> — access duration, dimensions, creation date, and codec info.</li>
+            <li><strong>Extract metadata</strong> — copy or export full datasets.</li>
+            <li><strong>Check image EXIF online</strong> — drag, drop, and explore instantly.</li>
+            <li><strong>Compare and verify</strong> — assess consistency across files.</li>
+          </ul>
+
+          <!-- READ MORE BUTTON -->
+          <button class="see-more-btn" id="see-more-btn">
+            Read More <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- HIDDEN CONTENT (FULL REMAINDER) -->
+    <div class="see-more-content" id="see-more-content" hidden>
+
+      <p>Whether you're a photographer verifying shot settings, a journalist validating sources, or a developer debugging asset pipelines, Toolivo serves as a trusted <strong>free metadata viewer</strong> — fast, accurate, and format-agnostic.</p>
+
+      <div class="content-section">
+        <div class="section-header">
+          <i class="fas fa-map-marker-alt section-icon"></i>
+          <h3 class="section-title-sm">Location, Time & Device — Verified Instantly</h3>
+        </div>
+        <div class="section-content">
+          <p>One of the most powerful — and often sensitive — parts of image metadata is geolocation. Toolivo decodes GPS coordinates into human-readable latitude/longitude <em>and</em> displays them in a dedicated map-ready format, while clearly indicating when location data is present (or absent).</p>
+          <p>Paired with timestamps (capture time, digitization time, modification time) and device fingerprints (camera make/model, lens, firmware), you gain a complete audit trail — essential for legal, journalistic, or archival workflows.</p>
+          <div class="tips-box">
+            <div class="tips-header">
+              <i class="fas fa-search"></i>
+              <span>When Metadata Matters</span>
+            </div>
+            <ul class="tips-list">
+              <li>→ <strong>Authenticity check?</strong> Verify that EXIF timestamps align with claimed events — and that GPS data matches expected locations.</li>
+              <li>→ <strong>Privacy audit?</strong> Spot unintended location leaks before sharing files externally.</li>
+              <li>→ <strong>Asset management?</strong> Sort or tag images by camera model, focal length, or ISO for consistent post-processing.</li>
+              <li>→ <strong>Forensic review?</strong> Cross-reference file modification dates with creation dates to detect edits or transfers.</li>
+            </ul>
+          </div>
+          <p>This isn't just data viewing — it's due diligence, enabled in seconds.</p>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="section-header">
+          <i class="fas fa-shield-alt section-icon"></i>
+          <h3 class="section-title-sm">Truly Private. Truly Local.</h3>
+        </div>
+        <div class="section-content">
+          <p>Toolivo operates on a foundational principle: your files stay yours. No data is uploaded. No analytics track your usage. Parsing happens entirely in your browser using battle-tested libraries like <code>exif-js</code>.</p>
+          <p>That means:</p>
+          <ul class="checklist">
+            <li>✅ Instant results — no network latency or server queues</li>
+            <li>✅ Full fidelity — raw EXIF, XMP, and GPS data preserved without truncation</li>
+            <li>✅ Safe for sensitive content — ideal for legal, medical, or journalistic use cases</li>
+            <li>✅ No signups, no ads, no "premium" paywalls — ever</li>
+          </ul>
+          <div class="article-image-compact">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhED2Rsvwc5XuzubD8O6T2FMMdsQn4tCpGj0k2-SFLyItIxNrPpiGViEZer91nPv71xGYbbKgpQskZ2kWg4QhvyHFul7xCSblAX5vg8bNGvsfxl7cAYtVfRCj64_QbhXxbggV3CP6lHa-Cr7ElhFaCV2u0tU1THoNK9N9_V_yA5vPmqfQ/s1600/2image.webp"
+              alt="Toolivo Metadata Viewer: 100% local processing with no uploads. Securely view EXIF, GPS, and technical metadata from images and videos private, instant, and browser-based"
+              loading="lazy"
+            >
+          </div>
+          <p>In an era where "free" tools often harvest metadata behind the scenes, Toolivo stands apart: a <strong>free EXIF info viewer</strong>, an <strong>online video metadata viewer</strong>, and a universal <strong>metadata extractor online</strong> — all private, all local, all transparent.</p>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="section-header">
+          <i class="fas fa-cogs section-icon"></i>
+          <h3 class="section-title-sm">How It Works: Extract Metadata in 3 Steps</h3>
+        </div>
+        <div class="section-content">
+          <ol class="step-list">
+            <li><strong>Upload or Drag & Drop.</strong> Add images (JPG, PNG, WebP, etc.) or videos (MP4, MOV) — no format restrictions.</li>
+            <li><strong>Explore Instantly.</strong> Metadata auto-loads into organized tabs: General, Location, Device, Technical, EXIF/XMP, and Raw — searchable and copy-enabled.</li>
+            <li><strong>Use What You Need.</strong> Copy individual fields, export raw JSON, or simply verify details — no forced downloads or watermarks.</li>
+          </ol>
+          <p>That's it. No tutorials. No APIs. No privacy trade-offs.</p>
+          <p>Need to <strong>view image metadata free</strong> for a client deliverable? Done in seconds.<br>
+            Verifying geotags before publishing? GPS data is clearly flagged and formatted.<br>
+            Auditing a photo archive? Switch between files instantly — Toolivo retains full context without reloading.</p>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="section-header">
+          <i class="fas fa-users section-icon"></i>
+          <h3 class="section-title-sm">Trusted Across Professions</h3>
+        </div>
+        <div class="section-content">
+          <p>Toolivo serves high-stakes, real-world needs:</p>
+          <div class="use-case-grid">
+            <div class="use-case-card">
+              <div class="use-case-icon"><i class="fas fa-camera"></i></div>
+              <h4>Photographers</h4>
+              <p>Review shooting parameters post-capture — aperture, ISO, focal length — to refine technique or replicate settings.</p>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon"><i class="fas fa-newspaper"></i></div>
+              <h4>Journalists</h4>
+              <p>Validate the origin and integrity of visual evidence before publication — a critical step in digital verification.</p>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon"><i class="fas fa-file-contract"></i></div>
+              <h4>Legal & Forensics</h4>
+              <p>Document chain of custody via timestamps and device IDs — admissible, unaltered metadata, extracted client-side.</p>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon"><i class="fas fa-mobile-alt"></i></div>
+              <h4>Mobile Users</h4>
+              <p>Works flawlessly on phones — inspect EXIF data from photos taken moments ago, before sharing.</p>
+            </div>
+          </div>
+          <p>Toolivo isn't a photo editor or cloud storage service. It's a precision instrument for one purpose: revealing the hidden story inside your files — as a reliable <strong>image EXIF reader online</strong> and <strong>video metadata reader</strong>, it delivers exactly what professionals need, nothing more.</p>
+          <blockquote class="testimonial">
+            <p>"I've used half a dozen 'EXIF viewers' — most push upsells or require downloads. Toolivo just works. It's now my first stop for verification."<br><cite>— Lena M., Documentary Filmmaker</cite></p>
+          </blockquote>
+          <div class="final-insight">
+            <strong>Final Thought:</strong> Metadata is evidence. It's context. It's credibility. With Toolivo Metadata Viewer, accessing that insight is as simple as opening a file — no expertise required, no privacy sacrificed. Just clarity, control, and confidence — exactly as a <strong>free metadata viewer</strong> should be.
+          </div>
+          <div class="cta-box">
+            <p>Curious what your files know? Find out — instantly.</p>
+            <a href="https://toolivo.github.io/tool/metadata-viewer.html" class="btn btn-primary">
+              <i class="fas fa-info-circle"></i> View Your Image & Video Metadata — Free & Private
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section lazy-section">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <!-- First 3 visible by default -->
+    <div class="faq-group" id="faq-initial">
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Are my files uploaded or stored anywhere?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>No. All metadata parsing happens locally in your browser using libraries like <code>exif-js</code>. Your images and videos never leave your device — no uploads, no servers, no tracking.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>What types of files does it support?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Images: JPEG, PNG, WebP (with EXIF/XMP/GPS).<br>Videos: MP4, MOV, AVI (basic metadata like duration, resolution, creation date). Support depends on browser capabilities and embedded data.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Can I see GPS location data?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes — if your photo contains geotags, Toolivo displays them as latitude/longitude coordinates and clearly indicates when location data is present (or absent). No map rendering, but values are copy-ready for external use.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden extra FAQs -->
+    <div class="faq-group" id="faq-extra" hidden>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Why is some metadata missing from my file?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Not all devices or apps embed full EXIF data. Screenshots, social media downloads, or edited files often strip metadata. Toolivo shows everything that’s actually embedded — nothing is hidden or filtered.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Can I export or save the metadata?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. You can copy individual fields or export the full dataset as raw JSON for documentation, forensic reports, or archival purposes — no watermarks or restrictions.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Does it work on mobile phones?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. Toolivo works on iOS and Android browsers. You can inspect EXIF data from photos taken moments ago — ideal for quick privacy checks before sharing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Is Toolivo really free — forever?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. No signups, no ads, no premium tiers. It’s a public utility for transparency — built for journalists, photographers, and privacy-conscious users.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question">
+          <span>Can it detect if a photo has been edited?</span>
+          <span class="faq-icon"><i class="fas fa-plus"></i></span>
+        </div>
+        <div class="faq-answer">
+          <p>Indirectly. If modification dates differ from creation dates, or if software tags (e.g., “Photoshop”) appear in XMP data, those clues may indicate editing. However, Toolivo doesn’t perform deep forensic analysis — it only displays what’s embedded.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- See More Button -->
+    <button class="see-more-btn" id="faq-see-more">
+      See more FAQs <i class="fas fa-chevron-down"></i>
+    </button>
+  </div>
+</section>
+
+<!-- Troubleshooting Section -->
+<section class="troubleshooting-section lazy-section">
+  <h2 class="section-title">Troubleshooting</h2>
+  <div class="troubleshooting-grid">
+    
+    <div class="troubleshooting-card">
+      <h3><i class="fas fa-exclamation-triangle"></i> No metadata appears for my image</h3>
+      <p>The file may have had its EXIF data stripped (common with screenshots, social media downloads, or edited images). Try a photo directly from your camera — those usually contain full metadata.</p>
+    </div>
+
+    <div class="troubleshooting-card">
+      <h3><i class="fas fa-video"></i> Video metadata is limited</h3>
+      <p>Browser-based video metadata extraction is restricted for security reasons. Only basic fields (duration, dimensions, creation time) are available — not codec details or advanced tags.</p>
+    </div>
+
+    <div class="troubleshooting-card">
+      <h3><i class="fas fa-lock"></i> GPS data isn’t showing</h3>
+      <p>Many phones disable geotagging by default. Check your camera app settings. Also, iOS and Android often remove location data when sharing via messaging apps — use “original” file transfer methods.</p>
+    </div>
+
+  </div>
+</section>
+<!-- About Section -->
+<section class="about-section lazy-section">
+  <h2 class="section-title">About Toolivo Metadata Viewer</h2>
+  <div class="about-content">
+    <p>Toolivo Metadata Viewer is a free, privacy-first tool that reveals the hidden context inside your photos and videos. Built for journalists, photographers, developers, and privacy-conscious users, it extracts EXIF, GPS, device, and technical metadata — instantly and entirely in your browser.</p>
+
+    <p>Whether you’re verifying the authenticity of visual evidence, auditing geotags before sharing, or debugging media assets in a pipeline, Toolivo gives you full transparency without compromise. No signups. No uploads. No tracking.</p>
+
+    <p>All processing happens locally on your device. Your files never leave your computer — making it safe for sensitive, legal, or forensic use. As part of the Toolivo suite, it embodies a simple belief: you should always know what your files know.</p>
+  </div>
+</section>
+
+    <!-- Share with Friends Section -->
+    <section class="social-sharing">
+        <h3>Share Toolivo Metadata Viewer with your friends</h3>
+        <div class="social-icons" id="socialIcons">
+            <!-- Social icons will be dynamically loaded -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="comprehensive-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faqs.html">FAQ</a></li>
+                    <li><a href="request-a-tool.html">Request a Tool</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="https://toolivo.github.io/blogs/">Blog</a></li>
+                    <li><a href="updates.html">Updates</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Toolivo &copy; 2026 — All rights reserved</p>
+            <p class="creator-credit">Created with ❤️ by Mushfikur Riad</p>
+        </div>
+    </footer>
+    <!-- Back-to-top button -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+<script>
+    // === Menu Functionality ===
+    const menuToggle = document.getElementById('menuToggle');
+    const menuCard = document.getElementById('menuCard');
+    const menuClose = document.getElementById('menuClose');
+    const backdrop = document.getElementById('backdrop');
+
+    function openMenu() {
+        menuCard.classList.add('open');
+        backdrop.classList.add('visible');
+        menuToggle.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        menuCard.classList.remove('open');
+        backdrop.classList.remove('visible');
+        menuToggle.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', () => {
+        menuCard.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    menuClose.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+
+    // === Animated Theme Toggle Functionality ===
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Check for saved theme or system preference
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    const isDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+    async function toggleTheme() {
+        if (!document.startViewTransition) {
+            // Fallback for browsers without View Transitions API
+            const newTheme = !body.classList.contains('dark-mode');
+            applyTheme(newTheme);
+            return;
+        }
+
+        await document.startViewTransition(() => {
+            const newTheme = !body.classList.contains('dark-mode');
+            body.classList.toggle('dark-mode', newTheme);
+            localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+        }).ready;
+
+        // Create circular animation
+        const { top, left, width, height } = themeToggle.getBoundingClientRect();
+        const x = left + width / 2;
+        const y = top + height / 2;
+        const maxRadius = Math.hypot(
+            Math.max(left, window.innerWidth - left),
+            Math.max(top, window.innerHeight - top)
+        );
+
+        document.documentElement.animate(
+            {
+                clipPath: [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${maxRadius}px at ${x}px ${y}px)`,
+                ],
+            },
+            {
+                duration: 400,
+                easing: 'ease-in-out',
+                pseudoElement: '::view-transition-new(root)',
+            }
+        );
+    }
+
+    function applyTheme(isDarkMode) {
+        body.classList.toggle('dark-mode', isDarkMode);
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }
+
+    // Apply theme on page load
+    applyTheme(isDark);
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // === Social Icons Functionality ===
+    const socialIconsContainer = document.getElementById('socialIcons');
+    
+    // Social icons data
+    const socialIconsData = [
+        { 
+            name: 'x-twitter', 
+            label: 'Share on X',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>`
+        },
+        { 
+            name: 'linkedin', 
+            label: 'Share on LinkedIn',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+            </svg>`
+        },
+        { 
+            name: 'facebook', 
+            label: 'Share on Facebook',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>`
+        },
+        { 
+            name: 'whatsapp', 
+            label: 'Share on WhatsApp',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893 0-3.189-1.248-6.189-3.515-8.444"/>
+            </svg>`
+        },
+        { 
+            name: 'telegram', 
+            label: 'Share on Telegram',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+            </svg>`
+        },
+        { 
+            name: 'instagram', 
+            label: 'Share on Instagram',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 7A2.5 2.5 0 1 1 14.5 12 2.5 2.5 0 0 1 12 14.5zm4.75-8.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/>
+            </svg>`
+        },
+        { 
+            name: 'reddit', 
+            label: 'Share on Reddit',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+            </svg>`
+        },
+        { 
+            name: 'pinterest', 
+            label: 'Share on Pinterest',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+            </svg>`
+        },
+        {
+            name: 'messenger',
+            label: 'Share on Messenger',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.49 2 2 6.2 2 11.15c0 2.92 1.6 5.55 4.07 7.34V22l3.68-2.02c.99.28 2.07.43 3.25.43 5.51 0 10-4.2 10-9.26C23 6.2 17.51 2 12 2zm4.9 7.6-3.3 3.5-2.1-2.3-4.5 2.3 4.7-4.9 2.1 2.3 3.1-1.9z"/>
+            </svg>`
+        },
+        { 
+            name: 'email', 
+            label: 'Share via Email',
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>`
+        }
+    ];
+
+    // Function to load social icons
+    function loadSocialIcons() {
+        socialIconsData.forEach(icon => {
+            const socialIcon = document.createElement('a');
+            socialIcon.href = '#';
+            socialIcon.className = `social-icon ${icon.name}`;
+            socialIcon.setAttribute('aria-label', icon.label);
+            socialIcon.innerHTML = icon.svg;
+            
+            socialIconsContainer.appendChild(socialIcon);
+        });
+        
+        // Add event listeners to social icons after they're loaded
+        addSocialIconEventListeners();
+    }
+    
+    // Load social icons immediately when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSocialIcons();
+    });
+
+    // Social Media Sharing Functionality with Click Effects
+    function addSocialIconEventListeners() {
+        const socialIcons = document.querySelectorAll('.social-icon');
+        
+        socialIcons.forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Add click animation
+                icon.classList.add('clicked');
+                setTimeout(() => {
+                    icon.classList.remove('clicked');
+                }, 400);
+                
+                const currentUrl = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(document.title);
+                const description = encodeURIComponent("Analyze text instantly with Toolivo Text Analyzer. Get accurate counts, readability metrics and detailed insights in one place.");
+                
+                let shareUrl = '';
+                
+                if (icon.classList.contains('x-twitter')) {
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${currentUrl}`;
+                } else if (icon.classList.contains('linkedin')) {
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+                } else if (icon.classList.contains('facebook')) {
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+                } else if (icon.classList.contains('whatsapp')) {
+                    shareUrl = `https://api.whatsapp.com/send?text=${title}%20${currentUrl}`;
+                } else if (icon.classList.contains('telegram')) {
+                    shareUrl = `https://t.me/share/url?url=${currentUrl}&text=${title}`;
+                } else if (icon.classList.contains('instagram')) {
+                    // Instagram doesn't support direct sharing, open profile
+                    shareUrl = `https://www.instagram.com/`;
+                } else if (icon.classList.contains('reddit')) {
+                    shareUrl = `https://reddit.com/submit?url=${currentUrl}&title=${title}`;
+                } else if (icon.classList.contains('pinterest')) {
+                    shareUrl = `https://pinterest.com/pin/create/button/?url=${currentUrl}&description=${title}`;
+                } else if (icon.classList.contains('messenger')) {
+                    shareUrl = `https://www.facebook.com/dialog/send?link=${currentUrl}&app_id=YOUR_APP_ID&redirect_uri=${currentUrl}`;
+                } else if (icon.classList.contains('email')) {
+                    shareUrl = `mailto:?subject=${title}&body=${description}%20${currentUrl}`;
+                }
+                
+                if (shareUrl) {
+                    if (icon.classList.contains('email')) {
+                        // For email, don't open in new window
+                        window.location.href = shareUrl;
+                    } else {
+                        window.open(shareUrl, '_blank', 'width=600,height=400');
+                    }
+                }
+            });
+        });
+    }
+
+    // Enhanced FAQ toggle with smooth animation, grouped visibility, and outside-click close
+    function initFAQs() {
+        const allFAQItems = document.querySelectorAll('.faq-item');
+        allFAQItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            if (!question.dataset.initialized) {
+                question.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent triggering outside-click handler
+                    const isActive = item.classList.contains('active');
+                    // Close all others
+                    allFAQItems.forEach(other => {
+                        if (other !== item) {
+                            other.classList.remove('active');
+                        }
+                    });
+                    // Toggle current
+                    item.classList.toggle('active', !isActive);
+                });
+                question.dataset.initialized = 'true';
+            }
+            
+            // Add keyboard support for FAQ items
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+    }
+
+    // Close all FAQs on outside click/tap
+    function closeAllFAQs() {
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+        });
+    }
+
+    // Global outside-click listener
+    document.addEventListener('click', (e) => {
+        const clickedInsideFAQ = e.target.closest('.faq-item');
+        if (!clickedInsideFAQ) {
+            closeAllFAQs();
+        }
+    });
+
+    // Initialize first batch
+    initFAQs();
+
+    // Enhanced FAQ "See More" with smooth entry animation
+    const seeMoreBtn = document.getElementById('faq-see-more');
+    const extraFAQs = document.getElementById('faq-extra');
+
+    if (seeMoreBtn && extraFAQs) {
+        seeMoreBtn.addEventListener('click', () => {
+            // 1. Reveal container with smooth opacity/transform
+            extraFAQs.style.opacity = '0';
+            extraFAQs.style.transform = 'translateY(10px)';
+            extraFAQs.removeAttribute('hidden');
+            
+            // Trigger reflow
+            void extraFAQs.offsetWidth;
+            
+            // 2. Animate container in
+            extraFAQs.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            extraFAQs.style.opacity = '1';
+            extraFAQs.style.transform = 'translateY(0)';
+
+            // 3. Fade out & remove button smoothly
+            seeMoreBtn.style.opacity = '0';
+            seeMoreBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                seeMoreBtn.style.display = 'none';
+            }, 300);
+
+            // 4. Initialize new FAQs
+            setTimeout(() => {
+                initFAQs();
+                
+                // 5. Animate each newly revealed FAQ item
+                const newItems = extraFAQs.querySelectorAll('.faq-item');
+                newItems.forEach((item, i) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(10px)';
+                    item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, i * 80);
+                });
+            }, 100);
+        });
+    }
+
+    function lazyLoadSections() {
+  const sections = document.querySelectorAll('.lazy-section');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // stop watching once loaded
+      }
+    });
+  }, {
+    // 👇 Load earlier — 100–150px before entering viewport
+    rootMargin: '50px 0px',  // vertical margin only; left/right = 0
+    threshold: 0.01  // minimal visibility required (more responsive than 0.1)
+  });
+
+  sections.forEach(section => {
+    // Optional: preload the very first section (e.g., Features)
+    // if (section === sections[0]) section.classList.add('visible');
+    // else
+    observer.observe(section);
+  });
+}
+
+    // Article "See More" functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('see-more-btn');
+        const content = document.getElementById('see-more-content');
+
+        if (btn && content) {
+            btn.addEventListener('click', () => {
+                // 1. Show the hidden content
+                content.removeAttribute('hidden');
+                
+                // 2. Hide the button completely
+                btn.style.display = 'none';
+                
+                // 3. Optional: smooth scroll to revealed content
+                content.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start', 
+                    inline: 'nearest' 
+                });
+                
+                // 4. Optional: Add animation to content appearance
+                setTimeout(() => {
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }, 10);
+            });
+        }
+    });
+
+    // Back to top functionality
+    const backToTopBtn = document.getElementById('backToTop');
+
+    // Show/hide based on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 3000) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    // Smooth scroll to top
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Theme toggle visibility on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.getElementById('themeToggle');
+
+        if (!themeToggle) {
+            console.warn('⚠️ themeToggle not found. Skipping scroll visibility logic.');
+            return;
+        }
+
+        // Initially hide (in case CSS didn't apply yet)
+        themeToggle.classList.remove('visible');
+
+        function updateThemeToggleVisibility() {
+            if (window.scrollY > 30) {
+                themeToggle.classList.add('visible');
+            } else {
+                themeToggle.classList.remove('visible');
+            }
+        }
+
+        // Run on load & scroll
+        window.addEventListener('scroll', updateThemeToggleVisibility, { passive: true });
+        updateThemeToggleVisibility(); // in case page is reloaded mid-scroll
+    });
+
+    // Scroll down 10px on full page load — ensures layout is stable
+    window.addEventListener('load', () => {
+        // Small delay ensures header, menu, and layout have settled
+        setTimeout(() => {
+            // Only scroll if at absolute top (e.g. not mid-scroll on refresh)
+            if (window.scrollY === 0) {
+                window.scrollTo({
+                    top: 45,
+                    behavior: 'smooth'
+                });
+            }
+        }, 10);
+    });
+
+    // Initialize lazy loading
+    lazyLoadSections();
+
+    // Function to scroll to tool section
+    function scrollToToolSection() {
+        const toolSection = document.getElementById('tool-section');
+        if (toolSection) {
+            toolSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+    }
+
+    // Fix image visibility and lazy loading
+    function fixImageVisibility() {
+        const images = document.querySelectorAll('.article-image-compact img');
+        images.forEach(img => {
+            // Ensure images are properly loaded
+            if (!img.complete) {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s ease';
+            }
+            
+            // Ensure proper image display
+            img.style.display = 'block';
+            img.style.width = '100%';
+            img.style.height = 'auto';
+        });
+    }
+
+    // Fix images on load
+    document.addEventListener('DOMContentLoaded', fixImageVisibility);
+    window.addEventListener('load', fixImageVisibility);
+    
+    <!-- EXIF.js Library for Image Metadata Extraction -->
+
+// Metadata Viewer Application
+document.addEventListener('DOMContentLoaded', function() {
+    // Application State
+    const state = {
+        files: [],
+        currentFileIndex: -1,
+        currentMetadata: null,
+        activeTab: 'general',
+        searchQuery: ''
+    };
+
+    // DOM Elements
+    const elements = {
+        uploadArea: document.getElementById('uploadArea'),
+        browseBtn: document.getElementById('browseBtn'),
+        fileInput: document.getElementById('fileInput'),
+        fileList: document.getElementById('fileList'),
+        metadataTabs: document.getElementById('metadataTabs'),
+        metadataContent: document.getElementById('metadataContent'),
+        searchContainer: document.getElementById('searchContainer'),
+        searchInput: document.getElementById('searchInput')
+    };
+
+    // Utility Functions
+    function formatBytes(bytes) {
+        if (bytes === 0 || !bytes) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function formatDate(timestamp) {
+        if (!timestamp) return 'Not available';
+        try {
+            const date = new Date(timestamp);
+            return date.toLocaleString();
+        } catch {
+            return 'Not available';
+        }
+    }
+
+    function getFileType(filename) {
+        const extension = filename.split('.').pop().toLowerCase();
+        const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'tiff', 'tif'];
+        const videoTypes = ['mp4', 'mov', 'avi', 'mkv', 'webm', 'flv', 'wmv', 'm4v'];
+        
+        if (imageTypes.includes(extension)) return 'Image';
+        if (videoTypes.includes(extension)) return 'Video';
+        return 'Unknown';
+    }
+
+    function getFileIcon(type) {
+        switch(type) {
+            case 'Image': return 'fas fa-image';
+            case 'Video': return 'fas fa-video';
+            default: return 'fas fa-file';
+        }
+    }
+
+    function getMimeType(extension) {
+        const mimeTypes = {
+            'jpg': 'image/jpeg',
+            'jpeg': 'image/jpeg',
+            'png': 'image/png',
+            'gif': 'image/gif',
+            'webp': 'image/webp',
+            'bmp': 'image/bmp',
+            'tiff': 'image/tiff',
+            'tif': 'image/tiff',
+            'mp4': 'video/mp4',
+            'mov': 'video/quicktime',
+            'avi': 'video/x-msvideo',
+            'mkv': 'video/x-matroska',
+            'webm': 'video/webm'
+        };
+        return mimeTypes[extension] || 'application/octet-stream';
+    }
+
+    function formatGPSDecimal(gps, ref) {
+        if (!gps || gps.length !== 3 || !ref) return 'Not available';
+        
+        const [degrees, minutes, seconds] = gps;
+        let decimal = degrees + (minutes / 60) + (seconds / 3600);
+        
+        if (ref === 'S' || ref === 'W') {
+            decimal = -decimal;
+        }
+        
+        return decimal.toFixed(6) + '°';
+    }
+
+    // Real Metadata Extraction Functions
+    async function extractImageMetadata(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const image = new Image();
+                image.onload = function() {
+                    // Extract EXIF data
+                    EXIF.getData(image, function() {
+                        const allMetaData = EXIF.getAllTags(this);
+                        
+                        // General Information
+                        const general = {
+                            'File Name': file.name,
+                            'File Size': formatBytes(file.size),
+                            'File Type': getFileType(file.name),
+                            'MIME Type': getMimeType(file.name.split('.').pop().toLowerCase()),
+                            'Last Modified': formatDate(file.lastModified),
+                            'Dimensions': `${image.width} × ${image.height} pixels`
+                        };
+
+                        // Location Data
+                        const location = {
+                            'Latitude': allMetaData.GPSLatitude ? 
+                                formatGPSDecimal(allMetaData.GPSLatitude, allMetaData.GPSLatitudeRef || 'N') : 
+                                'Not available',
+                            'Longitude': allMetaData.GPSLongitude ? 
+                                formatGPSDecimal(allMetaData.GPSLongitude, allMetaData.GPSLongitudeRef || 'E') : 
+                                'Not available',
+                            'Altitude': allMetaData.GPSAltitude ? 
+                                `${Math.round(allMetaData.GPSAltitude)} meters` : 
+                                'Not available',
+                            'GPS Timestamp': allMetaData.GPSTimeStamp ? 
+                                formatDate(new Date().setHours(...allMetaData.GPSTimeStamp)) : 
+                                'Not available',
+                            'GPS Direction': allMetaData.GPSImgDirection ? 
+                                `${Math.round(allMetaData.GPSImgDirection)}°` : 
+                                'Not available',
+                            'GPS Speed': allMetaData.GPSSpeed ? 
+                                `${Math.round(allMetaData.GPSSpeed * 3.6)} km/h` : 
+                                'Not available'
+                        };
+
+                        // Device & Camera Information
+                        const device = {
+                            'Camera Make': allMetaData.Make || 'Not available',
+                            'Camera Model': allMetaData.Model || 'Not available',
+                            'Lens Model': allMetaData.LensModel || 'Not available',
+                            'Software': allMetaData.Software || 'Not available',
+                            'Serial Number': allMetaData.BodySerialNumber || allMetaData.SerialNumber || 'Not available',
+                            'Firmware': allMetaData.Firmware || 'Not available'
+                        };
+
+                        // Image Details
+                        const media = {
+                            'Width': `${image.width} pixels`,
+                            'Height': `${image.height} pixels`,
+                            'Resolution': allMetaData.XResolution ? 
+                                `${allMetaData.XResolution} DPI` : 
+                                'Not available',
+                            'Color Space': allMetaData.ColorSpace === 1 ? 'sRGB' : 
+                                           allMetaData.ColorSpace === 65535 ? 'Uncalibrated' : 
+                                           allMetaData.ColorSpace || 'Not available',
+                            'Bit Depth': allMetaData.BitsPerSample ? 
+                                `${allMetaData.BitsPerSample}-bit` : 
+                                'Not available',
+                            'Compression': allMetaData.Compression === 6 ? 'JPEG' : 
+                                          allMetaData.Compression === 1 ? 'Uncalibrated' : 
+                                          allMetaData.Compression || 'Not available',
+                            'Orientation': allMetaData.Orientation ? 
+                                `Rotation ${(allMetaData.Orientation - 1) * 90}°` : 
+                                'Normal'
+                        };
+
+                        // Technical Capture Settings
+                        const technical = {
+                            'ISO': allMetaData.ISOSpeedRatings || 'Not available',
+                            'Aperture': allMetaData.FNumber ? 
+                                `f/${allMetaData.FNumber}` : 
+                                'Not available',
+                            'Shutter Speed': allMetaData.ExposureTime ? 
+                                `1/${Math.round(1/allMetaData.ExposureTime)}s` : 
+                                'Not available',
+                            'Exposure Mode': allMetaData.ExposureMode === 0 ? 'Auto' :
+                                            allMetaData.ExposureMode === 1 ? 'Manual' :
+                                            allMetaData.ExposureMode === 2 ? 'Auto bracket' : 
+                                            'Not available',
+                            'White Balance': allMetaData.WhiteBalance === 0 ? 'Auto' :
+                                            allMetaData.WhiteBalance === 1 ? 'Manual' : 
+                                            'Not available',
+                            'Flash': allMetaData.Flash === 0 ? 'Did not fire' :
+                                    allMetaData.Flash === 1 ? 'Fired' :
+                                    allMetaData.Flash === 5 ? 'Fired, return not detected' :
+                                    allMetaData.Flash === 7 ? 'Fired, return detected' : 
+                                    'Not available',
+                            'Focal Length': allMetaData.FocalLength ? 
+                                `${allMetaData.FocalLength}mm` : 
+                                'Not available',
+                            '35mm Equivalent': allMetaData.FocalLengthIn35mmFormat ? 
+                                `${allMetaData.FocalLengthIn35mmFormat}mm` : 
+                                'Not available'
+                        };
+
+                        // EXIF/XMP Metadata
+                        const exif = {
+                            'Copyright': allMetaData.Copyright || 'Not specified',
+                            'Artist': allMetaData.Artist || 'Not specified',
+                            'Image Description': allMetaData.ImageDescription || 'No description',
+                            'Date Created': allMetaData.DateTimeOriginal ? 
+                                formatDate(new Date(
+                                    allMetaData.DateTimeOriginal.replace(
+                                        /^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/,
+                                        '$1-$2-$3T$4:$5:$6'
+                                    )
+                                )) : 
+                                'Not available',
+                            'Date Digitized': allMetaData.DateTimeDigitized ? 
+                                formatDate(new Date(
+                                    allMetaData.DateTimeDigitized.replace(
+                                        /^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/,
+                                        '$1-$2-$3T$4:$5:$6'
+                                    )
+                                )) : 
+                                'Not available',
+                            'Software': allMetaData.Software || 'Not specified',
+                            'Rating': allMetaData.Rating || 'Not rated'
+                        };
+
+                        // Raw metadata dump
+                        const raw = {
+                            file: {
+                                name: file.name,
+                                size: file.size,
+                                type: file.type,
+                                lastModified: file.lastModified,
+                                dimensions: {
+                                    width: image.width,
+                                    height: image.height
+                                }
+                            },
+                            exif: allMetaData
+                        };
+
+                        resolve({
+                            general,
+                            location,
+                            device,
+                            media,
+                            technical,
+                            exif,
+                            raw: JSON.stringify(raw, null, 2)
+                        });
+                    });
+                };
+                
+                image.src = e.target.result;
+            };
+            
+            reader.readAsDataURL(file);
+        });
+    }
+
+    async function extractVideoMetadata(file) {
+        return new Promise((resolve) => {
+            // Create video element to extract basic metadata
+            const video = document.createElement('video');
+            const url = URL.createObjectURL(file);
+            
+            video.onloadedmetadata = function() {
+                const duration = video.duration;
+                const width = video.videoWidth;
+                const height = video.videoHeight;
+                
+                // General Information
+                const general = {
+                    'File Name': file.name,
+                    'File Size': formatBytes(file.size),
+                    'File Type': 'Video',
+                    'MIME Type': file.type,
+                    'Last Modified': formatDate(file.lastModified),
+                    'Dimensions': `${width} × ${height} pixels`
+                };
+
+                // Video Details
+                const media = {
+                    'Duration': duration ? 
+                        `${Math.floor(duration / 60)}:${Math.floor(duration % 60).toString().padStart(2, '0')}` : 
+                        'Not available',
+                    'Resolution': `${width} × ${height}`,
+                    'Aspect Ratio': width && height ? 
+                        `${(width/height).toFixed(2)}:1` : 
+                        'Not available',
+                    'Video Codec': 'Not available (requires MediaInfo.js)',
+                    'Audio Codec': 'Not available (requires MediaInfo.js)',
+                    'Bitrate': 'Not available (requires MediaInfo.js)',
+                    'Frame Rate': 'Not available (requires MediaInfo.js)'
+                };
+
+                const raw = {
+                    file: {
+                        name: file.name,
+                        size: file.size,
+                        type: file.type,
+                        lastModified: file.lastModified,
+                        videoInfo: {
+                            duration,
+                            width,
+                            height
+                        }
+                    },
+                    note: 'Detailed video metadata requires MediaInfo.js library'
+                };
+
+                resolve({
+                    general,
+                    location: {'Status': 'GPS data not typically stored in video files'},
+                    device: {'Status': 'Camera data not typically stored in video files'},
+                    media,
+                    technical: {'Status': 'Capture settings not typically stored in video files'},
+                    exif: {'Status': 'EXIF data not typically stored in video files'},
+                    raw: JSON.stringify(raw, null, 2)
+                });
+                
+                URL.revokeObjectURL(url);
+            };
+            
+            video.onerror = function() {
+                // Fallback for unsupported video formats
+                const general = {
+                    'File Name': file.name,
+                    'File Size': formatBytes(file.size),
+                    'File Type': 'Video',
+                    'MIME Type': file.type,
+                    'Last Modified': formatDate(file.lastModified),
+                    'Note': 'Video metadata extraction requires browser support'
+                };
+
+                resolve({
+                    general,
+                    location: {'Status': 'Not available for video files'},
+                    device: {'Status': 'Not available for video files'},
+                    media: {'Status': 'Unable to extract video metadata'},
+                    technical: {'Status': 'Not available for video files'},
+                    exif: {'Status': 'Not available for video files'},
+                    raw: JSON.stringify({file: {name: file.name, size: file.size, type: file.type}}, null, 2)
+                });
+                
+                URL.revokeObjectURL(url);
+            };
+            
+            video.src = url;
+        });
+    }
+
+    async function extractMetadata(file) {
+        const fileType = getFileType(file.name);
+        
+        if (fileType === 'Image') {
+            return await extractImageMetadata(file);
+        } else if (fileType === 'Video') {
+            return await extractVideoMetadata(file);
+        } else {
+            // Generic file metadata
+            return {
+                general: {
+                    'File Name': file.name,
+                    'File Size': formatBytes(file.size),
+                    'File Type': 'Unknown',
+                    'MIME Type': file.type,
+                    'Last Modified': formatDate(file.lastModified)
+                },
+                location: {'Status': 'Not available'},
+                device: {'Status': 'Not available'},
+                media: {'Status': 'Not available'},
+                technical: {'Status': 'Not available'},
+                exif: {'Status': 'Not available'},
+                raw: JSON.stringify({file: {name: file.name, size: file.size, type: file.type}}, null, 2)
+            };
+        }
+    }
+
+    // UI Rendering Functions
+    function renderFileList() {
+        if (state.files.length === 0) {
+            elements.fileList.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-images"></i>
+                    <p>No files uploaded yet</p>
+                </div>
+            `;
+            return;
+        }
+
+        elements.fileList.innerHTML = state.files.map((file, index) => `
+            <div class="file-item ${index === state.currentFileIndex ? 'active' : ''}" 
+                 data-index="${index}">
+                <div class="file-icon">
+                    <i class="${getFileIcon(getFileType(file.name))}"></i>
+                </div>
+                <div class="file-info">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-details">
+                        <span class="file-size">${formatBytes(file.size)}</span>
+                        <span class="file-type">${getFileType(file.name)}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderMetadataGrid(data, gridId) {
+        if (!data || typeof data !== 'object') {
+            return '<div class="metadata-item"><div class="metadata-value empty">No metadata available</div></div>';
+        }
+
+        return Object.entries(data).map(([key, value]) => {
+            const isAvailable = value !== 'Not available' && value !== 'Not specified' && value !== undefined;
+            const displayValue = isAvailable ? value : 
+                               (value === undefined ? 'Not available' : value);
+            
+            return `
+                <div class="metadata-item" data-key="${key.toLowerCase()}">
+                    <div class="metadata-label">
+                        ${key}
+                        ${isAvailable ? `
+                            <button class="copy-btn" title="Copy value" data-value="${displayValue}">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                    <div class="metadata-value ${!isAvailable ? 'empty' : ''}">
+                        ${displayValue}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderTabContent(tabName, metadata) {
+        if (!metadata) return;
+
+        let content = '';
+        
+        switch(tabName) {
+            case 'general':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3>File Information</h3>
+                        </div>
+                        <div class="metadata-grid">
+                            ${renderMetadataGrid(metadata.general, 'general')}
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            case 'location':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>GPS & Location Data</h3>
+                        </div>
+                        <div class="metadata-grid">
+                            ${renderMetadataGrid(metadata.location, 'location')}
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            case 'device':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <h3>Device & Camera Information</h3>
+                        </div>
+                        <div class="metadata-grid">
+                            ${renderMetadataGrid(metadata.device, 'device')}
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            case 'media':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-photo-video"></i>
+                            </div>
+                            <h3>Media Specifications</h3>
+                        </div>
+                        <div class="metadata-grid">
+                            ${renderMetadataGrid(metadata.media, 'media')}
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            case 'technical':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h3>Technical Capture Settings</h3>
+                        </div>
+                        <div class="metadata-grid">
+                            ${renderMetadataGrid(metadata.technical, 'technical')}
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            case 'exif':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <h3>Descriptive Metadata</h3>
+                        </div>
+                        <div class="metadata-grid">
+                            ${renderMetadataGrid(metadata.exif, 'exif')}
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            case 'raw':
+                content = `
+                    <div class="metadata-group">
+                        <div class="group-header">
+                            <div class="group-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>Complete Metadata Dump</h3>
+                        </div>
+                        <pre class="raw-metadata">${metadata.raw || 'No metadata available'}</pre>
+                        <div class="text-center mt-2">
+                            <button class="btn btn-secondary" id="copyRawBtn">
+                                <i class="fas fa-copy"></i> Copy All Metadata
+                            </button>
+                        </div>
+                    </div>
+                `;
+                break;
+                
+            default:
+                content = `<div class="empty-state"><p>No metadata available for this tab</p></div>`;
+        }
+        
+        elements.metadataContent.innerHTML = content;
+        
+        // Re-attach copy button events
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', handleCopyClick);
+        });
+        
+        if (tabName === 'raw') {
+            document.getElementById('copyRawBtn')?.addEventListener('click', () => {
+                copyToClipboard(metadata.raw || '');
+            });
+        }
+    }
+
+    function switchTab(tabName) {
+        // Update active tab
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.tab === tabName);
+        });
+
+        // Render content for active tab
+        if (state.currentMetadata) {
+            renderTabContent(tabName, state.currentMetadata);
+        }
+        
+        state.activeTab = tabName;
+    }
+
+    // File Management
+    async function addFiles(newFiles) {
+        for (const file of newFiles) {
+            if (!state.files.some(f => f.name === file.name && f.size === file.size)) {
+                state.files.push(file);
+            }
+        }
+
+        // Set first file as active if none selected
+        if (state.currentFileIndex === -1 && state.files.length > 0) {
+            state.currentFileIndex = 0;
+            await loadFileMetadata(0);
+        }
+
+        renderFileList();
+    }
+
+    async function loadFileMetadata(index) {
+        if (index < 0 || index >= state.files.length) return;
+
+        state.currentFileIndex = index;
+        const file = state.files[index];
+
+        // Show loading state
+        elements.metadataContent.innerHTML = `
+            <div class="empty-state">
+                <div class="spinner" style="margin: 0 auto 20px; width: 40px; height: 40px;"></div>
+                <p>Extracting metadata from ${file.name}...</p>
+            </div>
+        `;
+
+        // Show search bar
+        elements.searchContainer.classList.remove('hidden');
+
+        try {
+            // Extract real metadata
+            state.currentMetadata = await extractMetadata(file);
+            
+            // Render current tab
+            renderTabContent(state.activeTab, state.currentMetadata);
+        } catch (error) {
+            console.error('Error extracting metadata:', error);
+            elements.metadataContent.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+                    <p>Error extracting metadata</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7;">
+                        ${error.message}
+                    </p>
+                </div>
+            `;
+        }
+
+        renderFileList();
+    }
+
+    // Search Functionality
+    function filterMetadata() {
+        const query = state.searchQuery.toLowerCase().trim();
+        if (!query) {
+            // Show all items
+            document.querySelectorAll('.metadata-item').forEach(item => {
+                item.classList.remove('hidden');
+            });
+            return;
+        }
+
+        document.querySelectorAll('.metadata-item').forEach(item => {
+            const key = item.dataset.key;
+            const value = item.querySelector('.metadata-value')?.textContent.toLowerCase() || '';
+            
+            if (key.includes(query) || value.includes(query)) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    }
+
+    // Copy to Clipboard
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            return true;
+        }
+    }
+
+    function showCopyFeedback(button) {
+        const icon = button.querySelector('i');
+        const originalIcon = icon.className;
+        
+        button.classList.add('copied');
+        icon.className = 'fas fa-check';
+        
+        setTimeout(() => {
+            button.classList.remove('copied');
+            icon.className = originalIcon;
+        }, 2000);
+    }
+
+    function handleCopyClick(e) {
+        const button = e.currentTarget;
+        const value = button.dataset.value;
+        
+        if (value && copyToClipboard(value)) {
+            showCopyFeedback(button);
+        }
+    }
+
+    // Event Listeners
+    function setupEventListeners() {
+        // File upload
+        elements.browseBtn.addEventListener('click', () => {
+            elements.fileInput.click();
+        });
+        
+        elements.uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        });
+        
+        elements.uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+        });
+        
+        elements.uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => 
+                file.type.startsWith('image/') || file.type.startsWith('video/')
+            );
+            if (files.length > 0) {
+                addFiles(files);
+            }
+        });
+
+        elements.fileInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            if (files.length > 0) {
+                addFiles(files);
+                this.value = '';
+            }
+        });
+
+        // File selection
+        elements.fileList.addEventListener('click', (e) => {
+            const fileItem = e.target.closest('.file-item');
+            if (!fileItem) return;
+
+            const index = parseInt(fileItem.dataset.index);
+            if (index !== state.currentFileIndex) {
+                loadFileMetadata(index);
+            }
+        });
+
+        // Tab switching
+        elements.metadataTabs.addEventListener('click', (e) => {
+            const tab = e.target.closest('.tab');
+            if (tab) {
+                switchTab(tab.dataset.tab);
+            }
+        });
+
+        // Search
+        elements.searchInput.addEventListener('input', (e) => {
+            state.searchQuery = e.target.value;
+            filterMetadata();
+        });
+    }
+
+    // Initialize Application
+    function init() {
+        setupEventListeners();
+        renderFileList();
+        
+        // Set initial tab
+        switchTab('general');
+    }
+
+    // Start the application
+    init();
+});
+
+</script>
+</body>
+</html>
